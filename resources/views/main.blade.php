@@ -294,7 +294,7 @@
                         </form>
 
                         <span class="d-flex justify-content-center">
-                            <a href="/condominio" class="btn btn-success">Entrar</a>
+                            <a href="/admin" class="btn btn-success">Entrar</a>
                         </span>
                     </div>
                 </div>
