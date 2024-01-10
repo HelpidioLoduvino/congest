@@ -106,14 +106,6 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-6 mb-3">
-                                <h6>NACIONALIDADE</h6>
-                                <select class="form-control" name="owner_nacionality">
-                                    <option value="">--Escolher--</option>
-                                    <option value="MASCULINO">ANGOLA</option>
-                                </select>
-                            </div>
-
                             <h6><strong>CONTATOS</strong></h6>
                             <div class="form-separator mb-3"></div>
 

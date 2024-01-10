@@ -281,8 +281,8 @@
                         <form action="" method="post">
                             @csrf
                             <div class="form-group mb-3">
-                                <label class="letra" for="identifier">Identificador</label>
-                                <input type="number" class="form-control" name="identifier">
+                                <label class="letra" for="identifier">BI</label>
+                                <input type="number" class="form-control" name="bi">
                             </div>
 
                             <div class="form-group mb-3">
@@ -294,7 +294,7 @@
                         </form>
 
                         <span class="d-flex justify-content-center">
-                            <a href="/morador" class="btn btn-success">Entrar</a>
+                            <a href="/condominio" class="btn btn-success">Entrar</a>
                         </span>
                     </div>
                 </div>
