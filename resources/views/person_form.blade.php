@@ -56,7 +56,7 @@
 
         <div class="col-md-6 mb-3">
             <h6>TELEFONE</h6>
-            <input type="number" class="form-control">
+            <input type="tel" class="form-control" id="telefone" name="telefone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
         </div>
 
         <div class="col-md-6 mb-3">
