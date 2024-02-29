@@ -5,7 +5,7 @@
 
 
 
-    <h5 class="d-flex justify-content-center condo-title">Condomínio da Sonangol</h5>
+    <h5 class="d-flex justify-content-center condo-title">Condomínio Sonangol</h5>
 
 
 <div class="row mt-3">

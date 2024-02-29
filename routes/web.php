@@ -32,6 +32,8 @@ Route::get('/pessoal', [CondominioController::class, 'showPersonForm']);
 Route::get('/empresarial', [CondominioController::class, 'showCompanyForm']);
 Route::get('/condomínios', [CondominioController::class, 'showAdminCondominio']);
 Route::get('/perfil-admin/{id}', [CondominioController::class, 'showAdminProfile']);
+Route::get('/contracto-pessoal/{id}', [CondominioController::class, 'showPersonalContract']);
+Route::get('/contracto-empresa/{id}', [CondominioController::class, 'showBusinessContract']);
 Route::post('/login', [CondominioController::class, 'login']);
 Route::post('/logout', [CondominioController::class, 'logout']);
 Route::post('/cadastrar-condominio-contracto-pessoal', [CondominioController::class, 'registerCondoPersonalContract']);

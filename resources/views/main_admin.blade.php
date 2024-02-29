@@ -135,19 +135,22 @@
         $(document).ready(function(){
             $("#clickableBody tr").click(function(){
                 var tipoContrato = $(this).data('type');
+                var userId = $(this).data('user-id');
 
-                // Aqui você pode definir lógica para abrir diferentes modais baseados no tipo de contrato.
-                // Por exemplo:
                 if (tipoContrato === "Empresa") {
-                    // Abrir modal de empresa
+                    // Open the modal for business contract
                     $("#contractCompanyModal").modal('show');
+                    // You can use the userId variable to get user-specific data
+                    console.log("User ID for business contract: " + userId);
                 } else if (tipoContrato === "Pessoal") {
-                    // Abrir modal de contrato pessoal
+                    // Open the modal for personal contract
                     $("#contractPersonModal").modal('show');
+                    // You can use the userId variable to get user-specific data
+                    console.log("User ID for personal contract: " + userId);
                 }
             });
         });
-        </script>
+    </script>
 </body>
 
 </html>

@@ -82,7 +82,37 @@ class CondominioController extends Controller
     }
 
     public function showAdminCondominio(){
-        return view('admin_condominio');
+
+        $condo_personal_contracts = Condominio::select(
+                                                    'condominios.user_id', 'condominios.condo_name',
+                                                    'contracts.contract_type', 'contracts.plan',
+                                                    'contracts.date')
+                                                    ->JOIN('contracts', 'condominios.id', '=',
+                                                    'contracts.condo_id')
+                                                    ->JOIN('personal_contracts',
+                                                    'condominios.user_id', '=',
+                                                    'personal_contracts.userId')
+                                                    ->get();
+
+        $condo_business_contracts = Condominio::select(
+                                                    'condominios.user_id', 'condominios.condo_name',
+                                                    'contracts.contract_type',
+                                                    'contracts.plan', 'contracts.date')
+                                                    ->JOIN('contracts', 'condominios.id', '=',
+                                                    'contracts.condo_id')
+                                                    ->JOIN('business_contracts', 'condominios.user_id',
+                                                    '=', 'business_contracts.userId')
+                                                    ->get();
+
+        if($condo_personal_contracts->isNotEmpty() || $condo_business_contracts->isNotEmpty()){
+            return view('admin_condominio', compact('condo_personal_contracts', 'condo_business_contracts'));
+        } else {
+            $condo_personal_contracts = [];
+            $condo_business_contracts = [];
+            return view('admin_condominio', compact('condo_personal_contracts', 'condo_business_contracts'));
+        }
+
+
     }
 
     public function showAdminProfile($id){
@@ -90,6 +120,53 @@ class CondominioController extends Controller
         $user = User::find($id);
 
         return view('admin_profile', compact('user'));
+    }
+
+    public function showPersonalContract($id){
+
+        $contracts = User::select(
+                                'users.name', 'users.email', 'condominios.condo_name',
+                                'condominios.condo_address', 'condominios.plot',
+                                'condominios.residency', 'contracts.plan',
+                                'personal_contracts.bi', 'personal_contracts.birthday',
+                                'personal_contracts.gender', 'personal_contracts.nationality',
+                                'personal_contracts.address', 'personal_contracts.contact')
+                                ->JOIN('condominios', 'condominios.user_id', '=', 'users.id')
+                                ->JOIN('contracts', 'condominios.id', '=', 'contracts.condo_id')
+                                ->JOIN('personal_contracts', 'condominios.user_id', '=',
+                                'personal_contracts.userId')->where('users.id', '=', $id)
+                                ->get();
+
+        if($contracts->isNotEmpty()){
+            return view('view_personal_contract', compact('contracts'));
+        } else {
+            $contracts = [];
+            return view('view_personal_contract', compact('contracts'));
+        }
+
+    }
+
+    public function showBusinessContract($id){
+
+        $contracts = User::select(
+                                'users.name', 'users.email', 'condominios.condo_name',
+                                'condominios.condo_address', 'condominios.plot',
+                                'condominios.residency', 'contracts.plan',
+                                'business_contracts.nif', 'business_contracts.address',
+                                'business_contracts.contact')
+                                ->JOIN('condominios', 'condominios.user_id', '=', 'users.id')
+                                ->JOIN('contracts', 'condominios.id', '=', 'contracts.condo_id')
+                                ->JOIN('business_contracts', 'condominios.user_id', '=',
+                                'business_contracts.userId')->where('users.id', '=', $id)
+                                ->get();
+
+        if($contracts->isNotEmpty()){
+            return view('view_business_contract', compact('contracts'));
+        } else {
+            $contracts = [];
+            return view('view_business_contract', compact('contracts'));
+        }
+
     }
 
     public function login (Request $request) {

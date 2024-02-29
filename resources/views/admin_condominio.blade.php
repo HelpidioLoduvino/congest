@@ -3,8 +3,8 @@
 @section('content')
     <div class="condo-font card card-body shadow-card mt-3">
         <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
+            <table class="table">
+                <thead class="table-active">
                     <tr>
                         <th>Nome Do Condomínio</th>
                         <th>Tipo de Contrato</th>
@@ -12,251 +12,82 @@
                         <th>Plano Do Contrato</th>
                     </tr>
                 </thead>
-                <tbody id="clickableBody">
-                    <tr data-type="Empresa">
-                        <td>Condominio Dos Cajueiros</td>
-                        <td>Empresa</td>
-                        <td>10/09/2023</td>
-                        <td>Plano Semestral</td>
-                    </tr>
+                <tbody>
+                    @if (!empty($condo_business_contracts))
+                        @foreach ($condo_business_contracts as $condo_business)
+                        <tr>
+                            <td>
+                                <a class="nav-link" href="#" onclick="redirectToBusinessContract('{{$condo_business->user_id }}')">
+                                    {{$condo_business->condo_name}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="#" onclick="redirectToBusinessContract('{{$condo_business->user_id }}')">
+                                    {{$condo_business->contract_type}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="#" onclick="redirectToBusinessContract('{{$condo_business->user_id }}')">
+                                    {{$condo_business->date}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="#" onclick="redirectToBusinessContract('{{$condo_business->user_id }}')">
+                                    {{$condo_business->plan}}
+                                </a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    @endif
 
-                    <tr data-type="Pessoal">
-                        <td>Condominio Dos Cajueiros</td>
-                        <td>Pessoal</td>
-                        <td>10/09/2023</td>
-                        <td>Plano Anual</td>
-                    </tr>
+                    @if (!empty($condo_personal_contracts))
+                    @foreach ($condo_personal_contracts as $condo_personal)
+                        <tr>
+                            <td>
+                                <a class="nav-link" href="#" onclick="redirectToPersonalContract('{{ $condo_personal->user_id }}')">
+                                    {{ $condo_personal->condo_name }}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="#" onclick="redirectToPersonalContract('{{ $condo_personal->user_id }}')">
+                                {{ $condo_personal->contract_type }}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="#" onclick="redirectToPersonalContract('{{ $condo_personal->user_id }}')">
+                                    {{ $condo_personal->date }}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="#" onclick="redirectToPersonalContract('{{ $condo_personal->user_id }}')">
+                                    {{ $condo_personal->plan }}
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
     </div>
 
-    <div class="modal" tabindex="-1" id="contractCompanyModal" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container mt-3">
-                        <div class="d-flex justify-content-center">
-                            <span class="logotipo">
-                                <img src="{{ asset('/icon/logo.svg') }}" width="40">
-
-                            </span>
-                        </div>
-                        <h6 class="d-flex justify-content-center"><strong>ConGest</strong></h6>
-                        <h6 class="d-flex justify-content-center mb-5"><strong>CONTRATO DO CONDOMÍNIO</strong></h6>
-                        <form class="row" action="">
-                            <h6><strong>DADOS DA EMPRESA</strong></h6>
-                            <div class="form-separator mb-3"></div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>NOME DA EMPRESA</h6>
-                                <h5><strong>congest</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>NIF</h6>
-                                <h5><strong>0076787887</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>LOCALIZAÇÃO</h6>
-                                <h5><strong>TALATONA</strong></h5>
-                            </div>
-
-                            <h6><strong>CONTATOS</strong></h6>
-                            <div class="form-separator mb-3"></div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>TELEFONE</h6>
-                                <h5><strong>944459953</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>EMAIL</h6>
-                                <h5><strong>helpidiolafame@gmail.com</strong></h5>
-                            </div>
-
-                            <h6><strong>DADOS DO CONDOMÍNIO</strong></h6>
-                            <div class="form-separator mb-3"></div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>NOME DO CONDOMÍNIO</h6>
-                                <h5><strong>condominio dos cajueiros</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>TÍTULO DE PROPRIEDADE</h6>
-                                <input type="file" class="form-control" accept=".pdf">
-                            </div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>LOCALIZAÇÃO</h6>
-                                <h5><strong>camama</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>NIF</h6>
-                                <h5><strong>9383839</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>LOTES</h6>
-                                <h5><strong>10</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>RESIDÊNCIAS</h6>
-                                <h5><strong>120</strong></h5>
-                            </div>
-
-                            <h6><strong>DADOS DO CONTRATO</strong></h6>
-                            <div class="form-separator mb-3"></div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>PLANO DO CONTRATO</h6>
-                                <h5><strong>SEMESTRAL</strong></h5>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
-                        <img src="{{ asset('/icon/edit.svg') }}" alt="" width="30">
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        <img src="{{ asset('/icon/print.svg') }}" alt="" width="30">
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" tabindex="-1" id="contractPersonModal" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container mt-3">
-                        <div class="d-flex justify-content-center">
-                            <span class="logotipo">
-                                <img src="{{ asset('/icon/logo.svg') }}" width="40">
-
-                            </span>
-                        </div>
-                        <h6 class="d-flex justify-content-center"><strong>ConGest</strong></h6>
-                        <h6 class="d-flex justify-content-center mb-5"><strong>CONTRATO DO CONDOMÍNIO</strong></h6>
-                        <form class="row" action="">
-                            <h6><strong>DADOS PESSOAIS</strong></h6>
-                            <div class="form-separator mb-3"></div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>NOME COMPLETO</h6>
-                                <h5><strong>helpidio loduvino caldeira mateus</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>BILHETE DE IDENTIDADE</h6>
-                                <h5><strong>383993953</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>DATA DE NASCIMENTO</h6>
-                                <h5><strong>01/01/2003</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>GÉNERO</h6>
-                                <h5><strong>masculino</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>NACIONALIDADE</h6>
-                                <h5><strong>angolana</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>MORADA</h6>
-                                <h5><strong>morro bento</strong></h5>
-                            </div>
-
-                            <h6><strong>CONTATOS</strong></h6>
-                            <div class="form-separator mb-3"></div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>TELEFONE</h6>
-                                <h5><strong>944459953</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>EMAIL</h6>
-                                <h5><strong>helpidio@gmail.com</strong></h5>
-                            </div>
-
-                            <h6><strong>DADOS DO CONDOMÍNIO</strong></h6>
-                            <div class="form-separator mb-3"></div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>NOME DO CONDOMÍNIO</h6>
-                                <h5><strong>condominio vila flor</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>TÍTULO DE PROPRIEDADE</h6>
-                                <input type="file" class="form-control" accept=".pdf">
-                            </div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>LOCALIZAÇÃO</h6>
-                                <h5><strong>patriota</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>NIF</h6>
-                                <h5><strong>9383839</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>LOTES</h6>
-                                <h5><strong>10</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>RESIDÊNCIAS</h6>
-                                <h5><strong>120</strong></h5>
-                            </div>
-
-                            <h6><strong>DADOS DO CONTRATO</strong></h6>
-                            <div class="form-separator mb-3"></div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>PLANO DO CONTRATO</h6>
-                                <h5><strong>ANUAL</strong></h5>
-                            </div>
-
-                        </form>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
-                        <img src="{{ asset('/icon/edit.svg') }}" alt="" width="30">
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        <img src="{{ asset('/icon/print.svg') }}" alt="" width="30">
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div id="pagination-container" class="mt-3">
         <!-- Botões de paginação serão inseridos aqui -->
     </div>
+
+    <script>
+        function redirectToPersonalContract(userId) {
+            var url = '/contracto-pessoal/' + userId;
+            window.location.href = url;
+        }
+    </script>
+
+<script>
+    function redirectToBusinessContract(userId) {
+        var url = '/contracto-empresa/' + userId;
+        window.location.href = url;
+    }
+</script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
