@@ -16,9 +16,7 @@ class CreateCondominiosTable extends Migration
         Schema::create('condominios', function (Blueprint $table) {
             $table->id();
             $table->string('condo_name');
-            $table->string('property_title');
-            $table->string('location');
-            $table->unsignedBigInteger('nif');
+            $table->string('condo_address');
             $table->unsignedBigInteger('plot');
             $table->unsignedBigInteger('residency');
         });

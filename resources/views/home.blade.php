@@ -2,6 +2,16 @@
 
 @section('content')
 
+@if($errors->any())
+    <div class="alert alert-danger d-flex justify-content-center">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="banner card card-body shadow-card">
     <div class="d-none d-md-block d-md-flex justify-content-center">
         <img src="{{ asset('/icon/logo.svg') }}" width="100">

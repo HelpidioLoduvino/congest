@@ -222,7 +222,6 @@
         </div>
     </nav>
 
-
     <div class="col">
 
         <div class="row">
@@ -278,7 +277,7 @@
                             <img src="{{ asset('/icon/logo.svg') }}">
                         </div>
 
-                        <form action="" method="post">
+                        <form action="/login" method="post">
                             @csrf
                             <div class="form-group mb-3">
                                 <label class="letra" for="identifier">E-mail</label>
@@ -290,12 +289,10 @@
                                 <input type="password" class="form-control" name="password">
                             </div>
 
-
+                            <span class="d-flex justify-content-center">
+                                <input type="submit" class="btn btn-success" value="Entrar">
+                            </span>
                         </form>
-
-                        <span class="d-flex justify-content-center">
-                            <a href="/condominio" class="btn btn-success">Entrar</a>
-                        </span>
                     </div>
                 </div>
             </div>

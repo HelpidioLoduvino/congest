@@ -59,16 +59,6 @@
             </div>
         </div>
 
-        <div class="ms-auto">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/" style="margin-right:20px;">
-                        <img class="hover-image" src="{{ asset('/icon/logout.svg') }}" width="40">
-                    </a>
-                </li>
-            </ul>
-        </div>
-
     </nav>
 
     <div class="row">
@@ -102,7 +92,7 @@
                         <hr>
                     </div>
                     <li>
-                        <a href="">
+                        <a href="/perfil-admin/{{session('id')}}">
                             <img class="hover-image" src="{{ asset('/icon/profile.svg') }}" width="25">
                             Perfil
                         </a>
@@ -114,6 +104,22 @@
         <div class="col-md-8">
             <div class="content mb-5">
                 <div class="container">
+                    @if($errors->any())
+                        <div class="alert mt-3 alert-danger alert-dismissible d-flex justify-content-center">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                    @if(session('msg'))
+                        <div class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
+                            <p class="msg d-flex justify-content-center">{{session('msg')}}</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     @yield('content')
                 </div>
             </div>

@@ -290,7 +290,12 @@
                     </li>
 
                     <div class="sidebar-separator mb-3 container mt-3"></div>
-                    <a class="btn btn-danger" href="/">Sair</a>
+                    <form action="/logout" method="post">
+                        @csrf
+                        <span class="">
+                            <input type="submit" class="btn btn-danger mt-3" value="Sair">
+                        </span>
+                    </form>
                 </ul>
             </div>
         </div>

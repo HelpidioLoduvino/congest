@@ -19,6 +19,7 @@ class CreateContractsTable extends Migration
             $table->foreign('condo_id')->references('id')->on('condominios');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('contract_type');
             $table->string('plan');
         });
     }
