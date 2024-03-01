@@ -1,8 +1,7 @@
 @extends('main_admin')
 
 @section('content')
-@if(!empty($contracts))
-@foreach ($contracts as $contract)
+@if(!empty($contract))
 <div class="card card-body shadow-card mt-3">
     <div class="container mt-3">
         <div class="d-flex justify-content-center">
@@ -79,8 +78,5 @@
         </div>
     </div>
 </div>
-@endforeach
 @endif
-
-
 @endsection

@@ -259,7 +259,7 @@
                         <hr>
                     </div>
                     <li class="nav-link">
-                        <a class="navbar-link" href="/moradores">
+                        <a class="navbar-link" href="/moradores/{{session('id')}}">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/person.svg') }}" width="25">
                                 Moradores
@@ -303,6 +303,22 @@
         <div class="col-md-8">
             <div class="content mb-5">
                 <div class="container">
+                    @if($errors->any())
+                        <div class="alert mt-3 alert-danger alert-dismissible d-flex justify-content-center">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                    @if(session('msg'))
+                        <div class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
+                            <p class="msg d-flex justify-content-center">{{session('msg')}}</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     @yield('content')
                 </div>
             </div>

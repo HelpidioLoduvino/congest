@@ -25,9 +25,9 @@
         <h6 class="d-flex justify-content-center"><strong>ConGest</strong></h6>
         <h6 class="d-flex justify-content-center mb-3"><strong>FICHA DE CADASTRO DE MORADOR</strong></h6>
         <div class="d-flex justify-content-center">
-            <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#formResidentModal">
+            <a class="btn btn-dark" href="/cadastrar-morador/{{session('id')}}">
                 Cadastrar
-            </button>
+            </a>
         </div>
     </div>
     <h4 class="mt-3 title-font">Moradores</h4>
@@ -43,18 +43,29 @@
                         <th>MORADOR</th>
                     </tr>
                 </thead>
-                <tbody id="clickableBody">
+                @if (!empty($residents))
+                <tbody>
+                    @foreach ($residents as $resident)
                     <tr>
-                        <td>A</td>
-                        <td>250</td>
-                        <td>Helpidio Loduvino Caldeira Mateus</td>
+                        <td class="uppercase-text">
+                            <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
+                                {{$resident->plot_resident}}
+                            </a>
+                        </td>
+                        <td>
+                            <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
+                                {{$resident->residency_number}}
+                            </a>
+                        </td>
+                        <td>
+                            <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
+                                {{$resident->name}}
+                            </a>
+                        </td>
                     </tr>
-                    <tr>
-                        <td>A</td>
-                        <td>250</td>
-                        <td>Helpidio Loduvino Caldeira Mateus</td>
-                    </tr>
+                    @endforeach
                 </tbody>
+                @endif
             </table>
         </div>
     </div>
@@ -62,176 +73,12 @@
         <!-- Botões de paginação serão inseridos aqui -->
     </div>
 
-    <div class="modal" tabindex="-1" id="formResidentModal" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container mt-3">
-                        <div class="d-flex justify-content-center">
-                            <span class="logotipo">
-                                <img src="{{ asset('/icon/logo.svg') }}" width="40">
-
-                            </span>
-                        </div>
-                        <h6 class="d-flex justify-content-center"><strong>ConGest</strong></h6>
-                        <h6 class="d-flex justify-content-center mb-5"><strong>FICHA DE CADASTRO DE MORADOR</strong></h6>
-                        <form class="row" action="">
-                            <h6 class="mt-5"><strong>DADOS PESSOAIS</strong></h6>
-                            <div class="form-separator mb-3"></div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>NOME COMPLETO</h6>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>BILHETE DE IDENTIDADE</h6>
-                                <input type="text" class="form-control">
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>DATA DE NASCIMENTO</h6>
-                                <input type="date" class="form-control">
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>GÉNERO</h6>
-                                <select class="form-control" name="owner_gender">
-                                    <option value="">--Escolher--</option>
-                                    <option value="MASCULINO">MASCULINO</option>
-                                    <option value="FEMININO">FEMININO</option>
-                                </select>
-                            </div>
-
-                            <h6><strong>CONTATOS</strong></h6>
-                            <div class="form-separator mb-3"></div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>TELEFONE</h6>
-                                <input type="number" class="form-control">
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>EMAIL</h6>
-                                <input type="email" class="form-control">
-                            </div>
-
-                            <h6><strong>DADOS DO CONDOMÍNIO</strong></h6>
-                            <div class="form-separator mb-3"></div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>LOTE</h6>
-                                <input type="number" class="form-control">
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>Nº DA RESIDÊNCIA</h6>
-                                <input type="number" class="form-control">
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
-                        <img src="{{ asset('/icon/edit.svg') }}" alt="" width="30">
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        <img src="{{ asset('/icon/print.svg') }}" alt="" width="30">
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" tabindex="-1" id="contractResidentModal" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container mt-3">
-                        <div class="d-flex justify-content-center">
-                            <span class="logotipo">
-                                <img src="{{ asset('/icon/logo.svg') }}" width="40">
-
-                            </span>
-                        </div>
-                        <h6 class="d-flex justify-content-center"><strong>ConGest</strong></h6>
-                        <h6 class="d-flex justify-content-center mb-5"><strong>CONTRATO DE MORADOR</strong></h6>
-                        <form class="row" action="">
-                            <h6 class="mt-5"><strong>DADOS PESSOAIS</strong></h6>
-                            <div class="form-separator mb-3"></div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>NOME COMPLETO</h6>
-                                <h5><strong>helpidio loduvino caldeira mateus</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>BILHETE DE IDENTIDADE</h6>
-                                <h5><strong>78886667767ggh78</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>DATA DE NASCIMENTO</h6>
-                                <h5><strong>01/01/2003</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>GÉNERO</h6>
-                                <h5><strong>masculino</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>NACIONALIDADE</h6>
-                                <h5><strong>angolano</strong></h5>
-                            </div>
-
-                            <h6><strong>CONTATOS</strong></h6>
-                            <div class="form-separator mb-3"></div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>TELEFONE</h6>
-                                <h5><strong>944459953</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>EMAIL</h6>
-                                <h5><strong>helpidio@gmail.com</strong></h5>
-                            </div>
-
-                            <h6><strong>DADOS DO CONDOMÍNIO</strong></h6>
-                            <div class="form-separator mb-3"></div>
-
-                            <div class="col-md-6 mb-3 uppercase-text">
-                                <h6>LOTE</h6>
-                                <h5><strong>b</strong></h5>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <h6>Nº DA RESIDÊNCIA</h6>
-                                <h5><strong>25</strong></h5>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
-                        <img src="{{ asset('/icon/edit.svg') }}" alt="" width="30">
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        <img src="{{ asset('/icon/print.svg') }}" alt="" width="30">
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script>
+        function redirectToResidentForm(residentId) {
+            var url = '/contracto-morador/' + residentId;
+            window.location.href = url;
+        }
+    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {

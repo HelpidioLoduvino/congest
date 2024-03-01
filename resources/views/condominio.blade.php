@@ -1,8 +1,7 @@
 @extends('main_condominio')
 
 @section('content')
-@if (!empty($owners))
-@foreach ($owners as $owner)
+@if (!empty($owner))
 <div class="card card-body shadow-card mt-3" style="background-color: rgba(188, 188, 188, 0.203)">
     <h5 class="d-flex justify-content-center condo-title">Condomínio {{$owner->condo_name}}</h5>
 <div class="row mt-3">
@@ -38,6 +37,5 @@
     <h5 class=""><strong>Destaques</strong></h5>
     <p class="text-muted">Atividades importantes em seu condomínio</p>
 </div>
-@endforeach
 @endif
 @endsection

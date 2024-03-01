@@ -3,7 +3,7 @@
 @section('content')
     <div class="condo-font card card-body shadow-card mt-3">
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-hover">
                 <thead class="table-active">
                     <tr>
                         <th>Nome Do Condomínio</th>
@@ -82,12 +82,12 @@
         }
     </script>
 
-<script>
-    function redirectToBusinessContract(userId) {
-        var url = '/contracto-empresa/' + userId;
-        window.location.href = url;
-    }
-</script>
+    <script>
+        function redirectToBusinessContract(userId) {
+            var url = '/contracto-empresa/' + userId;
+            window.location.href = url;
+        }
+    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
