@@ -14,7 +14,7 @@ use App\Http\Controllers\CondominioController;
 */
 
 Route::get('/', [CondominioController::class, 'index']);
-Route::get('/condominio', [CondominioController::class, 'showCondominio']);
+Route::get('/condominio/{id}', [CondominioController::class, 'showCondominio']);
 Route::get('/avisos', [CondominioController::class, 'showNotice']);
 Route::get('/reuniões', [CondominioController::class, 'showMeeting']);
 Route::get('/moradores', [CondominioController::class, 'showResident']);

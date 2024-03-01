@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersonalContractsTable extends Migration
+class CreateAvailableCondosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreatePersonalContractsTable extends Migration
      */
     public function up()
     {
-        Schema::create('personal_contracts', function (Blueprint $table) {
+        Schema::create('available_condos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('condoId');
+            $table->foreign('condoId')->references('id')->on('condominios');
             $table->unsignedBigInteger('userId');
             $table->foreign('userId')->references('id')->on('users');
-            $table->string('bi');
-            $table->date('birthday');
-            $table->string('gender');
-            $table->string('nationality');
-            $table->string('address');
-            $table->string('contact');
+            $table->Integer('available');
+            $table->Integer('occupied')->default(0);
         });
     }
 
@@ -33,6 +31,6 @@ class CreatePersonalContractsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personal_contracts');
+        Schema::dropIfExists('available_condos');
     }
 }

@@ -21,6 +21,7 @@ class CreateContractsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('contract_type');
             $table->string('plan');
+            $table->date('date')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

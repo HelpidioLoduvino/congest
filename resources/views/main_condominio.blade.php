@@ -181,7 +181,7 @@
                     <div class="sidebar-separator container"></div>
                     <br>
                     <li class="nav-link">
-                        <a class="navbar-link" href="/condominio">
+                        <a class="navbar-link" href="/condominio/{{session('id')}}">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/home.svg') }}" width="25">
                                 Home

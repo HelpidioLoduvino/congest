@@ -10,6 +10,8 @@ use App\Models\Condominio;
 use App\Models\Contract;
 use App\Models\PersonalContract;
 use App\Models\BusinessContract;
+use App\Models\AvailableCondo;
+
 
 class CondominioController extends Controller
 {
@@ -17,8 +19,23 @@ class CondominioController extends Controller
         return view('home');
     }
 
-    public function showCondominio(){
-        return view('condominio');
+    public function showCondominio($id){
+
+        $owners = User::select(
+                            'users.name', 'condominios.condo_name', 'condominios.residency',
+                            'available_condos.available', 'available_condos.occupied')
+                            ->join('condominios', 'condominios.user_id', '=', 'users.id')
+                            ->join('available_condos', 'available_condos.condoId', '=',
+                            'condominios.id')
+                            ->where('users.id', '=', $id)
+                            ->get();
+
+        if($owners->isNotEmpty()){
+            return view('condominio', compact('owners'));
+        }else {
+            $owners = [];
+            return view('condominio', compact('owners'));
+        }
     }
 
     public function showNotice(){
@@ -185,7 +202,7 @@ class CondominioController extends Controller
                 $sessionType = session('type');
                 switch($sessionType){
                     case 'condominio':
-                        return redirect('/condominio')->with('msg', 'Condominio Logado Com Sucesso');
+                        return redirect('/condominio/' . session('id'))->with('msg', 'Condominio Logado Com Sucesso');
                         break;
                     case 'admin':
                         return redirect('/admin')->with('msg','Admin Logado Com Sucesso');
@@ -266,6 +283,12 @@ class CondominioController extends Controller
                     'contract_type' => $request->input('contract_type'),
                     'plan' => $request->input('plan')
                 ]);
+
+                AvailableCondo::create([
+                    'condoId' => $condoId,
+                    'userId' => $userId,
+                    'available' => $request->input('residency')
+                ]);
             }
 
             return redirect('/admin')->with('msg', 'Condominio Cadastrado Com Sucesso');
@@ -324,6 +347,12 @@ class CondominioController extends Controller
                     'user_id' => $userId,
                     'contract_type' => $request->input('contract_type'),
                     'plan' => $request->input('plan')
+                ]);
+
+                AvailableCondo::create([
+                    'condoId' => $condoId,
+                    'userId' => $userId,
+                    'available' => $request->input('residency')
                 ]);
             }
 
