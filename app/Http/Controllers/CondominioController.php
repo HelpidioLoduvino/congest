@@ -125,10 +125,15 @@ class CondominioController extends Controller
                             ->where('residents.resident_id', $id)
                             ->first();
 
-        if($resident){
-            return view('resident_home', compact('resident'));
-        }
+        $condoId = $resident->condo_id;
 
+        $notices = Information::where('condo_id', $condoId)->get();
+
+        $meetings = Meeting::where('condo_id', $condoId)->get();
+
+        if($resident){
+            return view('resident_home', compact('resident', 'notices', 'meetings'));
+        }
     }
 
     public function showResidentFee(){
@@ -540,7 +545,6 @@ class CondominioController extends Controller
 
     public function scheduleMeeting(Request $request){
         $validator = $request->validate([
-            'meeting' => 'required|string',
             'participant' => 'required|string',
             'place' => 'required|string',
             'subject' => 'required|string',
@@ -555,7 +559,6 @@ class CondominioController extends Controller
                 'condo_id' => $request->input('condo_id'),
                 'user_id' => $userId,
                 'subject' => $request->input('subject'),
-                'meeting' => $request->input('meeting'),
                 'place' => $request->input('place'),
                 'participant' => $request->input('participant'),
                 'meeting_date' => $request->input('meeting_date')

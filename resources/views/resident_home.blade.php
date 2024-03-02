@@ -10,18 +10,15 @@
 <h4 class="title-font mt-3">Avisos</h4>
 <div class="condo-separator"></div>
 <div class="condo-font card card-body shadow-card mt-3">
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Data</th>
-                    <th>Mensagem</th>
-                    <th>De</th>
-                    <th>Para</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+    @if($notices->isNotEmpty())
+        <div>
+            <ul>
+                @foreach($notices as $notice)
+                    <li>{{ $notice->notice }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 </div>
 
 <h4 class="title-font mt-3">Reuniões</h4>
@@ -32,11 +29,21 @@
             <thead>
                 <tr>
                     <th>Assunto</th>
-                    <th>Com</th>
                     <th>Local</th>
                     <th>Data</th>
                 </tr>
             </thead>
+            <tbody>
+                @if ($meetings->isNotEmpty())
+                    @foreach ($meetings as $meeting)
+                        <tr>
+                            <td>{{$meeting->subject}}</td>
+                            <td>{{$meeting->place}}</td>
+                            <td>{{$meeting->meeting_date}}</td>
+                        </tr>
+                    @endforeach
+                @endif
+            </tbody>
         </table>
     </div>
 </div>

@@ -10,5 +10,5 @@ class Meeting extends Model
     use HasFactory;
     public $table = 'meetings';
     public $timestamps = false;
-    protected $fillable = ['condo_id', 'user_id', 'subject', 'meeting', 'place', 'participant', 'meeting_date'];
+    protected $fillable = ['condo_id', 'user_id', 'subject', 'place', 'participant', 'meeting_date'];
 }

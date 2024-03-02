@@ -523,24 +523,9 @@
                 </li>
                 <div class="separator-black rounded-pill mt-3"></div>
                 <div class="condo-font card card-body shadow-card mt-3">
-                    <h5 class="d-flex justify-content-center mb-3"><strong>Minhas Correspondências</strong></h5>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <tbody>
-                                <tr>
-                                    <td>Pedido Para dar Festa no Parque</td>
-                                    <td>Quero Pedir para dar festa no parque</td>
-                                    <td>Portaria</td>
-                                    <td>10/05/2023, 12:40</td>
-                                </tr>
-                                <tr>
-                                    <td>Pedido Para dar Festa no Parque</td>
-                                    <td>Quero Pedir para dar festa no parque</td>
-                                    <td>Portaria</td>
-                                    <td>10/05/2023, 12:40</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="d-flex justify-content-center m-3">
+                        <a class="btn btn-dark" href="#" data-bs-toggle="modal" data-bs-target="#sentMessageModal">Enviado</a>
+                        <a class="btn btn-success" href="#" style="margin-left: 20px;" data-bs-toggle="modal" data-bs-target="#receivedMessageModal">Recebido</a>
                     </div>
                 </div>
               </ul>
@@ -665,6 +650,69 @@
               </ul>
               <div class="condo-font card card-body shadow-card mt-3">
                 <h5 class="d-flex justify-content-center mb-3"><strong>Contatos de Emergência</strong></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="sentMessageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-xxl-down">
+          <div class="modal-content">
+            <div class="modal-body">
+              <ul class="navbar-nav">
+                <li class="nav-link">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn" data-bs-dismiss="modal" aria-label="Close">
+                            <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
+                        </button>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
+                        <div class="zoom-effect">
+                            <img src="{{ asset('/icon/logo.svg') }}" width="35">
+                            <span>ConGest</span>
+                        </div>
+                    </a>
+                </li>
+                <div class="separator-black rounded-pill mt-3"></div>
+              </ul>
+              <div class="condo-font card card-body shadow-card mt-3">
+                <h5 class="d-flex justify-content-center mb-3"><strong>Mensagens Enviadas</strong></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="receivedMessageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-xxl-down">
+          <div class="modal-content">
+            <div class="modal-body">
+              <ul class="navbar-nav">
+                <li class="nav-link">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn" data-bs-dismiss="modal" aria-label="Close">
+                            <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
+                        </button>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
+                        <div class="zoom-effect">
+                            <img src="{{ asset('/icon/logo.svg') }}" width="35">
+                            <span>ConGest</span>
+                        </div>
+                    </a>
+                </li>
+                <div class="separator-black rounded-pill mt-3"></div>
+              </ul>
+              <div class="condo-font card card-body shadow-card mt-3">
+                <h5 class="d-flex justify-content-center mb-3"><strong>Mensagens Recebidas</strong></h5>
+                <div>
+
+                </div>
               </div>
             </div>
           </div>

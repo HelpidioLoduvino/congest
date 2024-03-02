@@ -39,10 +39,6 @@
             <input type="text" name="subject" placeholder="Assunto" class="form-control">
         </div>
 
-        <div class="form-group mb-3">
-            <textarea name="meeting" class="form-control" cols="50" rows="3" placeholder="Compor"></textarea>
-        </div>
-
         <button class="btn btn-dark" type="submit">Marcar</button>
     </form>
 </div>

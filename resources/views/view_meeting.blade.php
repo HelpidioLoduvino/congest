@@ -20,10 +20,6 @@
         <h5>Data da Reunião: <strong>{{$meeting->meeting_date}}</strong></h5>
     </div>
 
-    <div class="form-group mb-3">
-        <p>{{$meeting->meeting}}</p>
-    </div>
-
     <div class="form-group mb-3 mt-3">
         <p class="text-muted">Data: {{$meeting->date}}</p>
     </div>
