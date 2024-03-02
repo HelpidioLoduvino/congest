@@ -20,8 +20,9 @@ class CreateInformationsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('subject');
-            $table->text('composition');
-            $table->string('destination');
+            $table->text('notice');
+            $table->string('receiver');
+            $table->date('date')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

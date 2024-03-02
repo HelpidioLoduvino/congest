@@ -3,7 +3,7 @@
 @section('content')
 @if (!empty($owner))
 <div class="card card-body shadow-card mt-3" style="background-color: rgba(188, 188, 188, 0.203)">
-    <h5 class="d-flex justify-content-center condo-title">Condomínio {{$owner->condo_name}}</h5>
+    <h1 class="d-flex justify-content-center">Condomínio {{$owner->condo_name}}</h1>
 <div class="row mt-3">
     <div class="col-md-4 mb-3">
         <div class="condo-font card mx-auto shadow-card" style="width: 17rem; background-color: rgba(255, 0, 0, 0.302);">

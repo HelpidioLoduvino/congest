@@ -15,8 +15,8 @@ use App\Http\Controllers\CondominioController;
 
 Route::get('/', [CondominioController::class, 'index']);
 Route::get('/condominio/{id}', [CondominioController::class, 'showCondominio']);
-Route::get('/avisos', [CondominioController::class, 'showNotice']);
-Route::get('/reuniões', [CondominioController::class, 'showMeeting']);
+Route::get('/avisos/{id}', [CondominioController::class, 'showNotice']);
+Route::get('/reuniões/{id}', [CondominioController::class, 'showMeeting']);
 Route::get('/moradores/{id}', [CondominioController::class, 'showResident']);
 Route::get('/blocos', [CondominioController::class, 'showBlock']);
 Route::get('/reclamações', [CondominioController::class, 'showComplaint']);
@@ -24,7 +24,7 @@ Route::get('/reclamação', [CondominioController::class, 'showComplaintLetter']
 Route::get('/mensagens', [CondominioController::class, 'showMessage']);
 Route::get('/mensagem', [CondominioController::class, 'showMessageLetter']);
 Route::get('/admin', [CondominioController::class, 'showAdmin']);
-Route::get('/morador', [CondominioController::class, 'showHomeResident']);
+Route::get('/morador/{id}', [CondominioController::class, 'showHomeResident']);
 Route::get('/comprovativos', [CondominioController::class, 'showResidentFee']);
 Route::get('/taxas', [CondominioController::class, 'showValidResidentFee']);
 Route::get('/reservas', [CondominioController::class, 'showBooking']);
@@ -36,11 +36,15 @@ Route::get('/contracto-pessoal/{id}', [CondominioController::class, 'showPersona
 Route::get('/contracto-empresa/{id}', [CondominioController::class, 'showBusinessContract']);
 Route::get('/cadastrar-morador/{id}', [CondominioController::class, 'showRegisterResident']);
 Route::get('/contracto-morador/{id}', [CondominioController::class, 'showResidentForm']);
+Route::get('/aviso/{id}', [CondominioController::class, 'showCondominioNotice']);
+Route::get('/reunião/{id}', [CondominioController::class, 'showCondominioMeeting']);
 Route::post('/login', [CondominioController::class, 'login']);
 Route::post('/logout', [CondominioController::class, 'logout']);
 Route::post('/cadastrar-condominio-contracto-pessoal', [CondominioController::class, 'registerCondoPersonalContract']);
 Route::post('/cadastrar-condominio-contracto-empresarial', [CondominioController::class, 'registerCondoBusinessContract']);
 Route::post('/cadastrar-morador', [CondominioController::class, 'registerResident']);
+Route::post('/enviar-aviso', [CondominioController::class, 'sendNotice']);
+Route::post('/marcar-reunião', [CondominioController::class, 'scheduleMeeting']);
 
 
 

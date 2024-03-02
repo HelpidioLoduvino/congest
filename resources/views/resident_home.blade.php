@@ -1,11 +1,12 @@
 @extends('main_resident')
 
 @section('content')
-<br>
-<div class="card card-body shadow-card " style="background-color: rgba(245, 222, 179, 0.292)">
-    <h6 class="d-flex justify-content-center condo-title">Condomínio da Sonangol</h6>
-</div>
 
+@if (!empty($resident))
+<div class="card card-body shadow-card mt-3" style="background-color: rgba(245, 222, 179, 0.292)">
+    <h6 class="d-flex justify-content-center condo-title">Condomínio {{$resident->condo_name}}</h6>
+</div>
+@endif
 <h4 class="title-font mt-3">Avisos</h4>
 <div class="condo-separator"></div>
 <div class="condo-font card card-body shadow-card mt-3">

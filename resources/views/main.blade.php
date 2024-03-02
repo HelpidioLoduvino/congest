@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=0">
 
-    <title>Laravel</title>
+    <title>CONGEST</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 
@@ -154,37 +154,22 @@
             </ul>
         </div>
 
-        <div class="collapse navbar-collapse d-flex justify-content-end" style="margin-right: 20px;">
-            <button class="btn d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
-                aria-controls="sidebarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <img class="hover-image" src="{{ asset('/icon/menu.svg') }}" width="30">
-            </button>
-        </div>
+        <div class="d-md-none" style="margin-left: 100px;">
+            <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#solutionModal">
+                <img class="hover-image" src="{{ asset('/icon/idea-bulb-solution.svg') }}" width="35">
+            </a>
 
-        <div class="d-md-none collapse" id="menu">
-            <div class="phone-menu container mt-5">
-                <div class="row">
-                    <div class="col">
-                        <a href="#" type="button" data-bs-toggle="modal"
-                            data-bs-target="#solutionModal">Soluções</a>
-                    </div>
+            <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#aboutModal">
+                <img class="hover-image" src="{{ asset('/icon/notice.svg') }}" width="35">
+            </a>
 
-                    <div class="col">
-                        <a href="#" type="button" data-bs-toggle="modal"
-                            data-bs-target="#aboutModal">Sobre</a>
-                    </div>
+            <a href="#">
+                <img class="hover-image" src="{{ asset('/icon/whatsapp.svg') }}" width="35">
+            </a>
 
-                    <div class="col">
-                        <a href="#" href="">Contacto</a>
-                    </div>
-
-                    <div class="col">
-                        <a href="#" type="button" data-bs-toggle="modal"
-                            data-bs-target="#loginModal">Login</a>
-                    </div>
-                </div>
-
-            </div>
+            <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">
+                <img class="hover-image" src="{{ asset('/icon/login.svg') }}" width="35">
+            </a>
         </div>
 
         <div class="ml-auto">

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=0">
 
     <title>Laravel</title>
     <link rel="stylesheet" href="/css/style.css">
@@ -15,13 +15,13 @@
 
     <nav class="condo-navbar navbar navbar-expand-md">
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarNav"
+        <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarNav"
             aria-controls="sidebarNav" aria-expanded="false" aria-label="Toggle navigation" style="margin-left: 20px;">
-            <img class="hover-image" src="{{asset('/icon/menu.svg')}}" width="40">
+            <img class="hover-image" src="{{asset('/icon/menu.svg')}}" width="35">
         </button>
 
         <div class="collapse navbar-collapse" id="sidebarNav">
-            <div class="sidebar">
+            <div class="sidebar d-md-none">
                 <div class="close-btn mb-3 d-flex justify-content-end">
                     <a href="#" class="d-md-none" data-bs-toggle="collapse"
                         data-bs-target="#sidebarNav" aria-controls="sidebarNav" aria-expanded="false"
@@ -38,12 +38,10 @@
                     </li>
                     <div class="sidebar-separator container"></div>
                     <br>
-                    <li class="nav-link">
-                        <a class="navbar-link" href="/admin">
-                            <div class="zoom-effect">
-                                <img class="hover-image" src="{{ asset('/icon/home.svg') }}" width="25">
-                                <span>Home</span>
-                            </div>
+                    <li>
+                        <a href="/admin">
+                            <img class="hover-image" src="{{ asset('/icon/home.svg') }}" width="25">
+                            Home
                         </a>
                     </li>
                     <div class="container">
@@ -53,6 +51,15 @@
                         <a href="/condomínios">
                             <img class="hover-image" src="{{ asset('/icon/apartment.svg') }}" width="25">
                             Condomínios
+                        </a>
+                    </li>
+                    <div class="container">
+                        <hr>
+                    </div>
+                    <li>
+                        <a href="/perfil-admin/{{session('id')}}">
+                            <img class="hover-image" src="{{ asset('/icon/profile.svg') }}" width="25">
+                            Perfil
                         </a>
                     </li>
                 </ul>

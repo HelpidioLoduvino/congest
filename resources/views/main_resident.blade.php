@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=0">
 
     <title>Laravel</title>
     <link rel="stylesheet" href="/css/style.css">
@@ -22,8 +22,8 @@
             </div>
         </a>
 
-        <button class="btn d-md-block" data-bs-toggle="modal" data-bs-target="#menuModal" style="margin-right: 20px;">
-            <img class="hover-image" src="{{asset('/icon/menu.svg')}}" width="30">
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#menuModal">
+            <img class="hover-image" src="{{asset('/icon/menu.svg')}}" width="35">
         </button>
 
         <div class="collapse navbar-collapse d-md-flex justify-content-end">
@@ -54,11 +54,12 @@
                 </li>
             </ul>
         </div>
+
         <div class="d-md-none d-flex" style="margin-left: 60px;">
             <ul class="navbar-nav">
                 <li class="nav-item d-flex">
-                    <a class="nav-link" style="margin-right: 10px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#bookingModal">
-                        <img class="hover-image" src="{{ asset('/icon/reservation.svg') }}" width="25">
+                    <a class="nav-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#bookingModal">
+                        <img class="hover-image" src="{{ asset('/icon/reservation.svg') }}" width="35">
                     </a>
                 </li>
             </ul>
@@ -67,8 +68,8 @@
         <div class="d-md-none d-flex">
             <ul class="navbar-nav">
                 <li class="nav-item d-flex">
-                    <a class="nav-link" style="margin-right: 10px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#complaintModal">
-                        <img class="hover-image" src="{{ asset('/icon/complaint.svg') }}" width="25">
+                    <a class="nav-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#complaintModal">
+                        <img class="hover-image" src="{{ asset('/icon/complaint.svg') }}" width="35">
                     </a>
                 </li>
             </ul>
@@ -78,22 +79,11 @@
             <ul class="navbar-nav">
                 <li class="nav-item d-flex">
                     <a class="nav-link" style="margin-right: 10px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#messageModal">
-                        <img class="hover-image" src="{{ asset('/icon/message.svg') }}" width="25">
+                        <img class="hover-image" src="{{ asset('/icon/message.svg') }}" width="35">
                     </a>
                 </li>
             </ul>
         </div>
-
-        <div class="d-flex ms-auto">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" style="margin-right: 20px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#profileModal">
-                        <img class="hover-image" src="{{ asset('/icon/profile.svg') }}" width="30">
-                    </a>
-                </li>
-            </ul>
-        </div>
-
 
     </nav>
 
@@ -136,6 +126,15 @@
                     </li>
                     <div class="sidebar-separator container"></div>
                     <br>
+                    <li class="nav-link">
+                        <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#profileModal">
+                            <div class="zoom-effect">
+                                <img class="hover-image" src="{{ asset('/icon/profile.svg') }}" width="25">
+                                Perfil
+                            </div>
+                        </a>
+                    </li>
+                    <hr style="color: white">
                     <li class="nav-link">
                         <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#feeModal">
                             <div class="zoom-effect">
@@ -184,8 +183,13 @@
                     <li class="nav-link">
                         <a class="navbar-link" href="/">
                             <div class="zoom-effect">
-                                <img class="hover-image" src="{{ asset('/icon/logout.svg') }}" width="25">
-                                Sair
+                                <form action="/logout" method="post">
+                                    @csrf
+                                    <div class="d-flex">
+                                        <input class="hover-image" type="image" src="{{ asset('/icon/logout.svg') }}" alt="" width="30">
+                                        Sair
+                                    </div>
+                                </form>
                             </div>
                         </a>
                     </li>
@@ -372,16 +376,75 @@
                         </button>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
-                        <div class="zoom-effect">
-                            <img src="{{ asset('/icon/logo.svg') }}" width="35">
-                            <span>ConGest</span>
+                </ul>
+                <div class="d-none d-md-block d-md-flex justify-content-center mt-3">
+                    <img src="{{ asset('/icon/profile-black.svg') }}" width="100">
+                </div>
+                @if (!empty($resident))
+                <div class="container">
+                    <div class="row">
+                        <h6><strong>DADOS PESSOAIS</strong></h6>
+                        <div class="form-separator mb-3"></div>
+
+                        <div class="col-md-6 mb-3 uppercase-text">
+                            <h6>NOME COMPLETO</h6>
+                            <h5><strong>{{$resident->name}}</strong></h5>
                         </div>
-                    </a>
-                </li>
-                <div class="separator-black rounded-pill mt-3"></div>
-              </ul>
+
+                        <div class="col-md-6 mb-3 uppercase-text">
+                            <h6>BILHETE DE IDENTIDADE</h6>
+                            <h5><strong>{{$resident->bi}}</strong></h5>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <h6>DATA DE NASCIMENTO</h6>
+                            <h5><strong>{{$resident->birthday}}</strong></h5>
+                        </div>
+
+                        <div class="col-md-6 mb-3 uppercase-text">
+                            <h6>GÉNERO</h6>
+                            <h5><strong>{{$resident->gender}}</strong></h5>
+                        </div>
+
+                        <div class="col-md-6 mb-3 uppercase-text">
+                            <h6>NACIONALIDADE</h6>
+                            <h5><strong>{{$resident->nationality}}</strong></h5>
+                        </div>
+
+                        <h6><strong>CONTATOS</strong></h6>
+                        <div class="form-separator mb-3"></div>
+
+                        <div class="col-md-6 mb-3">
+                            <h6>TELEFONE</h6>
+                            <h5><strong>{{$resident->contact}}</strong></h5>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <h6>EMAIL</h6>
+                            <h5><strong>{{$resident->email}}</strong></h5>
+                        </div>
+
+                        <h6><strong>DADOS DO CONDOMÍNIO</strong></h6>
+                        <div class="form-separator mb-3"></div>
+
+
+                        <div class="col-md-6 mb-3 uppercase-text">
+                            <h6>LOTE</h6>
+                            <h5><strong>{{$resident->plot_resident}}</strong></h5>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <h6>RESIDÊNCIA</h6>
+                            <h5><strong>{{$resident->residency_number}}</strong></h5>
+                        </div>
+                    </div>
+
+                    <span class="d-flex justify-content-center">
+                        <a href="" class="btn btn-dark">EDITAR</a>
+                    </span>
+                </div>
+
+                @endif
             </div>
           </div>
         </div>

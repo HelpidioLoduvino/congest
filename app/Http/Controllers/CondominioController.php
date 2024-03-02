@@ -13,6 +13,8 @@ use App\Models\PersonalContract;
 use App\Models\BusinessContract;
 use App\Models\AvailableCondo;
 use App\Models\Resident;
+use App\Models\Information;
+use App\Models\Meeting;
 
 
 
@@ -37,12 +39,42 @@ class CondominioController extends Controller
         }
     }
 
-    public function showNotice(){
-        return view('notice');
+    public function showNotice($id){
+        $condoId = Condominio::select('condominios.id')
+                                    ->join('users', 'users.id', '=',
+                                    'condominios.user_id')
+                                    ->where('users.id', '=', $id)
+                                    ->first();
+
+        $notices = Information::where('user_id', $id)->get();
+
+        if($condoId){
+            if($notices->isNotEmpty()){
+                return view('notice', compact('condoId', 'notices'));
+            }else {
+                return view('notice', compact('condoId'));
+            }
+        }
     }
 
-    public function showMeeting(){
-        return view('meeting');
+    public function showMeeting($id){
+
+        $condoId = Condominio::select('condominios.id')
+                                    ->join('users', 'users.id', '=',
+                                    'condominios.user_id')
+                                    ->where('users.id', '=', $id)
+                                    ->first();
+
+        $meetings = Meeting::where('user_id', $id)->get();
+
+        if($condoId){
+
+            if($meetings->isNotEmpty()){
+                return view('meeting', compact('condoId', 'meetings'));
+            } else {
+                return view('meeting', compact('condoId'));
+            }
+        }
     }
 
     public function showResident($id){
@@ -85,8 +117,18 @@ class CondominioController extends Controller
         return view('admin');
     }
 
-    public function showHomeResident(){
-        return view('resident_home');
+    public function showHomeResident($id){
+
+        $resident = Resident::select('condominios.*', 'residents.*', 'users.name', 'users.email')
+                            ->join('condominios', 'condominios.id', '=', 'residents.condo_id')
+                            ->join('users', 'users.id', '=', 'residents.resident_id')
+                            ->where('residents.resident_id', $id)
+                            ->first();
+
+        if($resident){
+            return view('resident_home', compact('resident'));
+        }
+
     }
 
     public function showResidentFee(){
@@ -217,6 +259,20 @@ class CondominioController extends Controller
 
     }
 
+    public function showCondominioNotice($id){
+        $notice = Information::find($id);
+        if($notice){
+            return view('view_notice', compact('notice'));
+        }
+    }
+
+    public function showCondominioMeeting($id){
+        $meeting = Meeting::find($id);
+        if($meeting){
+            return view('view_meeting', compact('meeting'));
+        }
+    }
+
     public function login (Request $request) {
 
         $validator = $request->validate([
@@ -239,7 +295,7 @@ class CondominioController extends Controller
                         return redirect('/admin')->with('msg','Admin Logado Com Sucesso');
                         break;
                     case 'morador':
-                        return redirect('/morador')->with('msg', 'Morador Logado Com Sucesso');
+                        return redirect('/morador/'. session('id'))->with('msg', 'Morador Logado Com Sucesso');
                         break;
                     default:
                         return view('/login')->with('error', 'Erro ao Fazer Login');
@@ -451,6 +507,61 @@ class CondominioController extends Controller
             }
 
             return redirect('/moradores/'. $ownerId)->with('msg', 'Morador Cadastrado Com Sucesso');
+
+        } catch (Exception $e){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    }
+
+    public function sendNotice(Request $request){
+        $validator = $request->validate([
+            'subject' => 'required|string',
+            'notice' => 'required|string',
+            'receiver' => 'required|string'
+        ]);
+
+        $userId = $request->input('user_id');
+        try {
+            Information::create([
+                'condo_id' => $request->input('condo_id'),
+                'user_id' => $userId,
+                'notice' => $request->input('notice'),
+                'subject' => $request->input('subject'),
+                'receiver' => $request->input('receiver')
+            ]);
+
+            return redirect('/avisos/'. $userId)->with('msg', 'Aviso Enviado Com Sucesso');
+        } catch (Exception $e){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+
+    }
+
+    public function scheduleMeeting(Request $request){
+        $validator = $request->validate([
+            'meeting' => 'required|string',
+            'participant' => 'required|string',
+            'place' => 'required|string',
+            'subject' => 'required|string',
+            'meeting_date' => 'required'
+        ]);
+
+        $userId = $request->input('user_id');
+
+        try {
+
+            Meeting::create([
+                'condo_id' => $request->input('condo_id'),
+                'user_id' => $userId,
+                'subject' => $request->input('subject'),
+                'meeting' => $request->input('meeting'),
+                'place' => $request->input('place'),
+                'participant' => $request->input('participant'),
+                'meeting_date' => $request->input('meeting_date')
+            ]);
+
+            return redirect('/reuniões/' . $userId)->with('msg', 'Reunião Agendada Com Sucesso');
 
         } catch (Exception $e){
             return redirect()->back()->withErrors($validator)->withInput();

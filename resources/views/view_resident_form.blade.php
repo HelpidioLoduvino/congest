@@ -57,7 +57,7 @@
         <div class="form-separator mb-3"></div>
 
 
-        <div class="col-md-6 mb-3">
+        <div class="col-md-6 mb-3 uppercase-text">
             <h6>LOTE</h6>
             <h5><strong>{{$resident->plot_resident}}</strong></h5>
         </div>

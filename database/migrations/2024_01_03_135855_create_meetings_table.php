@@ -20,10 +20,11 @@ class CreateMeetingsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('subject');
-            $table->text('composition');
+            $table->text('meeting');
             $table->string('place');
             $table->string('participant');
-            $table->datetime('meeting_data');
+            $table->datetime('meeting_date');
+            $table->date('date')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

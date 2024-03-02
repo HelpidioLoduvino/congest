@@ -17,7 +17,7 @@
 
         <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarNav"
             aria-controls="sidebarNav" aria-expanded="false" aria-label="Toggle navigation" style="margin-left: 20px;">
-            <img class="hover-image" src="{{ asset('/icon/menu.svg') }}" width="30">
+            <img class="hover-image" src="{{ asset('/icon/menu.svg') }}" width="45">
         </button>
 
         <div class="collapse navbar-collapse" id="sidebarNav">
@@ -38,7 +38,7 @@
                     <div class="sidebar-separator container"></div>
                     <br>
                     <li class="nav-link">
-                        <a class="navbar-link" href="/condominio">
+                        <a class="navbar-link" href="/condominio/{{session('id')}}">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/home.svg') }}" width="25">
                                 Home
@@ -83,7 +83,7 @@
                         <hr>
                     </div>
                     <li class="nav-link">
-                        <a class="navbar-link" href="/avisos">
+                        <a class="navbar-link" href="/avisos/{{session('id')}}">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/notice.svg') }}" width="25">
                                 Avisos
@@ -94,7 +94,7 @@
                         <hr>
                     </div>
                     <li class="nav-link">
-                        <a class="navbar-link" href="/reuniões">
+                        <a class="navbar-link" href="/reuniões/{{session('id')}}">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/meeting.svg') }}" width="25">
                                 Reuniões
@@ -116,7 +116,7 @@
                         <hr>
                     </div>
                     <li class="nav-link">
-                        <a class="navbar-link" href="/moradores">
+                        <a class="navbar-link" href="/moradores/{{session('id')}}">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/person.svg') }}" width="25">
                                 Moradores
@@ -147,23 +147,13 @@
                     </li>
 
                     <div class="sidebar-separator mb-3 container mt-3"></div>
-                    <a class="btn btn-danger" href="/">Sair</a>
-                </ul>
-            </div>
-        </div>
-
-        <div class="ms-auto">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/mensagens" style="margin-right:20px;">
-                        <img class="hover-image" src="{{ asset('/icon/message.svg') }}" width="30">
-
-                        <span class="translate-middle badge rounded-pill bg-danger">
-                            1+
+                    <form action="/logout" method="post">
+                        @csrf
+                        <span class="">
+                            <input type="submit" class="btn btn-danger mt-3" value="Sair">
                         </span>
-                    </a>
-                </li>
-            </ul>
+                    </form>
+                </ul>
         </div>
 
     </nav>
@@ -226,7 +216,7 @@
                         <hr>
                     </div>
                     <li class="nav-link">
-                        <a class="navbar-link" href="/avisos">
+                        <a class="navbar-link" href="/avisos/{{session('id')}}">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/notice.svg') }}" width="25">
                                 Avisos
@@ -237,7 +227,7 @@
                         <hr>
                     </div>
                     <li class="nav-link">
-                        <a class="navbar-link" href="/reuniões">
+                        <a class="navbar-link" href="/reuniões/{{session('id')}}">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/meeting.svg') }}" width="25">
                                 Reuniões
