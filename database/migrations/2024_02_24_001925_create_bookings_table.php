@@ -20,8 +20,9 @@ class CreateBookingsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('subject');
-            $table->text('composition');
-            $table->datetime('reservation_date');
+            $table->text('booking');
+            $table->datetime('booking_date');
+            $table->date('date')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

@@ -20,9 +20,8 @@ class CreateComplaintsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('subject');
-            $table->text('composition');
-            $table->string('destination');
-            $table->datetime('complaint_data');
+            $table->text('complaint');
+            $table->date('date')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

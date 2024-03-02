@@ -199,6 +199,8 @@
         </div>
       </div>
 
+      @if ($resident)
+
       <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-xxl-down">
           <div class="modal-content">
@@ -225,27 +227,25 @@
               <div class="condo-font card card-body shadow-card mt-3">
                 <h5 class="d-flex justify-content-center mb-3"><strong>Marcar Reserva</strong></h5>
 
-                <form action="">
+                <form action="/fazer-reserva" method="post">
+                    @csrf
+                    <input type="hidden" name="condo_id" value="{{$resident->condo_id}}">
+                    <input type="hidden" name="user_id" value="{{session('id')}}">
+
                     <div class="form-group mb-3">
-                        <label for="">De: Helpidio Mateus</label>
+                        <label for="subject">Assunto:</label>
+                        <input type="text" class="form-control" name="subject" placeholder="Ex: Reserva do Parque Infantil">
                     </div>
                     <div class="form-group mb-3">
-                        <label for="">Para: Coordenação do Condomínio</label>
+                        <label for="meeting">Corpo:</label>
+                        <textarea name="meeting" class="form-control" cols="30" rows="5" placeholder="Compor"></textarea>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="booking_subject">Assunto:</label>
-                        <input type="text" class="form-control" name="booking_subject" placeholder="Ex: Reserva do Parque Infantil">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="booking_compose">Corpo:</label>
-                        <textarea name="booking_compose" class="form-control" cols="30" rows="5" placeholder="Compor"></textarea>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="booking_data">Data:</label>
-                        <input type="datetime-local" name="booking_data" class="form-control">
+                        <label for="booking_date">Data:</label>
+                        <input type="datetime-local" name="booking_date" class="form-control">
                     </div>
                     <span class="d-flex justify-content-center">
-                        <button class="btn btn-dark">Marcar</button>
+                        <button class="btn btn-dark" type="submit">Marcar</button>
                     </span>
                 </form>
               </div>
@@ -281,20 +281,18 @@
               <div class="condo-font card card-body shadow-card mt-3">
                 <h5 class="d-flex justify-content-center mb-3"><strong>Reclamação</strong></h5>
 
-                <form action="">
+                <form action="/fazer-reclamação" method="post">
+                    @csrf
+                    <input type="hidden" name="condo_id" value="{{$resident->condo_id}}">
+                    <input type="hidden" name="user_id" value="{{session('id')}}">
+
                     <div class="form-group mb-3">
-                        <label for="">De: Helpidio Mateus</label>
+                        <label for="subject">Assunto:</label>
+                        <input type="text" class="form-control" name="subject" placeholder="Ex: Reserva do Parque Infantil">
                     </div>
                     <div class="form-group mb-3">
-                        <label for="">Para: Coordenação do Condomínio</label>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="booking_subject">Assunto:</label>
-                        <input type="text" class="form-control" name="booking_subject" placeholder="Ex: Reserva do Parque Infantil">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="booking_compose">Corpo:</label>
-                        <textarea name="booking_compose" class="form-control" cols="30" rows="5" placeholder="Compor"></textarea>
+                        <label for="complaint">Corpo:</label>
+                        <textarea name="complaint" class="form-control" cols="30" rows="5" placeholder="Compor"></textarea>
                     </div>
                     <span class="d-flex justify-content-center">
                         <button class="btn btn-dark">Enviar</button>
@@ -333,28 +331,28 @@
                   <div class="condo-font card card-body shadow-card mt-3">
                     <h5 class="d-flex justify-content-center mb-3"><strong>Mensagem</strong></h5>
 
-                    <form action="">
+                    <form action="enviar-mensagem" method="post">
+                        @csrf
+                        <input type="hidden" name="condo_id" value="{{$resident->condo_id}}">
+                        <input type="hidden" name="user_id" value="{{session('id')}}">
                         <div class="form-group mb-3">
-                            <label for="">De: Helpidio Mateus</label>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="resident_message">Para:</label>
-                            <select name="resident_message" class="form-control">
+                            <label for="receiver">Para:</label>
+                            <select name="receiver" class="form-control">
                                 <option value="">--Escolher--</option>
                                 <option value="Coordenação do Condomínio">Coordenação do Condomínio</option>
                                 <option value="Portaria">Portaria</option>
                             </select>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="booking_subject">Assunto:</label>
-                            <input type="text" class="form-control" name="booking_subject" placeholder="Ex: Reserva do Parque Infantil">
+                            <label for="subject">Assunto:</label>
+                            <input type="text" class="form-control" name="subject" placeholder="Ex: Reserva do Parque Infantil">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="booking_compose">Corpo:</label>
-                            <textarea name="booking_compose" class="form-control" cols="30" rows="5" placeholder="Compor"></textarea>
+                            <label for="message">Corpo:</label>
+                            <textarea name="message" class="form-control" cols="30" rows="5" placeholder="Compor"></textarea>
                         </div>
                         <span class="d-flex justify-content-center">
-                            <button class="btn btn-dark">Enviar</button>
+                            <button class="btn btn-dark" type="submit">Enviar</button>
                         </span>
                     </form>
                   </div>
@@ -363,6 +361,8 @@
           </div>
         </div>
       </div>
+
+      @endif
 
       <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-xxl-down">

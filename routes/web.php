@@ -45,6 +45,9 @@ Route::post('/cadastrar-condominio-contracto-empresarial', [CondominioController
 Route::post('/cadastrar-morador', [CondominioController::class, 'registerResident']);
 Route::post('/enviar-aviso', [CondominioController::class, 'sendNotice']);
 Route::post('/marcar-reunião', [CondominioController::class, 'scheduleMeeting']);
+Route::post('/fazer-reserva', [CondominioController::class, 'scheduleBooking']);
+Route::post('/fazer-reclamação', [CondominioController::class, 'makeComplaint']);
+Route::post('/enviar-mensagem', [CondominioController::class, 'sendMessage']);
 
 
 

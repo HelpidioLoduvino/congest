@@ -20,9 +20,10 @@ class CreateMessagesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('subject');
-            $table->text('composition');
-            $table->string('destination');
-            $table->datetime('message_data');
+            $table->text('message');
+            $table->string('receiver');
+            $table->datetime('message_date');
+            $table->date('date')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

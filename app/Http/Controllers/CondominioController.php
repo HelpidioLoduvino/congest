@@ -15,6 +15,9 @@ use App\Models\AvailableCondo;
 use App\Models\Resident;
 use App\Models\Information;
 use App\Models\Meeting;
+use App\Models\Booking;
+use App\Models\Message;
+use App\Models\Complaint;
 
 
 
@@ -125,6 +128,8 @@ class CondominioController extends Controller
                             ->where('residents.resident_id', $id)
                             ->first();
 
+
+
         $condoId = $resident->condo_id;
 
         $notices = Information::where('condo_id', $condoId)->get();
@@ -132,7 +137,7 @@ class CondominioController extends Controller
         $meetings = Meeting::where('condo_id', $condoId)->get();
 
         if($resident){
-            return view('resident_home', compact('resident', 'notices', 'meetings'));
+            return view('resident_home', compact('resident', 'notices', 'meetings', 'condoId'));
         }
     }
 
@@ -569,5 +574,17 @@ class CondominioController extends Controller
         } catch (Exception $e){
             return redirect()->back()->withErrors($validator)->withInput();
         }
+    }
+
+    public function scheduleBooking (Request $request){
+
+    }
+
+    public function makeComplaint (Request $request){
+
+    }
+
+    public function sendMessage (Request $request){
+
     }
 }
