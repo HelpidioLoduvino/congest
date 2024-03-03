@@ -19,11 +19,31 @@
                 @if (!empty($complaints))
                     @foreach ($complaints as $complaint)
                         <tr>
-                            <td>{{$complaint->name}}</td>
-                            <td class="uppercase-text">{{$complaint->plot_resident}}</td>
-                            <td>{{$complaint->residency_number}}</td>
-                            <td>{{$complaint->subject}}</td>
-                            <td>{{$complaint->date}}</td>
+                            <td>
+                                <a href="#" class="nav-link" onclick="redirectToResidentComplaint('{{$complaint->id}}')">
+                                    {{$complaint->name}}
+                                </a>
+                            </td>
+                            <td class="uppercase-text">
+                                <a href="#" class="nav-link" onclick="redirectToResidentComplaint('{{$complaint->id}}')">
+                                    {{$complaint->plot_resident}}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#" class="nav-link" onclick="redirectToResidentComplaint('{{$complaint->id}}')">
+                                    {{$complaint->residency_number}}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#" class="nav-link" onclick="redirectToResidentComplaint('{{$complaint->id}}')">
+                                    {{$complaint->subject}}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#" class="nav-link" onclick="redirectToResidentComplaint('{{$complaint->id}}')">
+                                    {{$complaint->date}}
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 @endif
@@ -33,11 +53,10 @@
 </div>
 
 <script>
-document.getElementById('clickableBody').addEventListener('click', function() {
-    window.location.href = '/reclamação';
-});
+    function redirectToResidentComplaint(id) {
+        var url = '/reclamação-morador/' + id;
+        window.location.href = url;
+    }
 </script>
-
-
 
 @endsection

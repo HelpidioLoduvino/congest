@@ -19,11 +19,31 @@
                 @if (!empty($bookings))
                     @foreach ($bookings as $booking)
                         <tr>
-                            <td>{{$booking->name}}</td>
-                            <td class="uppercase-text">{{$booking->plot_resident}}</td>
-                            <td>{{$booking->residency_number}}</td>
-                            <td>{{$booking->subject}}</td>
-                            <td>{{$booking->booking_date}}</td>
+                            <td>
+                                <a href="#" class="nav-link" onclick="redirectToResidentBooking('{{$booking->id}}')">
+                                    {{$booking->name}}
+                                </a>
+                            </td>
+                            <td class="uppercase-text">
+                                <a href="#" class="nav-link" onclick="redirectToResidentBooking('{{$booking->id}}')">
+                                    {{$booking->plot_resident}}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#" class="nav-link" onclick="redirectToResidentBooking('{{$booking->id}}')">
+                                    {{$booking->residency_number}}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#" class="nav-link" onclick="redirectToResidentBooking('{{$booking->id}}')">
+                                    {{$booking->subject}}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#" class="nav-link" onclick="redirectToResidentBooking('{{$booking->id}}')">
+                                    {{$booking->booking_date}}
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 @endif
@@ -31,4 +51,12 @@
         </table>
     </div>
 </div>
+
+<script>
+    function redirectToResidentBooking(id) {
+        var url = '/reserva-morador/' + id;
+        window.location.href = url;
+    }
+</script>
+
 @endsection

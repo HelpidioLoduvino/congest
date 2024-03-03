@@ -116,10 +116,6 @@ class CondominioController extends Controller
 
     }
 
-    public function showComplaintLetter(){
-        return view('complaint_letter');
-    }
-
     public function showMessage($id){
 
         $messages = Message::select('messages.*', 'users.name',
@@ -139,8 +135,52 @@ class CondominioController extends Controller
 
     }
 
-    public function showMessageLetter(){
-        return view('message_letter');
+    public function showBooking($id){
+
+        $bookings = Booking::select('bookings.*', 'users.name',
+                            'residents.plot_resident', 'residents.residency_number')
+                           ->join('residents', 'residents.resident_id', '=', 'bookings.user_id')
+                           ->join('condominios', 'condominios.id', '=', 'bookings.condo_id')
+                           ->join('users', 'bookings.user_id', '=', 'users.id')
+                           ->where('condominios.user_id', $id)
+                           ->get();
+
+        if($bookings->isNotEmpty()){
+            return view('booking', compact('bookings'));
+        }else {
+            $bookings = [];
+            return view('booking', compact('bookings'));
+        }
+
+    }
+
+    public function showResidentMessage($id){
+
+        $message = Message::find($id);
+
+        if($message){
+            return view('view_resident_message', compact('message'));
+        }
+    }
+
+    public function showResidentBooking($id){
+
+        $booking = Booking::find($id);
+
+        if($booking){
+            return view('view_resident_booking', compact('booking'));
+        }
+
+    }
+
+    public function showResidentComplaint($id){
+
+        $complaint = Complaint::find($id);
+
+        if($complaint){
+            return view('view_resident_complaint', compact('complaint'));
+        }
+
     }
 
     public function showAdmin(){
@@ -189,25 +229,6 @@ class CondominioController extends Controller
 
     public function showValidResidentFee(){
         return view('resident_fee_list');
-    }
-
-    public function showBooking($id){
-
-        $bookings = Booking::select('bookings.*', 'users.name',
-                            'residents.plot_resident', 'residents.residency_number')
-                           ->join('residents', 'residents.resident_id', '=', 'bookings.user_id')
-                           ->join('condominios', 'condominios.id', '=', 'bookings.condo_id')
-                           ->join('users', 'bookings.user_id', '=', 'users.id')
-                           ->where('condominios.user_id', $id)
-                           ->get();
-
-        if($bookings->isNotEmpty()){
-            return view('booking', compact('bookings'));
-        }else {
-            $bookings = [];
-            return view('booking', compact('bookings'));
-        }
-
     }
 
     public function showPersonForm(){

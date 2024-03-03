@@ -19,11 +19,31 @@
                 @if (!empty($messages))
                     @foreach ($messages as $message)
                         <tr>
-                            <td>{{$message->name}}</td>
-                            <td class="uppercase-text">{{$message->plot_resident}}</td>
-                            <td>{{$message->residency_number}}</td>
-                            <td>{{$message->subject}}</td>
-                            <td>{{$message->date}}</td>
+                            <td>
+                                <a class="nav-link" href="#" onclick="redirectToResidentMessage('{{$message->id}}')">
+                                    {{$message->name}}
+                                </a>
+                            </td>
+                            <td class="uppercase-text">
+                                <a class="nav-link" href="#" onclick="redirectToResidentMessage('{{$message->id}}')">
+                                    {{$message->plot_resident}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="#" onclick="redirectToResidentMessage('{{$message->id}}')">
+                                    {{$message->residency_number}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="#" onclick="redirectToResidentMessage('{{$message->id}}')">
+                                    {{$message->subject}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="#" onclick="redirectToResidentMessage('{{$message->id}}')">
+                                    {{$message->date}}
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 @endif
@@ -33,9 +53,10 @@
 </div>
 
 <script>
-document.getElementById('clickableBody').addEventListener('click', function() {
-    window.location.href = '/mensagem';
-});
+    function redirectToResidentMessage(id) {
+        var url = '/mensagem-morador/' + id;
+        window.location.href = url;
+    }
 </script>
 
 @endsection
