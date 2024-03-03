@@ -17,7 +17,7 @@ use App\Models\Information;
 use App\Models\Meeting;
 use App\Models\Booking;
 use App\Models\Message;
-use App\Models\Complaint;
+use App\Models\MessageFeedback;
 
 
 
@@ -100,22 +100,6 @@ class CondominioController extends Controller
         return view('block');
     }
 
-    public function showComplaint($id){
-
-        $complaints = Complaint::select('complaints.*', 'users.name',
-                                'residents.plot_resident', 'residents.residency_number')
-                                ->join('residents', 'residents.resident_id', '=', 'complaints.user_id')
-                                ->join('condominios', 'condominios.id', '=', 'complaints.condo_id')
-                                ->join('users', 'complaints.user_id', '=', 'users.id')
-                                ->where('condominios.user_id', $id)
-                                ->get();
-
-        if($complaints->isNotEmpty()){
-            return view('complaint', compact('complaints'));
-        }
-
-    }
-
     public function showMessage($id){
 
         $messages = Message::select('messages.*', 'users.name',
@@ -173,16 +157,6 @@ class CondominioController extends Controller
 
     }
 
-    public function showResidentComplaint($id){
-
-        $complaint = Complaint::find($id);
-
-        if($complaint){
-            return view('view_resident_complaint', compact('complaint'));
-        }
-
-    }
-
     public function showAdmin(){
         return view('admin');
     }
@@ -205,8 +179,6 @@ class CondominioController extends Controller
 
         $bookings = Booking::where('user_id', $id)->get();
 
-        $complaints = Complaint::where('user_id', $id)->get();
-
         $messages = Message::where('user_id', $id)->get();
 
         if($resident){
@@ -217,7 +189,6 @@ class CondominioController extends Controller
                 'meetings',
                 'condoId',
                 'bookings',
-                'complaints',
                 'messages'
             ));
         }
@@ -724,6 +695,38 @@ class CondominioController extends Controller
             ]);
 
             return redirect('/morador/'. $userId)->with('msg', 'Mensagem Enviada Com Sucesso');
+
+        } catch (Exception $e){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    }
+
+    public function messageFeedback(Request $request){
+        $validator = $request->validate([
+            'feedback' => 'required|string'
+        ]);
+
+        $userId = $request->input('user_id');
+
+        $status = $request->input('status');
+
+        try {
+
+            if(trim($status) !== trim("Respondido")){
+
+                MessageFeedback::create([
+                    'message_id' => $request->input('message_id'),
+                    'condo_id' => $request->input('condo_id'),
+                    'feedback' => $request->input('feedback')
+                ]);
+
+                Message::where('id', $request->input('message_id'))
+                        ->update(['status' => 'Respondido']);
+
+                return redirect('/mensagens/' . $userId)->with('msg', 'Mensagem Respondida');
+            } else {
+                return redirect('/mensagens/'. $userId)->withErrors('Mensagem Já Respondida')->withInput();
+            }
 
         } catch (Exception $e){
             return redirect()->back()->withErrors($validator)->withInput();

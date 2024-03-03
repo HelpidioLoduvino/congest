@@ -50,4 +50,8 @@
 
 <h4 class="title-font mt-3">Correspondências</h4>
 <div class="condo-separator"></div>
+
+<div class="condo-font card card-body shadow-card mt-3">
+
+</div>
 @endsection

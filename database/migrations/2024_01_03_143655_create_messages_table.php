@@ -24,6 +24,7 @@ class CreateMessagesTable extends Migration
             $table->string('receiver');
             $table->datetime('message_date');
             $table->date('date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('status')->default('Não Respondido');
         });
     }
 

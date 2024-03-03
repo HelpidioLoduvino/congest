@@ -37,18 +37,19 @@
                     </a>
                 </li>
                 <li class="nav-item" style="margin-right:20px;">
-                    <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#complaintModal">
-                        <div class="zoom-effect">
-                            <img class="hover-image" src="{{ asset('/icon/complaint.svg') }}" width="25">
-                            Fazer Reclamação
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-item" style="margin-right:20px;">
                     <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#messageModal">
                         <div class="zoom-effect">
                             <img class="hover-image" src="{{ asset('/icon/message.svg') }}" width="25">
                             Enviar Mensagem
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item" style="margin-right:20px;">
+                    <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#profileModal">
+                        <div class="zoom-effect">
+                            <img class="hover-image" src="{{ asset('/icon/profile.svg') }}" width="25">
+                            Meu Perfil
                         </div>
                     </a>
                 </li>
@@ -68,8 +69,8 @@
         <div class="d-md-none d-flex">
             <ul class="navbar-nav">
                 <li class="nav-item d-flex">
-                    <a class="nav-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#complaintModal">
-                        <img class="hover-image" src="{{ asset('/icon/complaint.svg') }}" width="35">
+                    <a class="nav-link" style="margin-right: 10px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#messageModal">
+                        <img class="hover-image" src="{{ asset('/icon/message.svg') }}" width="35">
                     </a>
                 </li>
             </ul>
@@ -78,8 +79,8 @@
         <div class="d-md-none d-flex">
             <ul class="navbar-nav">
                 <li class="nav-item d-flex">
-                    <a class="nav-link" style="margin-right: 10px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#messageModal">
-                        <img class="hover-image" src="{{ asset('/icon/message.svg') }}" width="35">
+                    <a class="nav-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#profileMobile">
+                        <img class="hover-image" src="{{ asset('/icon/profile.svg') }}" width="35">
                     </a>
                 </li>
             </ul>
@@ -143,15 +144,6 @@
                     <div class="sidebar-separator container"></div>
                     <br>
                     <li class="nav-link">
-                        <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#profileModal">
-                            <div class="zoom-effect">
-                                <img class="hover-image" src="{{ asset('/icon/profile.svg') }}" width="25">
-                                Perfil
-                            </div>
-                        </a>
-                    </li>
-                    <hr style="color: white">
-                    <li class="nav-link">
                         <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#feeModal">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/apartment.svg') }}" width="25">
@@ -174,15 +166,6 @@
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/reservation.svg') }}" width="25">
                                 Reservas
-                            </div>
-                        </a>
-                    </li>
-                    <hr style="color: white">
-                    <li class="nav-link">
-                        <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#showComplaintModal">
-                            <div class="zoom-effect">
-                                <img class="hover-image" src="{{ asset('/icon/complaint.svg') }}" width="25">
-                                Reclamações
                             </div>
                         </a>
                     </li>
@@ -547,6 +530,7 @@
                                     <th>Assunto</th>
                                     <th>Destinatário</th>
                                     <th>Data de Envio</th>
+                                    <th>Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -566,6 +550,11 @@
                                             <td>
                                                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyMessage{{$message->id}}">
                                                     {{$message->date}}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyMessage{{$message->id}}">
+                                                    {{$message->status}}
                                                 </a>
                                             </td>
                                         </tr>
@@ -624,58 +613,6 @@
                                             <td>
                                                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyBooking{{$booking->id}}">
                                                     {{$booking->booking_date}}
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="showComplaintModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content">
-            <div class="modal-body">
-              <ul class="navbar-nav">
-                <li class="nav-link">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
-                        </button>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
-                        <div class="zoom-effect">
-                            <img src="{{ asset('/icon/logo.svg') }}" width="35">
-                            <span>ConGest</span>
-                        </div>
-                    </a>
-                </li>
-                <div class="separator-black rounded-pill mt-3"></div>
-                <div class="condo-font card card-body shadow-card mt-3">
-                    <h5 class="d-flex justify-content-center mb-3"><strong>Minhas Reclamações</strong></h5>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Assunto</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if ($complaints->isNotEmpty())
-                                    @foreach ($complaints as $complaint)
-                                        <tr>
-                                            <td>
-                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyComplaint{{$complaint->id}}">
-                                                    {{$complaint->subject}}
                                                 </a>
                                             </td>
                                         </tr>
@@ -784,40 +721,6 @@
                   <h5>Data De Reserva: {{$booking->booking_date}}</h5>
                   <p>{{$booking->booking}}</p>
                   <p class="text-muted">Data De Envio: {{$booking->date}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          @endforeach
-      @endif
-
-      @if ($complaints->isNotEmpty())
-          @foreach ($complaints as $complaint)
-          <div class="modal fade" id="showMyComplaint{{$complaint->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen-xxl-down">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <ul class="navbar-nav">
-                    <li class="nav-link">
-                        <div class="d-flex justify-content-end">
-                            <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                                <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
-                            </button>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
-                            <div class="zoom-effect">
-                                <img src="{{ asset('/icon/logo.svg') }}" width="35">
-                                <span>ConGest</span>
-                            </div>
-                        </a>
-                    </li>
-                    <div class="separator-black rounded-pill mt-3"></div>
-                  </ul>
-                  <h5 class="mt-3">Assunto: <strong>{{$complaint->subject}}</strong></h5>
-                  <p>{{$complaint->subject}}</p>
-                  <p class="text-muted">Data de Envio: {{$complaint->date}}</p>
                 </div>
               </div>
             </div>

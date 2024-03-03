@@ -289,17 +289,6 @@
                         <hr>
                     </div>
                     <li class="nav-link">
-                        <a class="navbar-link" href="/reclamações/{{session('id')}}">
-                            <div class="zoom-effect">
-                                <img class="hover-image" src="{{ asset('/icon/complaint.svg') }}" width="25">
-                                Reclamações
-                            </div>
-                        </a>
-                    </li>
-                    <div class=" container">
-                        <hr>
-                    </div>
-                    <li class="nav-link">
                         <a class="navbar-link" href="/reservas/{{session('id')}}">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/reservation.svg') }}" width="25">

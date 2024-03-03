@@ -10,9 +10,10 @@
                 <tr>
                     <th>Morador</th>
                     <th>Bloco</th>
-                    <th>nº Casa</th>
+                    <th>Casa</th>
                     <th>Assunto</th>
                     <th>Data</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +43,11 @@
                             <td>
                                 <a class="nav-link" href="#" onclick="redirectToResidentMessage('{{$message->id}}')">
                                     {{$message->date}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="#" onclick="redirectToResidentMessage('{{$message->id}}')">
+                                    {{$message->status}}
                                 </a>
                             </td>
                         </tr>

@@ -11,4 +11,19 @@
 <small class="text-muted">Data De Envio: {{$booking->booking_date}}</small>
 </div>
 @endif
+
+<div class="d-flex justify-content-center mt-3">
+    <div class="d-flex">
+        <form action="/aceitar" method="post">
+            @csrf
+            <input type="submit" name="accept" class="btn btn-success" value="Aceitar">
+        </form>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <form action="/negar" method="post">
+            @csrf
+            <input type="submit" name="deny" class="btn btn-danger" value="Negar">
+        </form>
+    </div>
+</div>
+
 @endsection

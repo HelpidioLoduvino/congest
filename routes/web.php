@@ -19,7 +19,6 @@ Route::get('/avisos/{id}', [CondominioController::class, 'showNotice']);
 Route::get('/reuniões/{id}', [CondominioController::class, 'showMeeting']);
 Route::get('/moradores/{id}', [CondominioController::class, 'showResident']);
 Route::get('/blocos', [CondominioController::class, 'showBlock']);
-Route::get('/reclamações/{id}', [CondominioController::class, 'showComplaint']);
 Route::get('/mensagens/{id}', [CondominioController::class, 'showMessage']);
 Route::get('/admin', [CondominioController::class, 'showAdmin']);
 Route::get('/morador/{id}', [CondominioController::class, 'showHomeResident']);
@@ -38,7 +37,6 @@ Route::get('/aviso/{id}', [CondominioController::class, 'showCondominioNotice'])
 Route::get('/reunião/{id}', [CondominioController::class, 'showCondominioMeeting']);
 Route::get('/mensagem-morador/{id}', [CondominioController::class, 'showResidentMessage']);
 Route::get('/reserva-morador/{id}', [CondominioController::class, 'showResidentBooking']);
-Route::get('/reclamação-morador/{id}', [CondominioController::class, 'showResidentComplaint']);
 Route::post('/login', [CondominioController::class, 'login']);
 Route::post('/logout', [CondominioController::class, 'logout']);
 Route::post('/cadastrar-condominio-contracto-pessoal', [CondominioController::class, 'registerCondoPersonalContract']);
@@ -47,8 +45,8 @@ Route::post('/cadastrar-morador', [CondominioController::class, 'registerResiden
 Route::post('/enviar-aviso', [CondominioController::class, 'sendNotice']);
 Route::post('/marcar-reunião', [CondominioController::class, 'scheduleMeeting']);
 Route::post('/fazer-reserva', [CondominioController::class, 'scheduleBooking']);
-Route::post('/fazer-reclamação', [CondominioController::class, 'makeComplaint']);
 Route::post('/enviar-mensagem', [CondominioController::class, 'sendMessage']);
+Route::post('/responder-mensagem', [CondominioController::class, 'messageFeedback']);
 
 
 
