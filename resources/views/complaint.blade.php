@@ -15,14 +15,18 @@
                     <th>Data</th>
                 </tr>
             </thead>
-            <tbody id="clickableBody">
-                <tr>
-                    <td>Johelsa Mateus</td>
-                    <td>B</td>
-                    <td>25</td>
-                    <td>Barulho na Vizinhança</td>
-                    <td>10/5/2023, 12:30</td>
-                </tr>
+            <tbody>
+                @if (!empty($complaints))
+                    @foreach ($complaints as $complaint)
+                        <tr>
+                            <td>{{$complaint->name}}</td>
+                            <td class="uppercase-text">{{$complaint->plot_resident}}</td>
+                            <td>{{$complaint->residency_number}}</td>
+                            <td>{{$complaint->subject}}</td>
+                            <td>{{$complaint->date}}</td>
+                        </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
     </div>

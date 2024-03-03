@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Bookings extends Model
+class Booking extends Model
 {
     use HasFactory;
     public $table = 'bookings';
     public $timestamps = false;
     protected $fillable = [
-        'user_id',
         'condo_id',
+        'user_id',
         'subject',
-        'meeting',
+        'booking',
         'booking_date'
     ];
 }

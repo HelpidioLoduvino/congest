@@ -15,14 +15,18 @@
                     <th>Data</th>
                 </tr>
             </thead>
-            <tbody id="clickableBody">
-                <tr>
-                    <td>Johelsa Mateus</td>
-                    <td>B</td>
-                    <td>25</td>
-                    <td>Pedido para festa de aniversário</td>
-                    <td>10/5/2023, 12:30</td>
-                </tr>
+            <tbody>
+                @if (!empty($messages))
+                    @foreach ($messages as $message)
+                        <tr>
+                            <td>{{$message->name}}</td>
+                            <td class="uppercase-text">{{$message->plot_resident}}</td>
+                            <td>{{$message->residency_number}}</td>
+                            <td>{{$message->subject}}</td>
+                            <td>{{$message->date}}</td>
+                        </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
     </div>
@@ -33,7 +37,5 @@ document.getElementById('clickableBody').addEventListener('click', function() {
     window.location.href = '/mensagem';
 });
 </script>
-
-
 
 @endsection

@@ -2,32 +2,24 @@
 
 @section('content')
 @if (!empty($owner))
-<div class="card card-body shadow-card mt-3" style="background-color: rgba(188, 188, 188, 0.203)">
-    <h1 class="d-flex justify-content-center">Condomínio {{$owner->condo_name}}</h1>
-<div class="row mt-3">
+<div class="card card-body shadow-card mt-3" style="background-color: rgb(24, 24, 220);">
+    <h1 class="d-flex justify-content-center" style="color: white">Condomínio {{$owner->condo_name}}</h1>
+<div class="row mt-3 d-flex justify-content-center">
     <div class="col-md-4 mb-3">
-        <div class="condo-font card mx-auto shadow-card" style="width: 17rem; background-color: rgba(255, 0, 0, 0.302);">
+        <div class="condo-font card mx-auto shadow-card" style="width: 17rem; background-color: rgba(0, 0, 0, 0.797);">
             <div class="card-body">
-                <h5 class="d-flex justify-content-center"><strong>Casas Ocupadas</strong></h5>
-                <p class="d-flex justify-content-center">{{$owner->occupied}}</p>
+                <p class="d-flex justify-content-center" style="color: white">Disponível: &nbsp; <strong style="color: rgb(113, 188, 0);"> {{$owner->available}}</strong></p>
+                <p class="d-flex justify-content-center" style="color: white">Ocupado: &nbsp; <strong style="color: rgb(255, 37, 37);"> {{$owner->occupied}}</strong></p>
             </div>
         </div>
     </div>
 
     <div class="col-md-4 mb-3">
-        <div class="condo-font card mx-auto shadow-card" style="width: 17rem; background-color: rgba(0, 128, 0, 0.322);">
+        <div class="condo-font card mx-auto shadow-card" style="width: 17rem; background-color:rgba(0, 0, 0, 0.797);">
             <div class="card-body">
-                <h5 class="d-flex justify-content-center"><strong>Casas Disponíveis</strong></h5>
-                <p class="d-flex justify-content-center">{{$owner->available}}</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-4 mb-3">
-        <div class="condo-font card mx-auto shadow-card" style="width: 17rem; background-color:rgba(205, 134, 63, 0.28)">
-            <div class="card-body">
-                <h5 class="d-flex justify-content-center"><strong>Proprietário</strong></h5>
-                <p class="d-flex justify-content-center">{{$owner->name}}</p>
+                <h5 class="d-flex justify-content-center" style="color: white;"><strong>Proprietário</strong></h5>
+                <h5 class="d-flex justify-content-center" style="color: gold;">{{$owner->name}}</h5>
+                <small class="d-flex justify-content-center" style="color: gold;">{{$owner->email}}</small>
             </div>
         </div>
     </div>

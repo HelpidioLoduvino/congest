@@ -91,6 +91,22 @@
         <div class="row">
             <div class="content mb-5">
                 <div class="container">
+                    @if($errors->any())
+                        <div class="alert mt-3 alert-danger alert-dismissible d-flex justify-content-center">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                    @if(session('msg'))
+                        <div class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
+                            <p class="msg d-flex justify-content-center">{{session('msg')}}</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     @yield('content')
                 </div>
             </div>
@@ -148,7 +164,7 @@
                         <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#correspondenceModal">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/email.svg') }}" width="25">
-                                Correspondência
+                                Mensagens
                             </div>
                         </a>
                     </li>
@@ -237,8 +253,8 @@
                         <input type="text" class="form-control" name="subject" placeholder="Ex: Reserva do Parque Infantil">
                     </div>
                     <div class="form-group mb-3">
-                        <label for="meeting">Corpo:</label>
-                        <textarea name="meeting" class="form-control" cols="30" rows="5" placeholder="Compor"></textarea>
+                        <label for="booking">Corpo:</label>
+                        <textarea name="booking" class="form-control" cols="30" rows="5" placeholder="Compor"></textarea>
                     </div>
                     <div class="form-group mb-3">
                         <label for="booking_date">Data:</label>
@@ -331,7 +347,7 @@
                   <div class="condo-font card card-body shadow-card mt-3">
                     <h5 class="d-flex justify-content-center mb-3"><strong>Mensagem</strong></h5>
 
-                    <form action="enviar-mensagem" method="post">
+                    <form action="/enviar-mensagem" method="post">
                         @csrf
                         <input type="hidden" name="condo_id" value="{{$resident->condo_id}}">
                         <input type="hidden" name="user_id" value="{{session('id')}}">
@@ -523,9 +539,40 @@
                 </li>
                 <div class="separator-black rounded-pill mt-3"></div>
                 <div class="condo-font card card-body shadow-card mt-3">
-                    <div class="d-flex justify-content-center m-3">
-                        <a class="btn btn-dark" href="#" data-bs-toggle="modal" data-bs-target="#sentMessageModal">Enviado</a>
-                        <a class="btn btn-success" href="#" style="margin-left: 20px;" data-bs-toggle="modal" data-bs-target="#receivedMessageModal">Recebido</a>
+                    <h5 class="d-flex justify-content-center mb-3"><strong>Minhas Mensagens</strong></h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Assunto</th>
+                                    <th>Destinatário</th>
+                                    <th>Data de Envio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if ($messages->isNotEmpty())
+                                    @foreach ($messages as $message)
+                                        <tr>
+                                            <td>
+                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyMessage{{$message->id}}">
+                                                    {{$message->subject}}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyMessage{{$message->id}}">
+                                                    {{$message->receiver}}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyMessage{{$message->id}}">
+                                                    {{$message->date}}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
                     </div>
                 </div>
               </ul>
@@ -559,17 +606,29 @@
                     <h5 class="d-flex justify-content-center mb-3"><strong>Minhas Reservas</strong></h5>
                     <div class="table-responsive">
                         <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Assunto</th>
+                                    <th>Data De Reserva</th>
+                                </tr>
+                            </thead>
                             <tbody>
-                                <tr>
-                                    <td>Pedido Para dar Festa no Parque</td>
-                                    <td>Quero Pedir para dar festa no parque</td>
-                                    <td>10/05/2023, 12:40</td>
-                                </tr>
-                                <tr>
-                                    <td>Pedido Para dar Festa no Parque</td>
-                                    <td>Quero Pedir para dar festa no parque</td>
-                                    <td>10/05/2023, 12:40</td>
-                                </tr>
+                                @if ($bookings->isNotEmpty())
+                                    @foreach ($bookings as $booking)
+                                        <tr>
+                                            <td>
+                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyBooking{{$booking->id}}">
+                                                    {{$booking->subject}}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyBooking{{$booking->id}}">
+                                                    {{$booking->booking_date}}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -605,17 +664,23 @@
                     <h5 class="d-flex justify-content-center mb-3"><strong>Minhas Reclamações</strong></h5>
                     <div class="table-responsive">
                         <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Assunto</th>
+                                </tr>
+                            </thead>
                             <tbody>
-                                <tr>
-                                    <td>Pedido Para dar Festa no Parque</td>
-                                    <td>Quero Pedir para dar festa no parque</td>
-                                    <td>10/05/2023, 12:40</td>
-                                </tr>
-                                <tr>
-                                    <td>Pedido Para dar Festa no Parque</td>
-                                    <td>Quero Pedir para dar festa no parque</td>
-                                    <td>10/05/2023, 12:40</td>
-                                </tr>
+                                @if ($complaints->isNotEmpty())
+                                    @foreach ($complaints as $complaint)
+                                        <tr>
+                                            <td>
+                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyComplaint{{$complaint->id}}">
+                                                    {{$complaint->subject}}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -656,73 +721,114 @@
         </div>
       </div>
 
-      <div class="modal fade" id="sentMessageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content">
-            <div class="modal-body">
-              <ul class="navbar-nav">
-                <li class="nav-link">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
-                        </button>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
-                        <div class="zoom-effect">
-                            <img src="{{ asset('/icon/logo.svg') }}" width="35">
-                            <span>ConGest</span>
+      @if ($messages->isNotEmpty())
+          @foreach ($messages as $message)
+          <div class="modal fade" id="showMyMessage{{$message->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen-xxl-down">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <ul class="navbar-nav">
+                    <li class="nav-link">
+                        <div class="d-flex justify-content-end">
+                            <button class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
+                            </button>
                         </div>
-                    </a>
-                </li>
-                <div class="separator-black rounded-pill mt-3"></div>
-              </ul>
-              <div class="condo-font card card-body shadow-card mt-3">
-                <h5 class="d-flex justify-content-center mb-3"><strong>Mensagens Enviadas</strong></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="receivedMessageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content">
-            <div class="modal-body">
-              <ul class="navbar-nav">
-                <li class="nav-link">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
-                        </button>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
-                        <div class="zoom-effect">
-                            <img src="{{ asset('/icon/logo.svg') }}" width="35">
-                            <span>ConGest</span>
-                        </div>
-                    </a>
-                </li>
-                <div class="separator-black rounded-pill mt-3"></div>
-              </ul>
-              <div class="condo-font card card-body shadow-card mt-3">
-                <h5 class="d-flex justify-content-center mb-3"><strong>Mensagens Recebidas</strong></h5>
-                <div>
-
+                    </li>
+                    <li class="nav-item">
+                        <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
+                            <div class="zoom-effect">
+                                <img src="{{ asset('/icon/logo.svg') }}" width="35">
+                                <span>ConGest</span>
+                            </div>
+                        </a>
+                    </li>
+                    <div class="separator-black rounded-pill mt-3"></div>
+                    <h5 class="mt-3">Destinatário: <strong>{{$message->receiver}}</strong></h5>
+                    <h5>Assunto: <strong>{{$message->subject}}</strong></h5>
+                    <p>{{$message->message}}</p>
+                    <p class="text-muted">Data De Envio: {{$message->date}}</p>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+          @endforeach
+      @endif
 
+      @if ($bookings->isNotEmpty())
+          @foreach ($bookings as $booking)
+          <div class="modal fade" id="showMyBooking{{$booking->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen-xxl-down">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <ul class="navbar-nav">
+                    <li class="nav-link">
+                        <div class="d-flex justify-content-end">
+                            <button class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
+                            </button>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
+                            <div class="zoom-effect">
+                                <img src="{{ asset('/icon/logo.svg') }}" width="35">
+                                <span>ConGest</span>
+                            </div>
+                        </a>
+                    </li>
+                    <div class="separator-black rounded-pill mt-3"></div>
+                  </ul>
+                  <h5 class="mt-3">Assunto: {{$booking->subject}}</h5>
+                  <h5>Data De Reserva: {{$booking->booking_date}}</h5>
+                  <p>{{$booking->booking}}</p>
+                  <p class="text-muted">Data De Envio: {{$booking->date}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          @endforeach
+      @endif
+
+      @if ($complaints->isNotEmpty())
+          @foreach ($complaints as $complaint)
+          <div class="modal fade" id="showMyComplaint{{$complaint->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen-xxl-down">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <ul class="navbar-nav">
+                    <li class="nav-link">
+                        <div class="d-flex justify-content-end">
+                            <button class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
+                            </button>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
+                            <div class="zoom-effect">
+                                <img src="{{ asset('/icon/logo.svg') }}" width="35">
+                                <span>ConGest</span>
+                            </div>
+                        </a>
+                    </li>
+                    <div class="separator-black rounded-pill mt-3"></div>
+                  </ul>
+                  <h5 class="mt-3">Assunto: <strong>{{$complaint->subject}}</strong></h5>
+                  <p>{{$complaint->subject}}</p>
+                  <p class="text-muted">Data de Envio: {{$complaint->date}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          @endforeach
+      @endif
 
     <script src="/bootstrap/script/popper.js"></script>
     <script src="/bootstrap/script/bootstrap.min.js"></script>
     <script src="/jquery/jquery.min.js"></script>
+
 </body>
 
 </html>

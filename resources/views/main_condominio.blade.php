@@ -11,7 +11,7 @@
 
 </head>
 
-<body class="antialiased">
+<body>
 
     <nav class="condo-navbar navbar navbar-expand-md">
 
@@ -127,6 +127,17 @@
                         <hr>
                     </div>
                     <li class="nav-link">
+                        <a class="navbar-link" href="/mensagens">
+                            <div class="zoom-effect">
+                                <img class="hover-image" src="{{ asset('/icon/message.svg') }}" width="25">
+                                Mensagens
+                            </div>
+                        </a>
+                    </li>
+                    <div class=" container">
+                        <hr>
+                    </div>
+                    <li class="nav-link">
                         <a class="navbar-link" href="/reclamações">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/complaint.svg') }}" width="25">
@@ -147,15 +158,22 @@
                     </li>
 
                     <div class="sidebar-separator mb-3 container mt-3"></div>
-                    <form action="/logout" method="post">
-                        @csrf
-                        <span class="">
-                            <input type="submit" class="btn btn-danger mt-3" value="Sair">
-                        </span>
-                    </form>
                 </ul>
+            </div>
         </div>
 
+        <div class="collapse navbar-collapse d-md-flex justify-content-end">
+            <ul class="navbar-nav">
+                <li class="nav-item" style="margin-right:20px;">
+                    <form action="/logout" method="post">
+                        @csrf
+                        <div class="zoom-effect">
+                            <input class="hover-image" type="image" src="{{asset('/icon/logout.svg')}}" alt="" width="35">
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <div class="row">
@@ -260,7 +278,18 @@
                         <hr>
                     </div>
                     <li class="nav-link">
-                        <a class="navbar-link" href="/reclamações">
+                        <a class="navbar-link" href="/mensagens/{{session('id')}}">
+                            <div class="zoom-effect">
+                                <img class="hover-image" src="{{ asset('/icon/message.svg') }}" width="25">
+                                Mensagens
+                            </div>
+                        </a>
+                    </li>
+                    <div class=" container">
+                        <hr>
+                    </div>
+                    <li class="nav-link">
+                        <a class="navbar-link" href="/reclamações/{{session('id')}}">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/complaint.svg') }}" width="25">
                                 Reclamações
@@ -271,21 +300,14 @@
                         <hr>
                     </div>
                     <li class="nav-link">
-                        <a class="navbar-link" href="/reservas">
+                        <a class="navbar-link" href="/reservas/{{session('id')}}">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/reservation.svg') }}" width="25">
                                 Reservas
                             </div>
                         </a>
                     </li>
-
                     <div class="sidebar-separator mb-3 container mt-3"></div>
-                    <form action="/logout" method="post">
-                        @csrf
-                        <span class="">
-                            <input type="submit" class="btn btn-danger mt-3" value="Sair">
-                        </span>
-                    </form>
                 </ul>
             </div>
         </div>

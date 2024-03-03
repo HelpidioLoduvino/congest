@@ -30,7 +30,7 @@ class CondominioController extends Controller
     public function showCondominio($id){
 
         $owner = User::select(
-                            'users.name', 'condominios.condo_name', 'condominios.residency',
+                            'users.name', 'users.email', 'condominios.condo_name', 'condominios.residency',
                             'available_condos.available', 'available_condos.occupied')
                             ->join('condominios', 'condominios.user_id', '=', 'users.id')
                             ->join('available_condos', 'available_condos.condoId', '=',
@@ -100,16 +100,43 @@ class CondominioController extends Controller
         return view('block');
     }
 
-    public function showComplaint(){
-        return view('complaint');
+    public function showComplaint($id){
+
+        $complaints = Complaint::select('complaints.*', 'users.name',
+                                'residents.plot_resident', 'residents.residency_number')
+                                ->join('residents', 'residents.resident_id', '=', 'complaints.user_id')
+                                ->join('condominios', 'condominios.id', '=', 'complaints.condo_id')
+                                ->join('users', 'complaints.user_id', '=', 'users.id')
+                                ->where('condominios.user_id', $id)
+                                ->get();
+
+        if($complaints->isNotEmpty()){
+            return view('complaint', compact('complaints'));
+        }
+
     }
 
     public function showComplaintLetter(){
         return view('complaint_letter');
     }
 
-    public function showMessage(){
-        return view('message');
+    public function showMessage($id){
+
+        $messages = Message::select('messages.*', 'users.name',
+                            'residents.plot_resident', 'residents.residency_number')
+                           ->join('residents', 'residents.resident_id', '=', 'messages.user_id')
+                           ->join('condominios', 'condominios.id', '=', 'messages.condo_id')
+                           ->join('users', 'messages.user_id', '=', 'users.id')
+                           ->where('condominios.user_id', $id)
+                           ->get();
+
+        if($messages->isNotEmpty()){
+            return view('message', compact('messages'));
+        }else {
+            $messages = [];
+            return view('message', compact('messages'));
+        }
+
     }
 
     public function showMessageLetter(){
@@ -136,8 +163,23 @@ class CondominioController extends Controller
 
         $meetings = Meeting::where('condo_id', $condoId)->get();
 
+        $bookings = Booking::where('user_id', $id)->get();
+
+        $complaints = Complaint::where('user_id', $id)->get();
+
+        $messages = Message::where('user_id', $id)->get();
+
         if($resident){
-            return view('resident_home', compact('resident', 'notices', 'meetings', 'condoId'));
+            return view('resident_home',
+            compact(
+                'resident',
+                'notices',
+                'meetings',
+                'condoId',
+                'bookings',
+                'complaints',
+                'messages'
+            ));
         }
     }
 
@@ -149,8 +191,23 @@ class CondominioController extends Controller
         return view('resident_fee_list');
     }
 
-    public function showBooking(){
-        return view('booking');
+    public function showBooking($id){
+
+        $bookings = Booking::select('bookings.*', 'users.name',
+                            'residents.plot_resident', 'residents.residency_number')
+                           ->join('residents', 'residents.resident_id', '=', 'bookings.user_id')
+                           ->join('condominios', 'condominios.id', '=', 'bookings.condo_id')
+                           ->join('users', 'bookings.user_id', '=', 'users.id')
+                           ->where('condominios.user_id', $id)
+                           ->get();
+
+        if($bookings->isNotEmpty()){
+            return view('booking', compact('bookings'));
+        }else {
+            $bookings = [];
+            return view('booking', compact('bookings'));
+        }
+
     }
 
     public function showPersonForm(){
@@ -577,14 +634,78 @@ class CondominioController extends Controller
     }
 
     public function scheduleBooking (Request $request){
+        $validator = $request->validate([
+            'subject' => 'required|string',
+            'booking' => 'required|string',
+            'booking_date' => 'required'
+        ]);
 
+        $userId = $request->input('user_id');
+
+        try {
+
+            Booking::create([
+                'condo_id' => $request->input('condo_id'),
+                'user_id' => $userId,
+                'subject' => $request->input('subject'),
+                'booking' => $request->input('booking'),
+                'booking_date' => $request->input('booking_date')
+            ]);
+
+            return redirect('/morador/'. $userId)->with('msg', 'Reserva Feita Com Sucesso');
+
+        } catch (Exception $e){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
     }
 
     public function makeComplaint (Request $request){
+        $validator = $request->validate([
+            'subject' => 'required|string',
+            'complaint' => 'required|string',
+        ]);
 
+        $userId = $request->input('user_id');
+
+        try {
+
+            Complaint::create([
+                'condo_id' => $request->input('condo_id'),
+                'user_id' => $userId,
+                'subject' => $request->input('subject'),
+                'complaint' => $request->input('complaint'),
+            ]);
+
+            return redirect('/morador/'. $userId)->with('msg', 'Reclamação Feita Com Sucesso');
+
+        } catch (Exception $e){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
     }
 
     public function sendMessage (Request $request){
+        $validator = $request->validate([
+            'subject' => 'required|string',
+            'message' => 'required|string',
+            'receiver' => 'required|string'
+        ]);
 
+        $userId = $request->input('user_id');
+
+        try {
+
+            Message::create([
+                'condo_id' => $request->input('condo_id'),
+                'user_id' => $userId,
+                'subject' => $request->input('subject'),
+                'message' => $request->input('message'),
+                'receiver' => $request->input('receiver')
+            ]);
+
+            return redirect('/morador/'. $userId)->with('msg', 'Mensagem Enviada Com Sucesso');
+
+        } catch (Exception $e){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
     }
 }

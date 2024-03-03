@@ -8,11 +8,26 @@
         <table class="table table-hover">
             <thead>
                 <tr>
+                    <th>Morador</th>
+                    <th>Bloco</th>
+                    <th>nº da Casa</th>
                     <th>Assunto</th>
-                    <th>Local</th>
-                    <th>Data</th>
+                    <th>Data De Reserva</th>
                 </tr>
             </thead>
+            <tbody>
+                @if (!empty($bookings))
+                    @foreach ($bookings as $booking)
+                        <tr>
+                            <td>{{$booking->name}}</td>
+                            <td class="uppercase-text">{{$booking->plot_resident}}</td>
+                            <td>{{$booking->residency_number}}</td>
+                            <td>{{$booking->subject}}</td>
+                            <td>{{$booking->booking_date}}</td>
+                        </tr>
+                    @endforeach
+                @endif
+            </tbody>
         </table>
     </div>
 </div>

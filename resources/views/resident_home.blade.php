@@ -3,8 +3,8 @@
 @section('content')
 
 @if (!empty($resident))
-<div class="card card-body shadow-card mt-3" style="background-color: rgba(245, 222, 179, 0.292)">
-    <h6 class="d-flex justify-content-center condo-title">Condomínio {{$resident->condo_name}}</h6>
+<div class="card card-body shadow-card mt-3" style="background-color: rgb(24, 24, 220)">
+    <h6 class="d-flex justify-content-center condo-title" style="color: white">Condomínio {{$resident->condo_name}}</h6>
 </div>
 @endif
 <h4 class="title-font mt-3">Avisos</h4>
@@ -47,4 +47,7 @@
         </table>
     </div>
 </div>
+
+<h4 class="title-font mt-3">Correspondências</h4>
+<div class="condo-separator"></div>
 @endsection
