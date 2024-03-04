@@ -13,6 +13,7 @@
                     <th>nº da Casa</th>
                     <th>Assunto</th>
                     <th>Data De Reserva</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +43,11 @@
                             <td>
                                 <a href="#" class="nav-link" onclick="redirectToResidentBooking('{{$booking->id}}')">
                                     {{$booking->booking_date}}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="#" class="nav-link" onclick="redirectToResidentBooking('{{$booking->id}}')">
+                                    {{$booking->status}}
                                 </a>
                             </td>
                         </tr>

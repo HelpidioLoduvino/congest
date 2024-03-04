@@ -10,20 +10,27 @@
 <p>{{$booking->booking}}</p>
 <small class="text-muted">Data De Envio: {{$booking->booking_date}}</small>
 </div>
-@endif
 
+@if(trim($booking->status) === trim("Aguardando"))
 <div class="d-flex justify-content-center mt-3">
     <div class="d-flex">
-        <form action="/aceitar" method="post">
+        <form action="/aceitar-reserva" method="post">
             @csrf
-            <input type="submit" name="accept" class="btn btn-success" value="Aceitar">
+            <input type="hidden" name="booking_id" value="{{$booking->id}}">
+            <input type="hidden" name="status" value="{{$booking->status}}">
+            <input type="hidden" name="user_id" value="{{session('id')}}">
+            <input type="submit" class="btn btn-success" value="Aceitar">
         </form>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <form action="/negar" method="post">
+        <form action="/negar-reserva" method="post">
             @csrf
-            <input type="submit" name="deny" class="btn btn-danger" value="Negar">
+            <input type="hidden" name="booking_id" value="{{$booking->id}}">
+            <input type="hidden" name="status" value="{{$booking->status}}">
+            <input type="hidden" name="user_id" value="{{session('id')}}">
+            <input type="submit" class="btn btn-danger" value="Negar">
         </form>
     </div>
 </div>
-
+@endif
+@endif
 @endsection

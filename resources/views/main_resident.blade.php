@@ -599,6 +599,7 @@
                                 <tr>
                                     <th>Assunto</th>
                                     <th>Data De Reserva</th>
+                                    <th>Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -613,6 +614,11 @@
                                             <td>
                                                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyBooking{{$booking->id}}">
                                                     {{$booking->booking_date}}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyBooking{{$booking->id}}">
+                                                    {{$booking->status}}
                                                 </a>
                                             </td>
                                         </tr>

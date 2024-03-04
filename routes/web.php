@@ -47,6 +47,8 @@ Route::post('/marcar-reunião', [CondominioController::class, 'scheduleMeeting']
 Route::post('/fazer-reserva', [CondominioController::class, 'scheduleBooking']);
 Route::post('/enviar-mensagem', [CondominioController::class, 'sendMessage']);
 Route::post('/responder-mensagem', [CondominioController::class, 'messageFeedback']);
+Route::post('/aceitar-reserva', [CondominioController::class, 'confirmBooking']);
+Route::post('/negar-reserva', [CondominioController::class, 'denyBooking']);
 
 
 

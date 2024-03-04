@@ -181,6 +181,19 @@ class CondominioController extends Controller
 
         $messages = Message::where('user_id', $id)->get();
 
+        if($messages->isNotEmpty()){
+            foreach($messages as $message){
+                $user_Id = $message->user_id;
+
+                $message_feedback = MessageFeedback::select('message_feedback.*',
+                                                            'messages.subject')
+                                                   ->join('messages', 'messages.id',
+                                                   '=', 'message_feedback.message_id')
+                                                   ->where('messages.user_id', $user_Id)
+                                                   ->get();
+            }
+        }
+
         if($resident){
             return view('resident_home',
             compact(
@@ -189,7 +202,8 @@ class CondominioController extends Controller
                 'meetings',
                 'condoId',
                 'bookings',
-                'messages'
+                'messages',
+                'message_feedback'
             ));
         }
     }
@@ -724,12 +738,40 @@ class CondominioController extends Controller
                         ->update(['status' => 'Respondido']);
 
                 return redirect('/mensagens/' . $userId)->with('msg', 'Mensagem Respondida');
-            } else {
-                return redirect('/mensagens/'. $userId)->withErrors('Mensagem Já Respondida')->withInput();
             }
 
         } catch (Exception $e){
             return redirect()->back()->withErrors($validator)->withInput();
         }
+    }
+
+    public function confirmBooking(Request $request){
+
+        $status = $request->input('status');
+        $bookingId = $request->input('booking_id');
+        $userId = $request->input('user_id');
+
+        if(trim($status) !== trim("Confirmado")){
+
+            Booking::where('id', $bookingId)->update(['status' => 'Confirmado']);
+
+            return redirect('/reservas/' . $userId)->with('msg', 'Reserva Confirmada');
+        }
+
+    }
+
+    public function denyBooking(Request $request){
+
+        $status = $request->input('status');
+        $bookingId = $request->input('booking_id');
+        $userId = $request->input('user_id');
+
+        if(trim($status) !== trim("Negado")){
+
+            Booking::where('id', $bookingId)->update(['status' => 'Negado']);
+
+            return redirect('/reservas/' . $userId)->with('msg', 'Reserva Negada');
+        }
+
     }
 }

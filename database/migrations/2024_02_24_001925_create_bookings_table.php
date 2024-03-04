@@ -23,6 +23,7 @@ class CreateBookingsTable extends Migration
             $table->text('booking');
             $table->datetime('booking_date');
             $table->date('date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('status')->default('Aguardando');
         });
     }
 

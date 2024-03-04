@@ -11,7 +11,7 @@
 
 </head>
 
-<body>
+<body class="condo-background">
 
     <nav class="condo-navbar navbar navbar-expand-md">
 
@@ -249,17 +249,6 @@
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/meeting.svg') }}" width="25">
                                 Reuniões
-                            </div>
-                        </a>
-                    </li>
-                    <div class=" container">
-                        <hr>
-                    </div>
-                    <li class="nav-link">
-                        <a class="navbar-link" href="/blocos">
-                            <div class="zoom-effect">
-                                <img class="hover-image" src="{{ asset('/icon/house.svg') }}" width="25">
-                                Lotes
                             </div>
                         </a>
                     </li>

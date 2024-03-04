@@ -10,6 +10,7 @@
 <small class="text-muted">Data De Envio: {{$message->date}}</small>
 </div>
 
+@if(trim($message->status) !== trim("Respondido"))
 <p class="d-flex justify-content-center mt-3">
     <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
         Responder
@@ -31,6 +32,6 @@
         </form>
     </div>
 </div>
-
+@endif
 @endif
 @endsection

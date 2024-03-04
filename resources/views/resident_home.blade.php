@@ -26,7 +26,7 @@
 <div class="condo-font card card-body shadow-card mt-3">
     <div class="table-responsive">
         <table class="table">
-            <thead>
+            <thead class="table-active">
                 <tr>
                     <th>Assunto</th>
                     <th>Local</th>
@@ -53,5 +53,49 @@
 
 <div class="condo-font card card-body shadow-card mt-3">
 
+    <h5 class="title-font">Reservas</h5>
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="table-active">
+                <th>Assunto</th>
+                <th>Estado</th>
+            </thead>
+            <tbody>
+                @if (!empty($bookings))
+                    @foreach ($bookings as $booking)
+                        @if (trim($booking->status) !== trim("Aguardando"))
+                            <tr>
+                                <td>{{$booking->subject}}</td>
+                                <td>{{$booking->status}}</td>
+                            </tr>
+                        @endif
+                    @endforeach
+                @endif
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="condo-font card card-body shadow-card mt-3">
+    <h5 class="title-font">Mensagens</h5>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="table-active">
+                <th>Assunto</th>
+                <th>Resposta</th>
+            </thead>
+            <tbody>
+                @if (!empty($message_feedback))
+                    @foreach ($message_feedback as $feedback)
+                        <tr>
+                            <td>{{$feedback->subject}}</td>
+                            <td>{{$feedback->feedback}}</td>
+                        </tr>
+                    @endforeach
+                @endif
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection
