@@ -11,15 +11,13 @@
 
 </head>
 
-<body class="antialiased">
+<body class="condo-background">
 
     <nav class="condo-navbar navbar navbar-expand-md">
 
         <a class="navbar-link" style="margin-left: 20px;">
-            <div class="zoom-effect">
-                <img src="{{ asset('/icon/logo2.svg') }}" width="35">
-                <span>ConGest</span>
-            </div>
+            <img src="{{ asset('/icon/logo2.svg') }}" width="35">
+            <span>ConGest</span>
         </a>
 
         <button class="btn" data-bs-toggle="modal" data-bs-target="#menuModal">
@@ -56,10 +54,10 @@
             </ul>
         </div>
 
-        <div class="d-md-none d-flex" style="margin-left: 60px;">
+        <div class="d-md-none d-flex">
             <ul class="navbar-nav">
                 <li class="nav-item d-flex">
-                    <a class="nav-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#bookingModal">
+                    <a class="nav-link" style="margin-left:60px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#bookingModal">
                         <img class="hover-image" src="{{ asset('/icon/reservation.svg') }}" width="35">
                     </a>
                 </li>
@@ -69,7 +67,7 @@
         <div class="d-md-none d-flex">
             <ul class="navbar-nav">
                 <li class="nav-item d-flex">
-                    <a class="nav-link" style="margin-right: 10px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#messageModal">
+                    <a class="nav-link" style="margin-right: 5px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#messageModal">
                         <img class="hover-image" src="{{ asset('/icon/message.svg') }}" width="35">
                     </a>
                 </li>
@@ -79,7 +77,7 @@
         <div class="d-md-none d-flex">
             <ul class="navbar-nav">
                 <li class="nav-item d-flex">
-                    <a class="nav-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#profileMobile">
+                    <a class="nav-link" style="margin-right:20px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#profileModal">
                         <img class="hover-image" src="{{ asset('/icon/profile.svg') }}" width="35">
                     </a>
                 </li>
@@ -125,7 +123,7 @@
 
     <div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-xxl-down" >
-          <div class="modal-content" style="background-color: rgb(24, 24, 220)">
+          <div class="modal-content" style="background-color: #2F3651">
             <div class="modal-body">
                 <ul class="navbar-nav" style="margin-left: 100px;">
                     <li class="nav-link">
@@ -202,28 +200,32 @@
 
       <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content">
+          <div class="modal-content" style="background-color: #24293E;">
             <div class="modal-body">
               <ul class="navbar-nav">
                 <li class="nav-item">
                     <div class="d-flex justify-content-end">
                         <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
+                            <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
                         </button>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
+                    <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
                         <div class="zoom-effect">
-                            <img src="{{ asset('/icon/logo.svg') }}" width="35">
+                            <img src="{{ asset('/icon/logo2.svg') }}" width="35">
                             <span>ConGest</span>
                         </div>
                     </a>
                 </li>
-                <div class="separator-black rounded-pill mt-3"></div>
+                <div class="condo-separator rounded-pill mt-3"></div>
               </ul>
 
-              <div class="condo-font card card-body shadow-card mt-3">
+              <div class="condo-font card card-body shadow-card mt-3" style="
+              background-color: #2F3651;
+              color:white;
+              max-width: 500px;
+              margin: auto;">
                 <h5 class="d-flex justify-content-center mb-3"><strong>Marcar Reserva</strong></h5>
 
                 <form action="/fazer-reserva" method="post">
@@ -233,72 +235,25 @@
 
                     <div class="form-group mb-3">
                         <label for="subject">Assunto:</label>
-                        <input type="text" class="form-control" name="subject" placeholder="Ex: Reserva do Parque Infantil">
+                        <input type="text" class="form-control" name="subject" placeholder="Ex: Reserva do Parque Infantil"
+                        style="background-color:rgb(255, 245, 225);">
                     </div>
                     <div class="form-group mb-3">
                         <label for="booking">Corpo:</label>
-                        <textarea name="booking" class="form-control" cols="30" rows="5" placeholder="Compor"></textarea>
+                        <textarea name="booking" class="form-control" cols="30" rows="5" placeholder="Compor"
+                        style="background-color:rgb(255, 245, 225);"></textarea>
                     </div>
                     <div class="form-group mb-3">
                         <label for="booking_date">Data:</label>
-                        <input type="datetime-local" name="booking_date" class="form-control">
+                        <input type="datetime-local" name="booking_date" class="form-control"
+                        style="background-color:rgb(255, 245, 225);">
                     </div>
                     <span class="d-flex justify-content-center">
-                        <button class="btn btn-dark" type="submit">Marcar</button>
+                        <button class="btn btn-danger" type="submit">Marcar</button>
                     </span>
                 </form>
               </div>
 
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="complaintModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content">
-            <div class="modal-body">
-              <ul class="navbar-nav">
-                <li class="nav-link">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
-                        </button>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
-                        <div class="zoom-effect">
-                            <img src="{{ asset('/icon/logo.svg') }}" width="35">
-                            <span>ConGest</span>
-                        </div>
-                    </a>
-                </li>
-                <div class="separator-black rounded-pill mt-3"></div>
-              </ul>
-
-              <div class="condo-font card card-body shadow-card mt-3">
-                <h5 class="d-flex justify-content-center mb-3"><strong>Reclamação</strong></h5>
-
-                <form action="/fazer-reclamação" method="post">
-                    @csrf
-                    <input type="hidden" name="condo_id" value="{{$resident->condo_id}}">
-                    <input type="hidden" name="user_id" value="{{session('id')}}">
-
-                    <div class="form-group mb-3">
-                        <label for="subject">Assunto:</label>
-                        <input type="text" class="form-control" name="subject" placeholder="Ex: Reserva do Parque Infantil">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="complaint">Corpo:</label>
-                        <textarea name="complaint" class="form-control" cols="30" rows="5" placeholder="Compor"></textarea>
-                    </div>
-                    <span class="d-flex justify-content-center">
-                        <button class="btn btn-dark">Enviar</button>
-                    </span>
-                </form>
-              </div>
-              </ul>
             </div>
           </div>
         </div>
@@ -306,28 +261,32 @@
 
       <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content">
+          <div class="modal-content" style="background-color: #24293E;">
             <div class="modal-body">
                 <ul class="navbar-nav">
                     <li class="nav-link">
                         <div class="d-flex justify-content-end">
                             <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                                <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
+                                <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
                             </button>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
+                        <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
                             <div class="zoom-effect">
-                                <img src="{{ asset('/icon/logo.svg') }}" width="35">
+                                <img src="{{ asset('/icon/logo2.svg') }}" width="35">
                                 <span>ConGest</span>
                             </div>
                         </a>
                     </li>
-                    <div class="separator-black rounded-pill mt-3"></div>
+                    <div class="condo-separator rounded-pill mt-3"></div>
                   </ul>
 
-                  <div class="condo-font card card-body shadow-card mt-3">
+                  <div class="condo-font card card-body shadow-card mt-3" style="
+                  background-color: #2F3651;
+                  color:white;
+                  max-width: 500px;
+                  margin: auto;">
                     <h5 class="d-flex justify-content-center mb-3"><strong>Mensagem</strong></h5>
 
                     <form action="/enviar-mensagem" method="post">
@@ -336,7 +295,8 @@
                         <input type="hidden" name="user_id" value="{{session('id')}}">
                         <div class="form-group mb-3">
                             <label for="receiver">Para:</label>
-                            <select name="receiver" class="form-control">
+                            <select name="receiver" class="form-control"
+                            style="background-color:rgb(255, 245, 225);">
                                 <option value="">--Escolher--</option>
                                 <option value="Coordenação do Condomínio">Coordenação do Condomínio</option>
                                 <option value="Portaria">Portaria</option>
@@ -344,14 +304,16 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="subject">Assunto:</label>
-                            <input type="text" class="form-control" name="subject" placeholder="Ex: Reserva do Parque Infantil">
+                            <input type="text" class="form-control" name="subject" placeholder="Ex: Reserva do Parque Infantil"
+                            style="background-color:rgb(255, 245, 225);">
                         </div>
                         <div class="form-group mb-3">
                             <label for="message">Corpo:</label>
-                            <textarea name="message" class="form-control" cols="30" rows="5" placeholder="Compor"></textarea>
+                            <textarea name="message" class="form-control" cols="30" rows="5" placeholder="Compor"
+                            style="background-color:rgb(255, 245, 225);"></textarea>
                         </div>
                         <span class="d-flex justify-content-center">
-                            <button class="btn btn-dark" type="submit">Enviar</button>
+                            <button class="btn btn-danger" type="submit">Enviar</button>
                         </span>
                     </form>
                   </div>
@@ -365,19 +327,19 @@
 
       <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content">
+          <div class="modal-content" style="background-color: #2F3651; color:white;">
             <div class="modal-body">
               <ul class="navbar-nav">
                 <li class="nav-link">
                     <div class="d-flex justify-content-end">
                         <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
+                            <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
                         </button>
                     </div>
                 </li>
                 </ul>
                 <div class="d-none d-md-block d-md-flex justify-content-center mt-3">
-                    <img src="{{ asset('/icon/profile-black.svg') }}" width="100">
+                    <img src="{{ asset('/icon/profile.svg') }}" width="100">
                 </div>
                 @if (!empty($resident))
                 <div class="container">
@@ -439,7 +401,7 @@
                     </div>
 
                     <span class="d-flex justify-content-center">
-                        <a href="" class="btn btn-dark">EDITAR</a>
+                        <a href="" class="btn btn-warning">EDITAR</a>
                     </span>
                 </div>
 
@@ -451,45 +413,55 @@
 
       <div class="modal fade" id="feeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content">
+          <div class="modal-content" style="background-color: #24293E;">
             <div class="modal-body">
               <ul class="navbar-nav">
                 <li class="nav-link">
                     <div class="d-flex justify-content-end">
                         <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
+                            <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
                         </button>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
+                    <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
                         <div class="zoom-effect">
-                            <img src="{{ asset('/icon/logo.svg') }}" width="35">
+                            <img src="{{ asset('/icon/logo2.svg') }}" width="35">
                             <span>ConGest</span>
                         </div>
                     </a>
                 </li>
-                <div class="separator-black rounded-pill mt-3"></div>
+                <div class="condo-separator rounded-pill mt-3"></div>
               </ul>
-            <div class="condo-font card card-body shadow-card mt-3">
+            <div class="condo-font card card-body shadow-card mt-3"
+            style="
+            background-color:#2F3651;
+            color:white;
+            max-width: 500px;
+            margin: auto;">
                 <h5 class="d-flex justify-content-center mb-3"><strong>Carregar Comprovativo</strong></h5>
                 <form action="" enctype="multipart/form-data">
                     @csrf
-                    <input type="file" name="receipt" class="form-control" accept=".pdf, image/jpeg, image/heic">
-                    <p><small class="text-muted">Formatos aceites: PDF, JPEG, HEIC</small></p>
-                    <button class="btn btn-success" type="submit">Carregar Comprovativo</button>
+                    <input type="file" name="receipt" class="form-control" accept=".pdf, image/jpeg, image/heic"
+                    style="background-color: rgb(255, 245, 225);">
+                    <p><small class="">Formatos aceites: PDF, JPEG, HEIC</small></p>
+                    <button class="btn btn-warning" type="submit">Carregar Comprovativo</button>
                 </form>
 
             </div>
-            <div class="condo-font card card-body shadow-card mt-3">
-                <h5 class="d-flex justify-content-center mb-3"><strong>Comprovativos</strong></h5>
+            <div class="condo-font card card-body shadow-card mt-3"
+            style="
+            background-color: rgb(255, 245, 225);
+            max-width: 800px;
+            margin: auto;">
+                <h5 class=" mb-3"><strong>Comprovativos</strong></h5>
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Mês</th>
-                                <th>Comprovativo</th>
-                                <th>Validado</th>
+                                <th style="background-color: goldenrod; color:white;">Mês</th>
+                                <th style="background-color: goldenrod; color:white;">Comprovativo</th>
+                                <th style="background-color: goldenrod; color:white;">Validado</th>
                             </tr>
                         </thead>
                     </table>
@@ -502,57 +474,58 @@
 
       <div class="modal fade" id="correspondenceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content">
+          <div class="modal-content" style="background-color: #24293E;">
             <div class="modal-body">
               <ul class="navbar-nav">
                 <li class="nav-link">
                     <div class="d-flex justify-content-end">
                         <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
+                            <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
                         </button>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
+                    <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
                         <div class="zoom-effect">
-                            <img src="{{ asset('/icon/logo.svg') }}" width="35">
+                            <img src="{{ asset('/icon/logo2.svg') }}" width="35">
                             <span>ConGest</span>
                         </div>
                     </a>
                 </li>
-                <div class="separator-black rounded-pill mt-3"></div>
-                <div class="condo-font card card-body shadow-card mt-3">
+                <div class="condo-separator rounded-pill mt-3"></div>
+                <div class="condo-font card card-body shadow-card mt-3" style="
+                background-color: rgb(255, 245, 225);">
                     <h5 class="d-flex justify-content-center mb-3"><strong>Minhas Mensagens</strong></h5>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Assunto</th>
-                                    <th>Destinatário</th>
-                                    <th>Data de Envio</th>
-                                    <th>Estado</th>
+                                    <th style="background-color: goldenrod; color:white;">Assunto</th>
+                                    <th style="background-color: goldenrod; color:white;">Destinatário</th>
+                                    <th style="background-color: goldenrod; color:white;">Data de Envio</th>
+                                    <th style="background-color: goldenrod; color:white;">Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if ($messages->isNotEmpty())
                                     @foreach ($messages as $message)
                                         <tr>
-                                            <td>
+                                            <td style="background-color: rgb(255, 245, 225);">
                                                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyMessage{{$message->id}}">
                                                     {{$message->subject}}
                                                 </a>
                                             </td>
-                                            <td>
+                                            <td style="background-color: rgb(255, 245, 225);">
                                                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyMessage{{$message->id}}">
                                                     {{$message->receiver}}
                                                 </a>
                                             </td>
-                                            <td>
+                                            <td style="background-color: rgb(255, 245, 225);">
                                                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyMessage{{$message->id}}">
                                                     {{$message->date}}
                                                 </a>
                                             </td>
-                                            <td>
+                                            <td style="background-color: rgb(255, 245, 225);">
                                                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyMessage{{$message->id}}">
                                                     {{$message->status}}
                                                 </a>
@@ -572,51 +545,52 @@
 
       <div class="modal fade" id="showBookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content">
+          <div class="modal-content" style="background-color: #24293E;">
             <div class="modal-body">
               <ul class="navbar-nav">
                 <li class="nav-link">
                     <div class="d-flex justify-content-end">
                         <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
+                            <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
                         </button>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
+                    <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
                         <div class="zoom-effect">
-                            <img src="{{ asset('/icon/logo.svg') }}" width="35">
+                            <img src="{{ asset('/icon/logo2.svg') }}" width="35">
                             <span>ConGest</span>
                         </div>
                     </a>
                 </li>
-                <div class="separator-black rounded-pill mt-3"></div>
-                <div class="condo-font card card-body shadow-card mt-3">
+                <div class="condo-separator rounded-pill mt-3"></div>
+                <div class="condo-font card card-body shadow-card mt-3" style="
+                background-color: rgb(255, 245, 225);">
                     <h5 class="d-flex justify-content-center mb-3"><strong>Minhas Reservas</strong></h5>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Assunto</th>
-                                    <th>Data De Reserva</th>
-                                    <th>Estado</th>
+                                    <th style="background-color: goldenrod; color:white;">Assunto</th>
+                                    <th style="background-color: goldenrod; color:white;">Data De Reserva</th>
+                                    <th style="background-color: goldenrod; color:white;">Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if ($bookings->isNotEmpty())
                                     @foreach ($bookings as $booking)
                                         <tr>
-                                            <td>
+                                            <td style="background-color: rgb(255, 245, 225);">
                                                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyBooking{{$booking->id}}">
                                                     {{$booking->subject}}
                                                 </a>
                                             </td>
-                                            <td>
+                                            <td style="background-color: rgb(255, 245, 225);">
                                                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyBooking{{$booking->id}}">
                                                     {{$booking->booking_date}}
                                                 </a>
                                             </td>
-                                            <td>
+                                            <td style="background-color: rgb(255, 245, 225);">
                                                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyBooking{{$booking->id}}">
                                                     {{$booking->status}}
                                                 </a>
@@ -636,27 +610,28 @@
 
       <div class="modal fade" id="emergencyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content">
+          <div class="modal-content" style="background-color: #24293E;">
             <div class="modal-body">
               <ul class="navbar-nav">
                 <li class="nav-link">
                     <div class="d-flex justify-content-end">
                         <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
+                            <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
                         </button>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
+                    <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
                         <div class="zoom-effect">
                             <img src="{{ asset('/icon/logo.svg') }}" width="35">
                             <span>ConGest</span>
                         </div>
                     </a>
                 </li>
-                <div class="separator-black rounded-pill mt-3"></div>
+                <div class="condo-separator rounded-pill mt-3"></div>
               </ul>
-              <div class="condo-font card card-body shadow-card mt-3">
+              <div class="condo-font card card-body shadow-card mt-3" style="
+              background-color: rgb(255, 245, 225);">
                 <h5 class="d-flex justify-content-center mb-3"><strong>Contatos de Emergência</strong></h5>
               </div>
             </div>
@@ -668,29 +643,29 @@
           @foreach ($messages as $message)
           <div class="modal fade" id="showMyMessage{{$message->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen-xxl-down">
-              <div class="modal-content">
+              <div class="modal-content" style="background-color: #2F3651; color:white;">
                 <div class="modal-body">
                   <ul class="navbar-nav">
                     <li class="nav-link">
                         <div class="d-flex justify-content-end">
                             <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                                <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
+                                <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
                             </button>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
+                        <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
                             <div class="zoom-effect">
-                                <img src="{{ asset('/icon/logo.svg') }}" width="35">
+                                <img src="{{ asset('/icon/logo2.svg') }}" width="35">
                                 <span>ConGest</span>
                             </div>
                         </a>
                     </li>
-                    <div class="separator-black rounded-pill mt-3"></div>
+                    <div class="condo-separator rounded-pill mt-3"></div>
                     <h5 class="mt-3">Destinatário: <strong>{{$message->receiver}}</strong></h5>
                     <h5>Assunto: <strong>{{$message->subject}}</strong></h5>
                     <p>{{$message->message}}</p>
-                    <p class="text-muted">Data De Envio: {{$message->date}}</p>
+                    <p>Data De Envio: {{$message->date}}</p>
                   </ul>
                 </div>
               </div>
@@ -703,30 +678,30 @@
           @foreach ($bookings as $booking)
           <div class="modal fade" id="showMyBooking{{$booking->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen-xxl-down">
-              <div class="modal-content">
+              <div class="modal-content" style="background-color: #2F3651; color:white;">
                 <div class="modal-body">
                   <ul class="navbar-nav">
                     <li class="nav-link">
                         <div class="d-flex justify-content-end">
                             <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                                <img class="hover-image" src="{{asset('/icon/close-circle-black.svg')}}" width="40">
+                                <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
                             </button>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="logo-black d-flex justify-content-center" style="margin-left: 20px;">
+                        <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
                             <div class="zoom-effect">
-                                <img src="{{ asset('/icon/logo.svg') }}" width="35">
+                                <img src="{{ asset('/icon/logo2.svg') }}" width="35">
                                 <span>ConGest</span>
                             </div>
                         </a>
                     </li>
-                    <div class="separator-black rounded-pill mt-3"></div>
+                    <div class="condo-separator rounded-pill mt-3"></div>
                   </ul>
                   <h5 class="mt-3">Assunto: {{$booking->subject}}</h5>
                   <h5>Data De Reserva: {{$booking->booking_date}}</h5>
                   <p>{{$booking->booking}}</p>
-                  <p class="text-muted">Data De Envio: {{$booking->date}}</p>
+                  <p>Data De Envio: {{$booking->date}}</p>
                 </div>
               </div>
             </div>

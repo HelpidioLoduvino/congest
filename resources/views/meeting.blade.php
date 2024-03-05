@@ -1,10 +1,10 @@
 @extends('main_condominio')
 
 @section('content')
-<h4 class="mt-3 title-font">Reuniões</h4>
+<h4 class="mt-3 title-font white-text">Reuniões</h4>
 <div class="condo-separator"></div>
 @if (!empty($condoId))
-<div class="condo-font card card-body shadow-card mt-3">
+<div class="condo-font card card-body shadow-card mt-3" style="background-color: goldenrod; color: white;">
     <h5 class="d-flex justify-content-center mb-3"><strong>Marcar Reunião</strong></h5>
     <form action="/marcar-reunião" method="post">
         @csrf
@@ -12,13 +12,12 @@
         <input type="hidden" name="user_id" value="{{session('id')}}">
         <div class="form-group mb-3">
             <label for="">Data:</label>
-            <input type="datetime-local"  name="meeting_date" class="form-control">
+            <input type="datetime-local"  name="meeting_date" class="form-control" style="background-color:rgb(255, 245, 225);">
         </div>
 
         <div class="form-group mb-3">
-            <label for="place">Local:</label>
-            <select name="place" class="form-control">
-                <option value="">Escolher</option>
+            <select name="place" class="form-control" style="background-color:rgb(255, 245, 225);">
+                <option value="">-- Escolher Local --</option>
                 <option value="Parque do Condominio">Parque do Condominio</option>
                 <option value="Google Meeting">Google Meeting</option>
                 <option value="Moradores">Reunião Online</option>
@@ -26,9 +25,8 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="participant">Com:</label>
-            <select name="participant" class="form-control">
-                <option value="">Escolher</option>
+            <select name="participant" class="form-control" style="background-color:rgb(255, 245, 225);">
+                <option value="">-- Escolher Participantes --</option>
                 <option value="Todos do Condomínio">Todos do Condomínio</option>
                 <option value="Portaria">Portaria</option>
                 <option value="Moradores">Moradores</option>
@@ -36,47 +34,48 @@
         </div>
 
         <div class="form-group mb-3">
-            <input type="text" name="subject" placeholder="Assunto" class="form-control">
+            <input type="text" name="subject" placeholder="Assunto" class="form-control" style="background-color:rgb(255, 245, 225);">
         </div>
-
-        <button class="btn btn-dark" type="submit">Marcar</button>
+        <span class="d-flex justify-content-center">
+            <button class="btn btn-dark" type="submit">Marcar</button>
+        </span>
     </form>
 </div>
 
 @endif
 
-<div class="condo-font card card-body shadow-card mt-3">
+<div class="condo-font card card-body shadow-card mt-3" style="background-color: goldenrod; color: white;">
     <h5 class="d-flex justify-content-center mb-3"><strong> Reuniões</strong></h5>
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Assunto</th>
-                    <th>Com</th>
-                    <th>Local</th>
-                    <th>Data</th>
+                    <th style="background-color:rgb(255, 245, 225);">Assunto</th>
+                    <th style="background-color:rgb(255, 245, 225);">Com</th>
+                    <th style="background-color:rgb(255, 245, 225);">Local</th>
+                    <th style="background-color:rgb(255, 245, 225);">Data</th>
                 </tr>
             </thead>
             <tbody>
                 @if(!empty($meetings))
                     @foreach ($meetings as $meeting)
                         <tr>
-                            <td>
+                            <td style="background-color: goldenrod; color: white;">
                                 <a class="nav-link" href="#" onclick="redirectToViewMeeting('{{$meeting->id}}')">
                                     {{$meeting->subject}}
                                 </a>
                             </td>
-                            <td>
+                            <td style="background-color: goldenrod; color: white;">
                                 <a class="nav-link" href="#" onclick="redirectToViewMeeting('{{$meeting->id}}')">
                                     {{$meeting->participant}}
                                 </a>
                             </td>
-                            <td>
+                            <td style="background-color: goldenrod; color: white;">
                                 <a class="nav-link" href="#" onclick="redirectToViewMeeting('{{$meeting->id}}')">
                                     {{$meeting->place}}
                                 </a>
                             </td>
-                            <td>
+                            <td style="background-color: goldenrod; color: white;">
                                 <a class="nav-link" href="#" onclick="redirectToViewMeeting('{{$meeting->id}}')">
                                     {{$meeting->meeting_date}}
                                 </a>

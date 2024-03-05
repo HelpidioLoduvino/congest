@@ -7,11 +7,12 @@
 
     <title>Laravel</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style2.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 
 </head>
 
-<body class="antialiased">
+<body class="antialiased" style="background-color: #24293E;">
 
     <nav class="condo-navbar navbar navbar-expand-md">
 

@@ -2,8 +2,8 @@
 
 @section('content')
 @if(!empty($meeting))
-<div class="condo-font card card-body shadow-card mt-3">
-    <h5 class="d-flex justify-content-center mb-3"><strong>Aviso</strong></h5>
+<div class="condo-font card card-body shadow-card mt-3" style="background-color: goldenrod; color: white;">
+    <h5 class="d-flex justify-content-center mb-3"><strong>Reunião</strong></h5>
     <div class="form-group mb-3">
         <h5>Para: <strong>{{$meeting->participant}}</strong></h5>
     </div>
@@ -21,7 +21,7 @@
     </div>
 
     <div class="form-group mb-3 mt-3">
-        <p class="text-muted">Data: {{$meeting->date}}</p>
+        <p class="text-muted">Data De Envio: {{$meeting->date}}</p>
     </div>
 </div>
 @endif

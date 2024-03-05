@@ -3,13 +3,13 @@
 @section('content')
 
 @if (!empty($resident))
-<div class="card card-body shadow-card mt-3" style="background-color: rgb(24, 24, 220)">
+<div class="card card-body shadow-card mt-3" style="background-color: rgb(93, 0, 0);">
     <h6 class="d-flex justify-content-center condo-title" style="color: white">Condomínio {{$resident->condo_name}}</h6>
 </div>
 @endif
-<h4 class="title-font mt-3">Avisos</h4>
+<h4 class="title-font mt-3 white-text">Avisos</h4>
 <div class="condo-separator"></div>
-<div class="condo-font card card-body shadow-card mt-3">
+<div class="condo-font card card-body shadow-card mt-3" style="background-color:rgb(255, 245, 225);">
     @if($notices->isNotEmpty())
         <div>
             <ul>
@@ -21,25 +21,25 @@
     @endif
 </div>
 
-<h4 class="title-font mt-3">Reuniões</h4>
+<h4 class="title-font mt-3 white-text">Reuniões</h4>
 <div class="condo-separator"></div>
-<div class="condo-font card card-body shadow-card mt-3">
+<div class="condo-font card card-body shadow-card mt-3" style="background-color:rgb(255, 245, 225);">
     <div class="table-responsive">
         <table class="table">
-            <thead class="table-active">
+            <thead>
                 <tr>
-                    <th>Assunto</th>
-                    <th>Local</th>
-                    <th>Data</th>
+                    <th style="background-color: goldenrod; color:white;">Assunto</th>
+                    <th style="background-color: goldenrod; color:white;">Local</th>
+                    <th style="background-color: goldenrod; color:white;">Data</th>
                 </tr>
             </thead>
             <tbody>
                 @if ($meetings->isNotEmpty())
                     @foreach ($meetings as $meeting)
                         <tr>
-                            <td>{{$meeting->subject}}</td>
-                            <td>{{$meeting->place}}</td>
-                            <td>{{$meeting->meeting_date}}</td>
+                            <td style="background-color:rgb(255, 245, 225);">{{$meeting->subject}}</td>
+                            <td style="background-color:rgb(255, 245, 225);">{{$meeting->place}}</td>
+                            <td style="background-color:rgb(255, 245, 225);">{{$meeting->meeting_date}}</td>
                         </tr>
                     @endforeach
                 @endif
@@ -48,25 +48,25 @@
     </div>
 </div>
 
-<h4 class="title-font mt-3">Correspondências</h4>
+<h4 class="title-font mt-3 white-text">Correspondências</h4>
 <div class="condo-separator"></div>
 
-<div class="condo-font card card-body shadow-card mt-3">
+<div class="condo-font card card-body shadow-card mt-3" style="background-color:rgb(255, 245, 225);">
 
     <h5 class="title-font">Reservas</h5>
     <div class="table-responsive">
         <table class="table">
-            <thead class="table-active">
-                <th>Assunto</th>
-                <th>Estado</th>
+            <thead>
+                <th style="background-color: goldenrod; color:white;">Assunto</th>
+                <th style="background-color: goldenrod; color:white;">Estado</th>
             </thead>
             <tbody>
                 @if (!empty($bookings))
                     @foreach ($bookings as $booking)
                         @if (trim($booking->status) !== trim("Aguardando"))
                             <tr>
-                                <td>{{$booking->subject}}</td>
-                                <td>{{$booking->status}}</td>
+                                <td style="background-color:rgb(255, 245, 225);">{{$booking->subject}}</td>
+                                <td style="background-color:rgb(255, 245, 225);">{{$booking->status}}</td>
                             </tr>
                         @endif
                     @endforeach
@@ -76,21 +76,21 @@
     </div>
 </div>
 
-<div class="condo-font card card-body shadow-card mt-3">
+<div class="condo-font card card-body shadow-card mt-3" style="background-color:rgb(255, 245, 225);">
     <h5 class="title-font">Mensagens</h5>
 
     <div class="table-responsive">
         <table class="table">
-            <thead class="table-active">
-                <th>Assunto</th>
-                <th>Resposta</th>
+            <thead>
+                <th style="background-color: goldenrod; color:white;">Assunto</th>
+                <th style="background-color: goldenrod; color:white;">Resposta</th>
             </thead>
             <tbody>
                 @if (!empty($message_feedback))
                     @foreach ($message_feedback as $feedback)
                         <tr>
-                            <td>{{$feedback->subject}}</td>
-                            <td>{{$feedback->feedback}}</td>
+                            <td style="background-color:rgb(255, 245, 225);">{{$feedback->subject}}</td>
+                            <td style="background-color:rgb(255, 245, 225);">{{$feedback->feedback}}</td>
                         </tr>
                     @endforeach
                 @endif

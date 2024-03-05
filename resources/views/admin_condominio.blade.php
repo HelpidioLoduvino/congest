@@ -1,37 +1,37 @@
 @extends('main_admin')
 
 @section('content')
-    <div class="condo-font card card-body shadow-card mt-3">
+    <div class="condo-font card card-body shadow-card mt-3" style="background-color: goldenrod">
         <div class="table-responsive">
             <table class="table table-hover">
-                <thead class="table-active">
+                <thead>
                     <tr>
-                        <th>Nome Do Condomínio</th>
-                        <th>Tipo de Contrato</th>
-                        <th>Data Do Contrato</th>
-                        <th>Plano Do Contrato</th>
+                        <th style="background-color:rgb(255, 245, 225);">Nome Do Condomínio</th>
+                        <th style="background-color:rgb(255, 245, 225);">Tipo de Contrato</th>
+                        <th style="background-color:rgb(255, 245, 225);">Data Do Contrato</th>
+                        <th style="background-color:rgb(255, 245, 225);">Plano Do Contrato</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if (!empty($condo_business_contracts))
                         @foreach ($condo_business_contracts as $condo_business)
                         <tr>
-                            <td>
+                            <td style="background-color: goldenrod; color: white;">
                                 <a class="nav-link" href="#" onclick="redirectToBusinessContract('{{$condo_business->user_id }}')">
                                     {{$condo_business->condo_name}}
                                 </a>
                             </td>
-                            <td>
+                            <td style="background-color: goldenrod; color: white;">
                                 <a class="nav-link" href="#" onclick="redirectToBusinessContract('{{$condo_business->user_id }}')">
                                     {{$condo_business->contract_type}}
                                 </a>
                             </td>
-                            <td>
+                            <td style="background-color: goldenrod; color: white;">
                                 <a class="nav-link" href="#" onclick="redirectToBusinessContract('{{$condo_business->user_id }}')">
                                     {{$condo_business->date}}
                                 </a>
                             </td>
-                            <td>
+                            <td style="background-color: goldenrod; color: white;">
                                 <a class="nav-link" href="#" onclick="redirectToBusinessContract('{{$condo_business->user_id }}')">
                                     {{$condo_business->plan}}
                                 </a>
@@ -43,22 +43,22 @@
                     @if (!empty($condo_personal_contracts))
                     @foreach ($condo_personal_contracts as $condo_personal)
                         <tr>
-                            <td>
+                            <td style="background-color: goldenrod; color: white;">
                                 <a class="nav-link" href="#" onclick="redirectToPersonalContract('{{ $condo_personal->user_id }}')">
                                     {{ $condo_personal->condo_name }}
                                 </a>
                             </td>
-                            <td>
+                            <td style="background-color: goldenrod; color: white;">
                                 <a class="nav-link" href="#" onclick="redirectToPersonalContract('{{ $condo_personal->user_id }}')">
                                 {{ $condo_personal->contract_type }}
                                 </a>
                             </td>
-                            <td>
+                            <td style="background-color: goldenrod; color: white;">
                                 <a class="nav-link" href="#" onclick="redirectToPersonalContract('{{ $condo_personal->user_id }}')">
                                     {{ $condo_personal->date }}
                                 </a>
                             </td>
-                            <td>
+                            <td style="background-color: goldenrod; color: white;">
                                 <a class="nav-link" href="#" onclick="redirectToPersonalContract('{{ $condo_personal->user_id }}')">
                                     {{ $condo_personal->plan }}
                                 </a>

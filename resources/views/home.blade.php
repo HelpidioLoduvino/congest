@@ -12,22 +12,16 @@
     </div>
 @endif
 
-<div class="banner card card-body shadow-card">
-    <div class="d-none d-md-block d-md-flex justify-content-center">
-        <img src="{{ asset('/icon/logo.svg') }}" width="100">
-    </div>
-    <h5 class="text-banner title-banner">Sistema Completo <br> para Adminstração de condomínios</h5>
-    <p class="text-muted text-banner">Automatizamos a gerencia do seu condomínio por meio de uma plataforma simples e fácil de manusear.</p>
-</div>
-
-<div class="banner card card-body shadow-card d-md-none mt-3">
-    <div class="d-flex justify-content-center">
-        <h5 class="banner-text">Deixe o papél para trás e abrace uma gestão totalmente digitalizada.</h5>
+<div class="card" style="background-color: rgb(93, 0, 0);">
+    <div class="card-body shadow-card">
+        <div class="d-flex d-md-block d-md-flex justify-content-center mb-3">
+            <img src="{{ asset('/icon/logo2.svg') }}" width="80">
+        </div>
+        <h5 class="text-banner title-banner white-text">Sistema Completo <br> para Adminstração de condomínios</h5>
+        <p class=" text-banner white-text ">Automatizamos a gerencia do seu condomínio por meio de uma plataforma simples e fácil de manusear</p>
     </div>
 </div>
 
-<div class="d-none d-md-block d-md-flex justify-content-center mt-5">
-    <h5 class="banner-text">Deixe o papél para trás e abrace uma gestão totalmente digitalizada.</h5>
-</div>
+<p class="banner-text white-text mt-3">Deixe o papél para trás e abrace uma gestão totalmente digitalizada.</p>
 
 @endsection

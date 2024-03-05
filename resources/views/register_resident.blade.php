@@ -83,7 +83,7 @@
     </div>
 
     <span class="d-flex justify-content-center">
-        <input type="submit" class="btn btn-success mt-3" value="Cadastrar">
+        <input type="submit" class="btn btn-warning mt-3" value="Cadastrar" style="color:white;">
     </span>
 
 </form>

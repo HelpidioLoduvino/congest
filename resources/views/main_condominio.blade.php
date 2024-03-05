@@ -105,17 +105,6 @@
                         <hr>
                     </div>
                     <li class="nav-link">
-                        <a class="navbar-link" href="/blocos">
-                            <div class="zoom-effect">
-                                <img class="hover-image" src="{{ asset('/icon/house.svg') }}" width="25">
-                                Lotes
-                            </div>
-                        </a>
-                    </li>
-                    <div class=" container">
-                        <hr>
-                    </div>
-                    <li class="nav-link">
                         <a class="navbar-link" href="/moradores/{{session('id')}}">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/person.svg') }}" width="25">
@@ -127,7 +116,7 @@
                         <hr>
                     </div>
                     <li class="nav-link">
-                        <a class="navbar-link" href="/mensagens">
+                        <a class="navbar-link" href="/mensagens/{{session('id')}}">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/message.svg') }}" width="25">
                                 Mensagens
@@ -138,28 +127,25 @@
                         <hr>
                     </div>
                     <li class="nav-link">
-                        <a class="navbar-link" href="/reclamações">
-                            <div class="zoom-effect">
-                                <img class="hover-image" src="{{ asset('/icon/complaint.svg') }}" width="25">
-                                Reclamações
-                            </div>
-                        </a>
-                    </li>
-                    <div class=" container">
-                        <hr>
-                    </div>
-                    <li class="nav-link">
-                        <a class="navbar-link" href="/reservas">
+                        <a class="navbar-link" href="/reservas/{{session('id')}}">
                             <div class="zoom-effect">
                                 <img class="hover-image" src="{{ asset('/icon/reservation.svg') }}" width="25">
                                 Reservas
                             </div>
                         </a>
                     </li>
-
                     <div class="sidebar-separator mb-3 container mt-3"></div>
                 </ul>
             </div>
+        </div>
+
+        <div class="d-md-none" style="margin-right: 20px;">
+            <form action="/logout" method="post">
+                @csrf
+                <div class="zoom-effect">
+                    <input class="hover-image" type="image" src="{{asset('/icon/logout.svg')}}" alt="" width="35">
+                </div>
+            </form>
         </div>
 
         <div class="collapse navbar-collapse d-md-flex justify-content-end">
@@ -174,6 +160,7 @@
                 </li>
             </ul>
         </div>
+
     </nav>
 
     <div class="row">

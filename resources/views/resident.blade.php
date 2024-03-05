@@ -4,7 +4,7 @@
     <div class="mt-3">
         <div class="d-flex justify-content-center">
             <input id="product" class="search-bar form-control me-2" type="text" placeholder="Procurar morador"
-                aria-label="Search">
+                aria-label="Search" style="background-color:rgb(255, 245, 225);">
             <a href="#" class="btn btn-success" id="search-link">
                 <img src="{{ asset('/icon/search.svg') }}" alt="" width="30">
             </a>
@@ -13,9 +13,9 @@
 
         </div>
     </div>
-    <h4 class="mt-3 title-font">Cadastrar Morador</h4>
+    <h4 class="mt-3 title-font white-text">Cadastrar Morador</h4>
     <div class="condo-separator"></div>
-    <div class="condo-font card card-body shadow-card mt-3">
+    <div class="condo-font card card-body shadow-card mt-3" style="background-color: goldenrod; color: white;">
         <div class="d-flex justify-content-center">
             <span class="logotipo">
                 <img src="{{ asset('/icon/logo.svg') }}" width="40">
@@ -30,34 +30,34 @@
             </a>
         </div>
     </div>
-    <h4 class="mt-3 title-font">Moradores</h4>
+    <h4 class="mt-3 title-font white-text">Moradores</h4>
     <div class="condo-separator"></div>
 
-    <div class="condo-font card card-body shadow-card mt-3">
+    <div class="condo-font card card-body shadow-card mt-3" style="background-color: goldenrod; color: white;">
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>LOTE</th>
-                        <th>Nº DA RESIDÊNCIA</th>
-                        <th>MORADOR</th>
+                        <th style="background-color:rgb(255, 245, 225);">LOTE</th>
+                        <th style="background-color:rgb(255, 245, 225);">Nº DA RESIDÊNCIA</th>
+                        <th style="background-color:rgb(255, 245, 225);">MORADOR</th>
                     </tr>
                 </thead>
                 @if (!empty($residents))
                 <tbody>
                     @foreach ($residents as $resident)
                     <tr>
-                        <td class="uppercase-text">
+                        <td class="uppercase-text" style="background-color: goldenrod; color: white;">
                             <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
                                 {{$resident->plot_resident}}
                             </a>
                         </td>
-                        <td>
+                        <td style="background-color: goldenrod; color: white;">
                             <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
                                 {{$resident->residency_number}}
                             </a>
                         </td>
-                        <td>
+                        <td style="background-color: goldenrod; color: white;">
                             <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
                                 {{$resident->name}}
                             </a>

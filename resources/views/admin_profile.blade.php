@@ -2,13 +2,13 @@
 
 @section('content')
 
-<div class="banner card card-body condo-font shadow-card mt-3">
+<div class="banner card card-body condo-font shadow-card mt-3" style="background-color: goldenrod;">
     <div class="d-none d-md-block d-md-flex justify-content-center">
         <img src="{{ asset('/icon/profile-black.svg') }}" width="100">
     </div>
-    <h5 class="text-banner title-banner">Nome: {{$user->name}}</h5>
-    <h5 class="text-banner title-banner">Email: {{$user->email}}</h5>
-    <p class="text-muted text-banner">Tipo de Utilizador: {{$user->type}}</p>
+    <h6 class="text-banner title-banner white-text">Nome: {{$user->name}}</h6>
+    <h6 class="text-banner title-banner white-text">Email: {{$user->email}}</h6>
+    <p class="text-banner white-text">Tipo de Utilizador: {{$user->type}}</p>
 </div>
 
 

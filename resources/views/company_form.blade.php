@@ -83,7 +83,7 @@
         </div>
     </div>
     <span class="d-flex mt-3 justify-content-center">
-        <input type="submit" class="btn btn-dark" value="Cadastrar">
+        <input type="submit" class="btn btn-warning" value="Cadastrar">
     </span>
 </form>
 @endsection

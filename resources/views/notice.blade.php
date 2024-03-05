@@ -1,21 +1,21 @@
 @extends('main_condominio')
 
 @section('content')
-<h4 class="mt-3 title-font">Avisos</h4>
+<h4 class="mt-3 title-font white-text">Avisos</h4>
 <div class="condo-separator"></div>
 @if (!empty($condoId))
 
-<div class="condo-font card card-body shadow-card mt-3">
+<div class="condo-font card card-body shadow-card mt-3" style="background-color: goldenrod; color: white;">
     <h5 class="d-flex justify-content-center mb-3"><strong>Enviar Aviso</strong></h5>
 
     <form action="/enviar-aviso" method="post">
         @csrf
         <input type="hidden" name="condo_id" value="{{$condoId->id}}">
         <input type="hidden" name="user_id" value="{{session('id')}}">
-        <div class="form-group mb-3">
-            <label for="receiver">Para:</label>
-            <select name="receiver" class="form-control">
-                <option value="">Escolher</option>
+        <div class="form-group d-flex justify-content-center mb-3">
+            <select name="receiver" class="form-control" style="
+                background-color:rgb(255, 245, 225);">
+                <option value="">-- Destinatário --</option>
                 <option value="Todos do Condomínio">Todos do Condomínio</option>
                 <option value="Portaria">Portaria</option>
                 <option value="Moradores">Moradores</option>
@@ -23,45 +23,48 @@
         </div>
 
         <div class="form-group mb-3">
-            <input type="text" name="subject" placeholder="Assunto" class="form-control">
+            <input type="text" name="subject" placeholder="Assunto" class="form-control" style="
+                background-color:rgb(255, 245, 225);">
         </div>
 
         <div class="form-group mb-3">
-            <textarea name="notice" class="form-control" cols="50" rows="3" placeholder="Compor"></textarea>
+            <textarea name="notice" class="form-control" cols="50" rows="3" placeholder="Compor" style="
+                background-color:rgb(255, 245, 225);"></textarea>
         </div>
-
-        <button class="btn btn-dark" type="submit">Enviar</button>
+        <span class="d-flex justify-content-center">
+            <button class="btn btn-dark" type="submit">Enviar</button>
+        </span>
     </form>
 </div>
 
 @endif
 
-<div class="condo-font card card-body shadow-card mt-3">
+<div class="condo-font card card-body shadow-card mt-3" style="background-color: goldenrod; color: white;">
     <h5 class="d-flex justify-content-center mb-3"><strong>Avisos</strong></h5>
     <div class="table-responsive">
         <table class="table table-hover">
-            <thead class="table-active">
+            <thead>
                 <tr>
-                    <th>Data</th>
-                    <th>Assunto</th>
-                    <th>Para</th>
+                    <th style="background-color:rgb(255, 245, 225);">Data</th>
+                    <th style="background-color:rgb(255, 245, 225);">Assunto</th>
+                    <th style="background-color:rgb(255, 245, 225);">Para</th>
                 </tr>
             </thead>
             <tbody>
                 @if(!empty($notices))
                     @foreach ($notices as $notice)
                         <tr>
-                            <td>
+                            <td style="background-color: goldenrod; color: white;">
                                 <a class="nav-link" href="#" onclick="redirectToViewNotice('{{$notice->id}}')">
                                     {{$notice->date}}
                                 </a>
                             </td>
-                            <td>
+                            <td style="background-color: goldenrod; color: white;">
                                 <a class="nav-link" href="#" onclick="redirectToViewNotice('{{$notice->id}}')">
                                     {{$notice->subject}}
                                 </a>
                             </td>
-                            <td>
+                            <td style="background-color: goldenrod; color: white;">
                                 <a class="nav-link" href="#" onclick="redirectToViewNotice('{{$notice->id}}')">
                                     {{$notice->receiver}}
                                 </a>
