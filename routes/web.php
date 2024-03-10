@@ -49,6 +49,7 @@ Route::post('/enviar-mensagem', [CondominioController::class, 'sendMessage']);
 Route::post('/responder-mensagem', [CondominioController::class, 'messageFeedback']);
 Route::post('/aceitar-reserva', [CondominioController::class, 'confirmBooking']);
 Route::post('/negar-reserva', [CondominioController::class, 'denyBooking']);
+Route::get('/pesquisar-morador/{resident_name}', [CondominioController::class, 'searchResident']);
 
 
 

@@ -234,14 +234,20 @@
                     <input type="hidden" name="user_id" value="{{session('id')}}">
 
                     <div class="form-group mb-3">
-                        <label for="subject">Assunto:</label>
-                        <input type="text" class="form-control" name="subject" placeholder="Ex: Reserva do Parque Infantil"
-                        style="background-color:rgb(255, 245, 225);">
+                        <label for="place">Espaço:</label>
+                        <select name="place" class="form-control" style="background-color:rgb(255, 245, 225);">
+                            <option value="">-- Escolher --</option>
+                            <option value="Piscína">Piscína</option>
+                            <option value="Salão">Salão</option>
+                        </select>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="booking">Corpo:</label>
-                        <textarea name="booking" class="form-control" cols="30" rows="5" placeholder="Compor"
-                        style="background-color:rgb(255, 245, 225);"></textarea>
+                        <label for="purpose">Finalidade:</label>
+                        <select name="purpose" class="form-control" style="background-color:rgb(255, 245, 225);">
+                            <option value="">-- Escolher --</option>
+                            <option value="Aniversário">Aniversário</option>
+                            <option value="Convívio">Convívio</option>
+                        </select>
                     </div>
                     <div class="form-group mb-3">
                         <label for="booking_date">Data:</label>
@@ -439,14 +445,20 @@
             color:white;
             max-width: 500px;
             margin: auto;">
-                <h5 class="d-flex justify-content-center mb-3"><strong>Carregar Comprovativo</strong></h5>
-                <form action="" enctype="multipart/form-data">
-                    @csrf
-                    <input type="file" name="receipt" class="form-control" accept=".pdf, image/jpeg, image/heic"
-                    style="background-color: rgb(255, 245, 225);">
-                    <p><small class="">Formatos aceites: PDF, JPEG, HEIC</small></p>
-                    <button class="btn btn-warning" type="submit">Carregar Comprovativo</button>
-                </form>
+                <h5 class="d-flex justify-content-center mb-5"><strong>FORMAS DE PAGAMENTO</strong></h5>
+                <div class="d-flex mb-3">
+                    <img src="{{asset('/img/bai-angola.gif')}}" alt="" srcset="" width="100"> &nbsp;
+                    <a href="#" class="btn btn-primary">BAI DIRECTO</a>
+                </div>
+
+                <div class="d-flex mb-3">
+                    <img src="{{asset('/img/express.jpeg')}}" alt="" srcset="" width="100" height="40"> &nbsp;
+                    <a href="#" class="btn btn-danger">EXPRESS</a>
+                </div>
+
+                <p>CONTA (BAI):</p>
+                <a >Nº DA CONTA: <span id="numeroConta">12345678902</span></a>
+                <a>IBAN: <span id="iban">0040 0000 2345 5432 3456 2</span></a>
 
             </div>
             <div class="condo-font card card-body shadow-card mt-3"
@@ -712,6 +724,41 @@
     <script src="/bootstrap/script/popper.js"></script>
     <script src="/bootstrap/script/bootstrap.min.js"></script>
     <script src="/jquery/jquery.min.js"></script>
+
+    <script>
+        function verificarApp() {
+          setTimeout(function () {
+            // Redirecionar para a loja de aplicativos se o aplicativo não estiver instalado
+            window.location.href = "https://apps.apple.com/us/app/bai-directo/id454984675";
+          }, 500);
+        }
+      </script>
+
+    <script>
+        // Função para copiar texto para a área de transferência
+        function copiarTexto(elementId) {
+            var textoElemento = document.getElementById(elementId);
+            var textoSelecionado = window.getSelection();
+            var range = document.createRange();
+
+            range.selectNodeContents(textoElemento);
+            textoSelecionado.removeAllRanges();
+            textoSelecionado.addRange(range);
+
+            document.execCommand('copy');
+
+            alert("Texto copiado: " + textoElemento.textContent);
+        }
+
+        // Adiciona a funcionalidade de cópia ao clicar nos elementos
+        document.getElementById('numeroConta').addEventListener('click', function() {
+            copiarTexto('numeroConta');
+        });
+
+        document.getElementById('iban').addEventListener('click', function() {
+            copiarTexto('iban');
+        });
+    </script>
 
 </body>
 

@@ -149,7 +149,13 @@ class CondominioController extends Controller
 
     public function showResidentBooking($id){
 
-        $booking = Booking::find($id);
+        $booking = Booking::select('bookings.*', 'users.name',
+                                'residents.plot_resident', 'residents.residency_number')
+                            ->join('residents', 'residents.resident_id', '=', 'bookings.user_id')
+                            ->join('condominios', 'condominios.id', '=', 'bookings.condo_id')
+                            ->join('users', 'bookings.user_id', '=', 'users.id')
+                            ->where('bookings.id', $id)
+                            ->first();
 
         if($booking){
             return view('view_resident_booking', compact('booking'));
@@ -641,8 +647,8 @@ class CondominioController extends Controller
 
     public function scheduleBooking (Request $request){
         $validator = $request->validate([
-            'subject' => 'required|string',
-            'booking' => 'required|string',
+            'place' => 'required|string',
+            'purpose' => 'required|string',
             'booking_date' => 'required'
         ]);
 
@@ -653,8 +659,8 @@ class CondominioController extends Controller
             Booking::create([
                 'condo_id' => $request->input('condo_id'),
                 'user_id' => $userId,
-                'subject' => $request->input('subject'),
-                'booking' => $request->input('booking'),
+                'place' => $request->input('place'),
+                'purpose' => $request->input('purpose'),
                 'booking_date' => $request->input('booking_date')
             ]);
 
@@ -773,5 +779,12 @@ class CondominioController extends Controller
             return redirect('/reservas/' . $userId)->with('msg', 'Reserva Negada');
         }
 
+    }
+
+    public function searchResident($resident_name){
+
+        $resident = User::where('name', 'like', "%{$resident_name}%" )->get();
+
+        dd($resident);
     }
 }

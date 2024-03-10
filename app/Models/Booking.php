@@ -13,8 +13,8 @@ class Booking extends Model
     protected $fillable = [
         'condo_id',
         'user_id',
-        'subject',
-        'booking',
+        'place',
+        'purpose',
         'booking_date'
     ];
 }

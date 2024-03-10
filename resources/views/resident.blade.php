@@ -1,13 +1,15 @@
 @extends('main_condominio')
 
 @section('content')
-    <div class="mt-3">
-        <div class="d-flex justify-content-center">
-            <input id="product" class="search-bar form-control me-2" type="text" placeholder="Procurar morador"
-                aria-label="Search" style="background-color:rgb(255, 245, 225);">
-            <a href="#" class="btn btn-success" id="search-link">
-                <img src="{{ asset('/icon/search.svg') }}" alt="" width="30">
-            </a>
+    <div class="mt-5">
+        <div class="d-flex justify-content-end">
+            <form action="/pesquisar-morador/{resident_name}" method="get">
+                <div class="d-flex">
+                    <input id="resident_name" name="resident_name" class="search-bar form-control me-2" type="text" placeholder="Procurar morador"
+                    aria-label="Search" style="background-color:rgb(255, 245, 225);">
+                    <input type="image" class="btn btn-warning" src="{{ asset('/icon/search.svg') }}" alt="" width="50">
+                </div>
+            </form>
         </div>
         <div id="suggestions">
 

@@ -11,7 +11,7 @@
 
 </head>
 
-<body>
+<body class="condo-background">
 
     <nav class="condo-navbar navbar navbar-expand-md">
 

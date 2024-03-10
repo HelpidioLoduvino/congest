@@ -2,12 +2,9 @@ body {
     overflow-x: hidden;
 }
 
-main {
-    background-color:#24293E;
-}
 
 .condo-background {
-    background-color:#24293E;
+    background: linear-gradient(to bottom, #0053EE, #0050E6);
 }
 
 .condo-navbar{
@@ -198,7 +195,7 @@ table {
 
 .navbar-link {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 .logo-text-white{
@@ -233,10 +230,6 @@ table {
     color: goldenrod;
 }
 
-.font-times {
-    font-family: 'Times New Roman', Times, serif;
-}
-
 #pagination-container button {
     margin-right: 5px;
     padding: 5px 10px;
@@ -265,3 +258,291 @@ table {
     text-transform: uppercase;
 }
 
+.white-separator{
+    border: 1px solid white;
+}
+
+.list-style {
+    margin: 20px;
+    list-style: none;
+}
+
+.text-style{
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+
+.my-card {
+    background: white;
+    border-radius: 20px;
+    height: 660px;
+
+}
+
+
+.card-bottom-background{
+    margin-top: 10px;
+    height: 60px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    background-color: white;
+    padding: 0;
+}
+
+.card-bottom-text{
+    text-decoration: none;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    margin: 50px;
+}
+
+.condo-title{
+    color: #0042aa;
+    font-family: 'Poppins', sans-serif;
+}
+
+.vertical-separator{
+    border: 1px solid #0042aa;
+    height: 40px;
+    margin-left: 10px;
+}
+
+.calendar-background{
+    background-color: #0042aa;
+    border-radius: 10px;
+    margin-left: 10px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.condo-banner{
+    background: linear-gradient(to right, #98fde7, #8be7d3);
+    border-radius: 10px;
+    margin-left: 50px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.banner-margin{
+    margin-left: 40px;
+}
+
+.condo-name{
+    font-family: 'Poppins', sans-serif;
+    color: #0080ff;
+    font-weight: bolder;
+}
+
+.esphere-green{
+    height: 10px;
+    width: 10px;
+    margin-top: 8px;
+    margin-left: 50px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: #76e705;
+}
+
+.esphere-blue{
+    height: 10px;
+    width: 10px;
+    margin-top: 7px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: #3498db;
+}
+
+.title{
+    font-family: 'Poppins', sans-serif;
+    font-weight:500;
+}
+
+.paragraph {
+    font-family: 'Poppins', sans-serif;
+}
+
+.highlight-card{
+    border-radius: 10px;
+    background-color: #f7f7f7;
+    margin-left: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.highlight-card::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+}
+
+.highlight-card::-webkit-scrollbar-thumb{
+    background-color: transparent;
+}
+
+.my-div-card{
+    background-color: #fffefa;
+    border-radius: 10px;
+    height: 60px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.current-month{
+    background-color:#0042aa;
+    color: white;
+    margin-left: 50px;
+    border-radius: 5px;
+}
+
+.calendar-table {
+    border-collapse: collapse;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.calendar-table  th, td {
+    padding: 1px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.calendar-table th {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.highlight-table{
+    border-collapse: collapse;
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.highlight-table th, td{
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+
+.current-day {
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 50%;
+}
+
+.occupied-house-card{
+    background: linear-gradient(to right, red, orange);
+    border-radius: 10px;
+}
+
+.available-house-card{
+    background: linear-gradient(to right, green, greenyellow);
+    border-radius: 10px;
+}
+
+.house-details{
+    color: white;
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.search-button{
+    background-color: #0042aa;
+    border-radius: 50px;
+}
+
+.booking-history-list{
+    display: flex;
+    list-style: none;
+}
+
+.booking-history-list li{
+    padding-right: 5px;
+}
+
+.vertical-green-separator{
+    border: 1px solid #76e705;
+    height: 25px;
+}
+
+.vertical-green-separator-large{
+    border: 1px solid #76e705;
+    height: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+.booking-list{
+    list-style: none;
+    display: flex;
+    margin-top: 10px;
+}
+
+.card-link{
+    text-decoration: none;
+    color: black;
+}
+
+.card-link:hover{
+    color: gainsboro;
+}
+
+
+
+/*----------------------------------------- */
+/* CSS PARA TELA MOBILE */
+
+.mobile-navbar{
+    display: flex;
+    list-style: none;
+}
+
+.mobile-navbar li{
+    margin: 4px;
+}
+
+.vertical-separator-mobile{
+    border: 1px solid #0042aa;
+    height: 40px;
+}
+
+.calendar-background-mobile{
+    background-color: #0042aa;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.condo-banner-mobile{
+    background: linear-gradient(to right, #98fde7, #8be7d3);
+    border-radius: 10px;
+    font-family:monospace;
+}
+
+
+.esphere-green-mobile{
+    height: 10px;
+    width: 10px;
+    margin-top: 8px;
+    margin-left: 50px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: #76e705;
+}
+
+.highlight-card-mobile{
+    border-radius: 10px;
+    background-color: #f7f7f7;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.highlight-card-mobile::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+}
+
+.highlight-card-mobile::-webkit-scrollbar-thumb{
+    background-color: transparent;
+}
