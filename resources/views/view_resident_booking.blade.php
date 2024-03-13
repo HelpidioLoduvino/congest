@@ -1,7 +1,7 @@
 @extends('main_condominio')
 
 @section('content')
-<div class="my-card d-md-block d-none mt-3">
+<div class="my-card d-md-block d-none mt-3" style="position: relative; overflow:hidden;">
     <div class="row">
         <div class="col-md-8">
             <nav class="navbar navbar-expand-lg">
@@ -82,13 +82,17 @@
         margin-right:12px;
         border-top-right-radius: 20px;
         box-shadow: -4px 0px 16px 0px rgba(0,0,0,0.2);
-        height:96vh;
+        height:100vh;
+        position:sticky;
+        top: 0;
+        left: 0;
+        object-fit: cover;
         border-bottom-right-radius: 20px;
         ">
             <div class="container">
                 <form class="d-flex mt-5" role="search">
                     <div class="input-group mt-3">
-                        <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search" style="background-color: #ebebeb; height:30px; width:25vh;">
+                        <input class="form-control" type="search" placeholder="Pesquisar" aria-label="Search" style="background-color: #ebebeb; height:30px; width:25vh;">
                         <button class="btn btn-primary" type="submit" style="height: 30px;">
                             <img src="{{asset('icon/search.svg')}}" width="20" style="margin-bottom: 20px;">
                         </button>
@@ -115,7 +119,6 @@
                 </table>
                 <div class="d-flex">
                     <h5 class="title mt-5" style="color: blue;">Histórico</h5>
-                    <a class="mt-5" style="margin-left: 120px; cursor: pointer;"><small><u> Ver tudo</u></small></a>
                 </div>
             </div>
             <div class="mt-1">

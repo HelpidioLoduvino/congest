@@ -300,20 +300,6 @@
                         <input type="hidden" name="condo_id" value="{{$resident->condo_id}}">
                         <input type="hidden" name="user_id" value="{{session('id')}}">
                         <div class="form-group mb-3">
-                            <label for="receiver">Para:</label>
-                            <select name="receiver" class="form-control"
-                            style="background-color:rgb(255, 245, 225);">
-                                <option value="">--Escolher--</option>
-                                <option value="Coordenação do Condomínio">Coordenação do Condomínio</option>
-                                <option value="Portaria">Portaria</option>
-                            </select>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="subject">Assunto:</label>
-                            <input type="text" class="form-control" name="subject" placeholder="Ex: Reserva do Parque Infantil"
-                            style="background-color:rgb(255, 245, 225);">
-                        </div>
-                        <div class="form-group mb-3">
                             <label for="message">Corpo:</label>
                             <textarea name="message" class="form-control" cols="30" rows="5" placeholder="Compor"
                             style="background-color:rgb(255, 245, 225);"></textarea>

@@ -1,67 +1,121 @@
 @extends('main_condominio')
 
 @section('content')
-    <div class="mt-5">
-        <div class="d-flex justify-content-end">
-            <form action="/pesquisar-morador/{resident_name}" method="get">
-                <div class="d-flex">
-                    <input id="resident_name" name="resident_name" class="search-bar form-control me-2" type="text" placeholder="Procurar morador"
-                    aria-label="Search" style="background-color:rgb(255, 245, 225);">
-                    <input type="image" class="btn btn-warning" src="{{ asset('/icon/search.svg') }}" alt="" width="50">
-                </div>
-            </form>
-        </div>
-        <div id="suggestions">
 
-        </div>
-    </div>
-    <h4 class="mt-3 title-font white-text">Cadastrar Morador</h4>
-    <div class="condo-separator"></div>
-    <div class="condo-font card card-body shadow-card mt-3" style="background-color: goldenrod; color: white;">
-        <div class="d-flex justify-content-center">
-            <span class="logotipo">
-                <img src="{{ asset('/icon/logo.svg') }}" width="40">
+<div class="my-card d-md-block d-none mt-3" style="position: relative; overflow:hidden;">
+    <nav class="navbar navbar-expand-lg">
+        <h4 class="condo-title mt-5" style="margin-left: 50px;">Moradores</h4>
+        <div class="vertical-separator mt-5"></div>
+        <div class="d-flex calendar-background mt-5">
+            <span>
 
+                <span style="color: goldenrod; margin-left: 10px;">
+                    @php
+                    setlocale(LC_TIME, 'pt_BR');
+                    echo strftime('%A');
+                @endphp,
+                </span>
+
+                @php
+                    echo date('d')
+                @endphp,
+
+                @php
+                setlocale(LC_TIME, 'pt_BR');
+                echo strftime('%B');
+                @endphp,
+
+                <span style="margin-right: 10px;">
+                    @php
+                    echo date('Y')
+                 @endphp
+
+                </span>
             </span>
         </div>
-        <h6 class="d-flex justify-content-center"><strong>ConGest</strong></h6>
-        <h6 class="d-flex justify-content-center mb-3"><strong>FICHA DE CADASTRO DE MORADOR</strong></h6>
-        <div class="d-flex justify-content-center">
-            <a class="btn btn-dark" href="/cadastrar-morador/{{session('id')}}">
-                Cadastrar
-            </a>
+        <div class="collapse navbar-collapse d-md-flex justify-content-end mt-5">
+            <ul class="navbar-nav">
+                <li class="nav-item" style="margin-right:50px;">
+                    <div>
+                        <form class="d-flex" role="search">
+                            <div class="input-group">
+                                <input class="form-control" type="search" placeholder="Pesquisar" aria-label="Search" style="background-color: #ebebeb; height:30px; width:26vh;">
+                                <button class="btn btn-primary" type="submit" style="height: 30px;">
+                                    <img src="{{asset('icon/search.svg')}}" width="20" style="margin-bottom: 20px;">
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="mt-5">
+        <div class="d-flex">
+            <div class="esphere-blue" style="margin-left: 50px;"></div>
+            <h4 class="title">Cadastrar morador</h4>
         </div>
     </div>
-    <h4 class="mt-3 title-font white-text">Moradores</h4>
-    <div class="condo-separator"></div>
-
-    <div class="condo-font card card-body shadow-card mt-3" style="background-color: goldenrod; color: white;">
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
+    <div class="container mt-3">
+        <div class="card" style="
+            margin-left:50px;
+            margin-right:50px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(to right, #98fde7, #8be7d3);">
+            <div class="card-body">
+                <h6 class="d-flex justify-content-center"><strong>ConGest</strong></h6>
+                <h6 class="d-flex justify-content-center mb-3"><strong>FICHA DE CADASTRO DE MORADOR</strong></h6>
+                <div class="d-flex justify-content-center">
+                    <a class="btn btn-warning" style="color: white;" href="/cadastrar-morador/{{session('id')}}">
+                        Cadastrar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-3">
+        <div class="d-flex">
+            <div class="esphere-green"></div>
+            <h4 class="title">Tabela dos moradores</h4>
+        </div>
+    </div>
+    <div class="container">
+        <div class="table-responsive" style="
+            margin-left:50px;
+            margin-right:50px;">
+            <table class="table table-hover" style="
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-family: 'Poppins', sans-serif;">
+                <thead class="table-active">
                     <tr>
-                        <th style="background-color:rgb(255, 245, 225);">LOTE</th>
-                        <th style="background-color:rgb(255, 245, 225);">Nº DA RESIDÊNCIA</th>
-                        <th style="background-color:rgb(255, 245, 225);">MORADOR</th>
+                        <th class="text-center">Morador</th>
+                        <th class="text-center">Lote</th>
+                        <th class="text-center">Residência</th>
+                        <th class="text-center">Gênero</th>
                     </tr>
                 </thead>
                 @if (!empty($residents))
                 <tbody>
                     @foreach ($residents as $resident)
                     <tr>
-                        <td class="uppercase-text" style="background-color: goldenrod; color: white;">
+                        <td class="uppercase-text">
+                            <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
+                                {{$resident->name}}
+                            </a>
+                        </td>
+                        <td class="uppercase-text">
                             <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
                                 {{$resident->plot_resident}}
                             </a>
                         </td>
-                        <td style="background-color: goldenrod; color: white;">
+                        <td>
                             <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
                                 {{$resident->residency_number}}
                             </a>
                         </td>
-                        <td style="background-color: goldenrod; color: white;">
+                        <td>
                             <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
-                                {{$resident->name}}
+                                {{$resident->gender}}
                             </a>
                         </td>
                     </tr>
@@ -70,10 +124,12 @@
                 @endif
             </table>
         </div>
+        <div id="pagination-container">
+            <!-- Botões de paginação serão inseridos aqui -->
+        </div>
+        <br>
     </div>
-    <div id="pagination-container" class="mt-3">
-        <!-- Botões de paginação serão inseridos aqui -->
-    </div>
+</div>
 
     <script>
         function redirectToResidentForm(residentId) {
@@ -86,7 +142,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             const table = document.querySelector('.table');
             const rows = Array.from(table.querySelectorAll('tbody tr'));
-            const rowsPerPage = 5; // Defina o número de linhas por página
+            const rowsPerPage = 3; // Defina o número de linhas por página
             const pageCount = Math.ceil(rows.length / rowsPerPage);
 
             // Função para mostrar as linhas corretas com base na página atual

@@ -12,8 +12,7 @@
 </head>
 
 <body class="condo-background">
-
-    <div class="row">
+    <div class="row g-0">
         <div class="col-md-3">
             <div class="container mt-3">
                 <div class="my-card">
@@ -60,7 +59,7 @@
                                 </a>
                             </li>
                             <li class="list-style">
-                                <a class="navbar-link" href="/condominio/{{session('id')}}">
+                                <a class="navbar-link" href="/mensagens/{{session('id')}}">
                                     <div class="zoom-effect">
                                         <img class="hover-image" src="{{ asset('/icon/email.svg') }}" width="25">
                                         Mensagens
@@ -68,7 +67,7 @@
                                 </a>
                             </li>
                             <li class="list-style">
-                                <a class="navbar-link" href="/condominio/{{session('id')}}">
+                                <a class="navbar-link" href="/moradores/{{session('id')}}">
                                     <div class="zoom-effect">
                                         <img class="hover-image" src="{{ asset('/icon/group-team.svg') }}" width="25">
                                         Moradores
@@ -83,29 +82,19 @@
                                     </div>
                                 </a>
                             </li>
-                            <li class="list-style">
-                                <form action="/logout" method="post">
-                                    @csrf
-                                    <span class="d-flex justify-content-center">
-                                        <input type="submit" class="btn btn-danger mt-3" value="Sair">
-                                    </span>
-                                </form>
+                            <li class="list-style" style="margin-top: 70px;">
+                                <a class="navbar-link" href="#" class="card-bottom-text">
+                                    <div class="zoom-effect">
+                                        <img class="hover-image" src="{{ asset('/icon/setting.svg') }}" width="25">
+                                        Configurações
+                                    </div>
+                                </a>
                             </li>
                         </ul>
-                    </div>
-                    <div class="card-bottom-background">
-                        <a href="#" class="card-bottom-text">
-                            <div class="zoom-effect">
-                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                <img class="hover-image" src="{{ asset('/icon/setting.svg') }}" width="25">
-                                Configurações
-                            </div>
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="col">
             <div class="content mb-5">
                 <div class="container">

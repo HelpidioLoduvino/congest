@@ -35,7 +35,7 @@ Route::get('/cadastrar-morador/{id}', [CondominioController::class, 'showRegiste
 Route::get('/contracto-morador/{id}', [CondominioController::class, 'showResidentForm']);
 Route::get('/aviso/{id}', [CondominioController::class, 'showCondominioNotice']);
 Route::get('/reunião/{id}', [CondominioController::class, 'showCondominioMeeting']);
-Route::get('/mensagem-morador/{id}', [CondominioController::class, 'showResidentMessage']);
+Route::get('/mensagem-morador/{residentId}/{ownerId}', [CondominioController::class, 'showResidentMessage']);
 Route::get('/reserva-morador/{id}', [CondominioController::class, 'showResidentBooking']);
 Route::post('/login', [CondominioController::class, 'login']);
 Route::post('/logout', [CondominioController::class, 'logout']);

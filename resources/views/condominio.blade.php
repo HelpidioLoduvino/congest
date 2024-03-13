@@ -39,7 +39,7 @@
                     <div>
                         <form class="d-flex" role="search">
                             <div class="input-group">
-                                <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search" style="background-color: #ebebeb; height:30px; width:26vh;">
+                                <input class="form-control" type="search" placeholder="Pesquisar" aria-label="Search" style="background-color: #ebebeb; height:30px; width:26vh;">
                                 <button class="btn btn-primary" type="submit" style="height: 30px;">
                                     <img src="{{asset('icon/search.svg')}}" width="20" style="margin-bottom: 20px;">
                                 </button>

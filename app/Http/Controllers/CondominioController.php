@@ -102,13 +102,16 @@ class CondominioController extends Controller
 
     public function showMessage($id){
 
-        $messages = Message::select('messages.*', 'users.name',
-                            'residents.plot_resident', 'residents.residency_number')
-                           ->join('residents', 'residents.resident_id', '=', 'messages.user_id')
-                           ->join('condominios', 'condominios.id', '=', 'messages.condo_id')
-                           ->join('users', 'messages.user_id', '=', 'users.id')
-                           ->where('condominios.user_id', $id)
-                           ->get();
+        $messages = Message::select('users.name', 'condominios.user_id as owner_id',
+                                    DB::raw('MAX(messages.user_id) as resident_id'),
+                                    DB::raw('MAX(messages.message) as message'))
+                            ->join('condominios', 'condominios.id', '=', 'messages.condo_id')
+                            ->join('users', 'messages.user_id', '=', 'users.id')
+                            ->where('condominios.user_id', $id)
+                            ->latest('messages.time')
+                            ->groupBy('users.name', 'condominios.user_id')
+                            ->get();
+
 
         if($messages->isNotEmpty()){
             return view('message', compact('messages'));
@@ -138,12 +141,39 @@ class CondominioController extends Controller
 
     }
 
-    public function showResidentMessage($id){
+    public function showResidentMessage($residentId, $ownerId){
 
-        $message = Message::find($id);
+        $chats = Message::select('users.name', 'condominios.user_id as owner_id',
+                                    DB::raw('MAX(messages.user_id) as resident_id'),
+                                    DB::raw('MAX(messages.message) as message'))
+                            ->join('condominios', 'condominios.id', '=', 'messages.condo_id')
+                            ->join('users', 'messages.user_id', '=', 'users.id')
+                            ->where('condominios.user_id', $ownerId)
+                            ->latest('messages.time')
+                            ->groupBy('users.name', 'condominios.user_id')
+                            ->get();
 
-        if($message){
-            return view('view_resident_message', compact('message'));
+        $userInfo = Message::select('users.name', 'residents.plot_resident',
+                                    'residents.resident_id as resident_id',
+                                    'residents.residency_number',
+                                    'condominios.id as condo_id')
+                            ->join('residents', 'residents.resident_id', '=', 'messages.user_id')
+                            ->join('condominios', 'condominios.id', '=', 'messages.condo_id')
+                            ->join('users', 'messages.user_id', '=', 'users.id')
+                            ->where('messages.user_id', $residentId)
+                            ->first();
+
+        $messages = Message::select('messages.*')
+                           ->join('residents', 'residents.resident_id', '=', 'messages.user_id')
+                           ->join('condominios', 'condominios.id', '=', 'messages.condo_id')
+                           ->join('users', 'messages.user_id', '=', 'users.id')
+                           ->where('messages.user_id', $residentId)
+                           ->get();
+
+        $feedbacks = MessageFeedback::where('resident_id', $residentId)->get();
+
+        if($messages->isNotEmpty()){
+            return view('view_resident_message', compact('messages', 'userInfo', 'chats', 'feedbacks'));
         }
     }
 
@@ -187,19 +217,6 @@ class CondominioController extends Controller
 
         $messages = Message::where('user_id', $id)->get();
 
-        if($messages->isNotEmpty()){
-            foreach($messages as $message){
-                $user_Id = $message->user_id;
-
-                $message_feedback = MessageFeedback::select('message_feedback.*',
-                                                            'messages.subject')
-                                                   ->join('messages', 'messages.id',
-                                                   '=', 'message_feedback.message_id')
-                                                   ->where('messages.user_id', $user_Id)
-                                                   ->get();
-            }
-        }
-
         if($resident){
             return view('resident_home',
             compact(
@@ -209,7 +226,6 @@ class CondominioController extends Controller
                 'condoId',
                 'bookings',
                 'messages',
-                'message_feedback'
             ));
         }
     }
@@ -697,9 +713,7 @@ class CondominioController extends Controller
 
     public function sendMessage (Request $request){
         $validator = $request->validate([
-            'subject' => 'required|string',
-            'message' => 'required|string',
-            'receiver' => 'required|string'
+            'message' => 'required|string'
         ]);
 
         $userId = $request->input('user_id');
@@ -709,12 +723,10 @@ class CondominioController extends Controller
             Message::create([
                 'condo_id' => $request->input('condo_id'),
                 'user_id' => $userId,
-                'subject' => $request->input('subject'),
-                'message' => $request->input('message'),
-                'receiver' => $request->input('receiver')
+                'message' => $request->input('message')
             ]);
 
-            return redirect('/morador/'. $userId)->with('msg', 'Mensagem Enviada Com Sucesso');
+            return redirect('/morador/'. $userId);
 
         } catch (Exception $e){
             return redirect()->back()->withErrors($validator)->withInput();
@@ -726,25 +738,15 @@ class CondominioController extends Controller
             'feedback' => 'required|string'
         ]);
 
-        $userId = $request->input('user_id');
-
-        $status = $request->input('status');
-
         try {
 
-            if(trim($status) !== trim("Respondido")){
+            MessageFeedback::create([
+                'resident_id' => $request->input('resident_id'),
+                'condo_id' => $request->input('condo_id'),
+                'feedback' => $request->input('feedback')
+            ]);
 
-                MessageFeedback::create([
-                    'message_id' => $request->input('message_id'),
-                    'condo_id' => $request->input('condo_id'),
-                    'feedback' => $request->input('feedback')
-                ]);
-
-                Message::where('id', $request->input('message_id'))
-                        ->update(['status' => 'Respondido']);
-
-                return redirect('/mensagens/' . $userId)->with('msg', 'Mensagem Respondida');
-            }
+            return redirect()->back();
 
         } catch (Exception $e){
             return redirect()->back()->withErrors($validator)->withInput();

@@ -13,8 +13,6 @@ class Message extends Model
     protected $fillable = [
         'user_id',
         'condo_id',
-        'subject',
         'message',
-        'receiver'
     ];
 }
