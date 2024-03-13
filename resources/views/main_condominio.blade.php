@@ -20,8 +20,22 @@
                         <img class="mt-5" src="{{asset('icon/user.svg')}}" alt="" width="100">
                     </div>
                     <div class="d-flex justify-content-center mt-3">
-                        <a href="#" class="text-style d-flex justify-content-center">Helpidio Mateus</a>
-                        <img src="{{asset('icon/dropdown-arrow.svg')}}" alt="" width="25">
+                        <div class="dropdown">
+                            <button href="#" class="bg-transparent no-border-on-click border-0 d-flex justify-content-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Helpidio Mateus
+                                <img src="{{asset('icon/dropdown-arrow.svg')}}" alt="" width="25">
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li class="list-style" style="margin: 0; padding: 0;">
+                                    <form action="/logout" method="post">
+                                        @csrf
+                                        <span class="d-flex justify-content-center">
+                                            <input type="submit" class="bg-transparent border-0" value="Sair">
+                                        </span>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="mt-3">
@@ -43,7 +57,7 @@
                                 </a>
                             </li>
                             <li class="list-style">
-                                <a class="navbar-link" href="/condominio/{{session('id')}}">
+                                <a class="navbar-link" href="/reuniões/{{session('id')}}">
                                     <div class="zoom-effect">
                                         <img class="hover-image" src="{{ asset('/icon/meeting.svg') }}" width="25">
                                         Reuniões
@@ -75,7 +89,7 @@
                                 </a>
                             </li>
                             <li class="list-style">
-                                <a class="navbar-link" href="/condominio/{{session('id')}}">
+                                <a class="navbar-link" href="/avisos/{{session('id')}}">
                                     <div class="zoom-effect">
                                         <img class="hover-image" src="{{ asset('/icon/information.svg') }}" width="25">
                                         Aviso
@@ -126,7 +140,5 @@
             });
         });
     </script>
-
 </body>
-
 </html>

@@ -635,7 +635,6 @@ class CondominioController extends Controller
 
     public function scheduleMeeting(Request $request){
         $validator = $request->validate([
-            'participant' => 'required|string',
             'place' => 'required|string',
             'subject' => 'required|string',
             'meeting_date' => 'required'
@@ -650,7 +649,6 @@ class CondominioController extends Controller
                 'user_id' => $userId,
                 'subject' => $request->input('subject'),
                 'place' => $request->input('place'),
-                'participant' => $request->input('participant'),
                 'meeting_date' => $request->input('meeting_date')
             ]);
 

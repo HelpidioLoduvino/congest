@@ -21,7 +21,6 @@ class CreateMeetingsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('subject');
             $table->string('place');
-            $table->string('participant');
             $table->datetime('meeting_date');
             $table->date('date')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

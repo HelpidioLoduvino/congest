@@ -50,84 +50,90 @@
             </ul>
         </div>
     </nav>
-    <div class="mt-5">
-        <div class="d-flex">
-            <div class="esphere-blue" style="margin-left: 50px;"></div>
-            <h4 class="title">Cadastrar morador</h4>
+    <div style="overflow:auto; overflow-x:hidden; max-height:500px;">
+        <div class="mt-5">
+            <div class="d-flex">
+                <div class="esphere-blue" style="margin-left: 50px;"></div>
+                <h4 class="title">Cadastrar morador</h4>
+            </div>
         </div>
-    </div>
-    <div class="container mt-3">
-        <div class="card" style="
-            margin-left:50px;
-            margin-right:50px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            background: linear-gradient(to right, #98fde7, #8be7d3);">
-            <div class="card-body">
-                <h6 class="d-flex justify-content-center"><strong>ConGest</strong></h6>
-                <h6 class="d-flex justify-content-center mb-3"><strong>FICHA DE CADASTRO DE MORADOR</strong></h6>
-                <div class="d-flex justify-content-center">
-                    <a class="btn btn-warning" style="color: white;" href="/cadastrar-morador/{{session('id')}}">
-                        Cadastrar
-                    </a>
+        <div class="container mt-3">
+            <div class="card border-0" style="
+                margin-left:50px;
+                margin-right:50px;
+                box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);">
+                <div class="card-body">
+                    <div class="d-flex justify-content-center">
+                        <span class="logotipo">
+                            <img src="{{ asset('/icon/logo.svg') }}" width="40">
+
+                        </span>
+                    </div>
+                    <h6 class="d-flex justify-content-center"><strong>ConGest</strong></h6>
+                    <h6 class="d-flex justify-content-center mb-3"><strong>FICHA DE CADASTRO DE MORADOR</strong></h6>
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-warning" style="color: white;" href="/cadastrar-morador/{{session('id')}}">
+                            Cadastrar
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="mt-3">
-        <div class="d-flex">
-            <div class="esphere-green"></div>
-            <h4 class="title">Tabela dos moradores</h4>
+        <div class="mt-3">
+            <div class="d-flex">
+                <div class="esphere-green"></div>
+                <h4 class="title">Tabela dos moradores</h4>
+            </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="table-responsive" style="
-            margin-left:50px;
-            margin-right:50px;">
-            <table class="table table-hover" style="
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            font-family: 'Poppins', sans-serif;">
-                <thead class="table-active">
-                    <tr>
-                        <th class="text-center">Morador</th>
-                        <th class="text-center">Lote</th>
-                        <th class="text-center">Residência</th>
-                        <th class="text-center">Gênero</th>
-                    </tr>
-                </thead>
-                @if (!empty($residents))
-                <tbody>
-                    @foreach ($residents as $resident)
-                    <tr>
-                        <td class="uppercase-text">
-                            <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
-                                {{$resident->name}}
-                            </a>
-                        </td>
-                        <td class="uppercase-text">
-                            <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
-                                {{$resident->plot_resident}}
-                            </a>
-                        </td>
-                        <td>
-                            <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
-                                {{$resident->residency_number}}
-                            </a>
-                        </td>
-                        <td>
-                            <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
-                                {{$resident->gender}}
-                            </a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-                @endif
-            </table>
+        <div class="container">
+            <div class="table-responsive" style="
+                margin-left:50px;
+                margin-right:50px;">
+                <table class="table table-hover" style="
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                font-family: 'Poppins', sans-serif;">
+                    <thead class="table-active">
+                        <tr>
+                            <th class="text-center">Morador</th>
+                            <th class="text-center">Lote</th>
+                            <th class="text-center">Residência</th>
+                            <th class="text-center">Gênero</th>
+                        </tr>
+                    </thead>
+                    @if (!empty($residents))
+                    <tbody>
+                        @foreach ($residents as $resident)
+                        <tr>
+                            <td class="uppercase-text">
+                                <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
+                                    {{$resident->name}}
+                                </a>
+                            </td>
+                            <td class="uppercase-text">
+                                <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
+                                    {{$resident->plot_resident}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
+                                    {{$resident->residency_number}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
+                                    {{$resident->gender}}
+                                </a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    @endif
+                </table>
+            </div>
+            <div id="pagination-container">
+                <!-- Botões de paginação serão inseridos aqui -->
+            </div>
         </div>
-        <div id="pagination-container">
-            <!-- Botões de paginação serão inseridos aqui -->
-        </div>
-        <br>
     </div>
 </div>
 
