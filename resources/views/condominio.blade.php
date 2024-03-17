@@ -51,13 +51,6 @@
         </div>
     </nav>
 
-    @if(session('msg'))
-    <div class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
-        <p class="msg d-flex justify-content-center">{{session('msg')}}</p>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
-
     <div class="row mt-5">
         <div class="col-md-8">
             <div class="condo-banner">

@@ -193,6 +193,27 @@ class CondominioController extends Controller
 
     }
 
+    public function showMessageResident($residentId){
+
+        return view('resident_message');
+    }
+
+    public function showBookingResident($id){
+
+        $resident = Resident::select('condominios.*', 'residents.*', 'users.name', 'users.email')
+        ->join('condominios', 'condominios.id', '=', 'residents.condo_id')
+        ->join('users', 'users.id', '=', 'residents.resident_id')
+        ->where('residents.resident_id', $id)
+        ->first();
+
+        $bookings = Booking::where('user_id', $id)->get();
+
+        if($resident){
+            return view('resident_booking', compact('bookings', 'resident'));
+        }
+
+    }
+
     public function showAdmin(){
         return view('admin');
     }

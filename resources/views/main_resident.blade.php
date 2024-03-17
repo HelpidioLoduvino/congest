@@ -8,314 +8,83 @@
     <title>Laravel</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
 
 </head>
 
 <body class="condo-background">
 
-    <nav class="condo-navbar navbar navbar-expand-md">
-
-        <a class="navbar-link" style="margin-left: 20px;">
-            <img src="{{ asset('/icon/logo2.svg') }}" width="35">
-            <span>ConGest</span>
-        </a>
-
-        <button class="btn" data-bs-toggle="modal" data-bs-target="#menuModal">
-            <img class="hover-image" src="{{asset('/icon/menu.svg')}}" width="35">
-        </button>
-
-        <div class="collapse navbar-collapse d-md-flex justify-content-end">
-            <ul class="navbar-nav">
-                <li class="nav-item" style="margin-right:20px;">
-                    <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#bookingModal">
-                        <div class="zoom-effect">
-                            <img class="hover-image" src="{{ asset('/icon/reservation.svg') }}" width="25">
-                            Fazer Reserva
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-item" style="margin-right:20px;">
-                    <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#messageModal">
-                        <div class="zoom-effect">
-                            <img class="hover-image" src="{{ asset('/icon/message.svg') }}" width="25">
-                            Enviar Mensagem
-                        </div>
-                    </a>
-                </li>
-
-                <li class="nav-item" style="margin-right:20px;">
-                    <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#profileModal">
-                        <div class="zoom-effect">
-                            <img class="hover-image" src="{{ asset('/icon/profile.svg') }}" width="25">
-                            Meu Perfil
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="d-md-none d-flex">
-            <ul class="navbar-nav">
-                <li class="nav-item d-flex">
-                    <a class="nav-link" style="margin-left:60px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#bookingModal">
-                        <img class="hover-image" src="{{ asset('/icon/reservation.svg') }}" width="35">
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="d-md-none d-flex">
-            <ul class="navbar-nav">
-                <li class="nav-item d-flex">
-                    <a class="nav-link" style="margin-right: 5px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#messageModal">
-                        <img class="hover-image" src="{{ asset('/icon/message.svg') }}" width="35">
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="d-md-none d-flex">
-            <ul class="navbar-nav">
-                <li class="nav-item d-flex">
-                    <a class="nav-link" style="margin-right:20px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#profileModal">
-                        <img class="hover-image" src="{{ asset('/icon/profile.svg') }}" width="35">
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-    </nav>
-
-    <div class="col">
-        <div class="row">
-            <div class="content mb-5">
-                <div class="container">
-                    @if($errors->any())
-                        <div class="alert mt-3 alert-danger alert-dismissible d-flex justify-content-center">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
+    <div class="row g-0">
+        <div class="col-md-3">
+            <div class="container mt-3">
+                <div class="my-card">
+                    <div class="d-flex justify-content-center">
+                        <img class="mt-5" src="{{asset('icon/user.svg')}}" alt="" width="100">
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <div class="dropdown">
+                            <button href="#" class="bg-transparent no-border-on-click border-0 d-flex justify-content-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Helpidio Mateus
+                                <img src="{{asset('icon/dropdown-arrow.svg')}}" alt="" width="25">
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li class="list-style" style="margin: 0; padding: 0;">
+                                    <form action="/logout" method="post">
+                                        @csrf
+                                        <span class="d-flex justify-content-center">
+                                            <input type="submit" class="bg-transparent border-0" value="Sair">
+                                        </span>
+                                    </form>
+                                </li>
                             </ul>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                    @endif
-                    @if(session('msg'))
-                        <div class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
-                            <p class="msg d-flex justify-content-center">{{session('msg')}}</p>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-                    @yield('content')
+                    </div>
+                    <div class="mt-3">
+                        <ul class="tex-style">
+                            <li class="list-style">
+                                <a class="navbar-link" href="/morador/{{session('id')}}">
+                                    <div class="zoom-effect">
+                                        <img class="hover-image" src="{{ asset('/icon/house.svg') }}" width="25">
+                                        Home
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="list-style">
+                                <a class="navbar-link" href="/condominio/{{session('id')}}">
+                                    <div class="zoom-effect">
+                                        <img class="hover-image" src="{{ asset('/icon/house.svg') }}" width="25">
+                                        Taxa do Condomínio
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="list-style">
+                                <a class="navbar-link" href="/morador-mensagem/{{session('id')}}">
+                                    <div class="zoom-effect">
+                                        <img class="hover-image" src="{{ asset('/icon/email.svg') }}" width="25">
+                                        Mensagens
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="list-style">
+                                <a class="navbar-link" href="/morador-reserva/{{session('id')}}">
+                                    <div class="zoom-effect">
+                                        <img class="hover-image" src="{{ asset('/icon/calendar.svg') }}" width="25">
+                                        Reservas
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <footer>
-                <table>
-                    <h5 class="font-times mt-2" style="color: white">@Powered By Helpidio Mateus</h5>
-                </table>
-            </footer>
+        <div class="col">
+            <div class="container">
+                @yield('content')
+            </div>
         </div>
     </div>
 
-
-    <div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down" >
-          <div class="modal-content" style="background-color: #2F3651">
-            <div class="modal-body">
-                <ul class="navbar-nav" style="margin-left: 100px;">
-                    <li class="nav-link">
-                        <div class="d-flex justify-content-end">
-                            <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                                <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="40">
-                            </button>
-                        </div>
-                    </li>
-                    <li class="nav-link">
-                        <span class="logotipo">
-                            <img src="{{ asset('/icon/logo2.svg') }}" width="40">
-                            ConGest
-                        </span>
-                    </li>
-                    <div class="sidebar-separator container"></div>
-                    <br>
-                    <li class="nav-link">
-                        <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#feeModal">
-                            <div class="zoom-effect">
-                                <img class="hover-image" src="{{ asset('/icon/apartment.svg') }}" width="25">
-                                Taxa do Condomínio
-                            </div>
-                        </a>
-                    </li>
-                    <hr style="color: white">
-                    <li class="nav-link">
-                        <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#correspondenceModal">
-                            <div class="zoom-effect">
-                                <img class="hover-image" src="{{ asset('/icon/email.svg') }}" width="25">
-                                Mensagens
-                            </div>
-                        </a>
-                    </li>
-                    <hr style="color: white">
-                    <li class="nav-link">
-                        <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#showBookingModal">
-                            <div class="zoom-effect">
-                                <img class="hover-image" src="{{ asset('/icon/reservation.svg') }}" width="25">
-                                Reservas
-                            </div>
-                        </a>
-                    </li>
-                    <hr style="color: white">
-                    <li class="nav-link">
-                        <a class="navbar-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#emergencyModal">
-                            <div class="zoom-effect">
-                                <img class="hover-image" src="{{ asset('/icon/emergency.svg') }}" width="25">
-                                Contactos de Emergência
-                            </div>
-                        </a>
-                    </li>
-                    <hr style="color: white">
-                    <li class="nav-link">
-                        <a class="navbar-link" href="/">
-                            <div class="zoom-effect">
-                                <form action="/logout" method="post">
-                                    @csrf
-                                    <div class="d-flex">
-                                        <input class="hover-image" type="image" src="{{ asset('/icon/logout.svg') }}" alt="" width="30">
-                                        Sair
-                                    </div>
-                                </form>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      @if ($resident)
-
-      <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content" style="background-color: #24293E;">
-            <div class="modal-body">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
-                        </button>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
-                        <div class="zoom-effect">
-                            <img src="{{ asset('/icon/logo2.svg') }}" width="35">
-                            <span>ConGest</span>
-                        </div>
-                    </a>
-                </li>
-                <div class="condo-separator rounded-pill mt-3"></div>
-              </ul>
-
-              <div class="condo-font card card-body shadow-card mt-3" style="
-              background-color: #2F3651;
-              color:white;
-              max-width: 500px;
-              margin: auto;">
-                <h5 class="d-flex justify-content-center mb-3"><strong>Marcar Reserva</strong></h5>
-
-                <form action="/fazer-reserva" method="post">
-                    @csrf
-                    <input type="hidden" name="condo_id" value="{{$resident->condo_id}}">
-                    <input type="hidden" name="user_id" value="{{session('id')}}">
-
-                    <div class="form-group mb-3">
-                        <label for="place">Espaço:</label>
-                        <select name="place" class="form-control" style="background-color:rgb(255, 245, 225);">
-                            <option value="">-- Escolher --</option>
-                            <option value="Piscína">Piscína</option>
-                            <option value="Salão">Salão</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="purpose">Finalidade:</label>
-                        <select name="purpose" class="form-control" style="background-color:rgb(255, 245, 225);">
-                            <option value="">-- Escolher --</option>
-                            <option value="Aniversário">Aniversário</option>
-                            <option value="Convívio">Convívio</option>
-                        </select>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="booking_date">Data:</label>
-                        <input type="datetime-local" name="booking_date" class="form-control"
-                        style="background-color:rgb(255, 245, 225);">
-                    </div>
-                    <span class="d-flex justify-content-center">
-                        <button class="btn btn-danger" type="submit">Marcar</button>
-                    </span>
-                </form>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content" style="background-color: #24293E;">
-            <div class="modal-body">
-                <ul class="navbar-nav">
-                    <li class="nav-link">
-                        <div class="d-flex justify-content-end">
-                            <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                                <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
-                            </button>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
-                            <div class="zoom-effect">
-                                <img src="{{ asset('/icon/logo2.svg') }}" width="35">
-                                <span>ConGest</span>
-                            </div>
-                        </a>
-                    </li>
-                    <div class="condo-separator rounded-pill mt-3"></div>
-                  </ul>
-
-                  <div class="condo-font card card-body shadow-card mt-3" style="
-                  background-color: #2F3651;
-                  color:white;
-                  max-width: 500px;
-                  margin: auto;">
-                    <h5 class="d-flex justify-content-center mb-3"><strong>Mensagem</strong></h5>
-
-                    <form action="/enviar-mensagem" method="post">
-                        @csrf
-                        <input type="hidden" name="condo_id" value="{{$resident->condo_id}}">
-                        <input type="hidden" name="user_id" value="{{session('id')}}">
-                        <div class="form-group mb-3">
-                            <label for="message">Corpo:</label>
-                            <textarea name="message" class="form-control" cols="30" rows="5" placeholder="Compor"
-                            style="background-color:rgb(255, 245, 225);"></textarea>
-                        </div>
-                        <span class="d-flex justify-content-center">
-                            <button class="btn btn-danger" type="submit">Enviar</button>
-                        </span>
-                    </form>
-                  </div>
-                  </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      @endif
 
       <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen-xxl-down">
@@ -402,310 +171,6 @@
           </div>
         </div>
       </div>
-
-      <div class="modal fade" id="feeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content" style="background-color: #24293E;">
-            <div class="modal-body">
-              <ul class="navbar-nav">
-                <li class="nav-link">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
-                        </button>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
-                        <div class="zoom-effect">
-                            <img src="{{ asset('/icon/logo2.svg') }}" width="35">
-                            <span>ConGest</span>
-                        </div>
-                    </a>
-                </li>
-                <div class="condo-separator rounded-pill mt-3"></div>
-              </ul>
-            <div class="condo-font card card-body shadow-card mt-3"
-            style="
-            background-color:#2F3651;
-            color:white;
-            max-width: 500px;
-            margin: auto;">
-                <h5 class="d-flex justify-content-center mb-5"><strong>FORMAS DE PAGAMENTO</strong></h5>
-                <div class="d-flex mb-3">
-                    <img src="{{asset('/img/bai-angola.gif')}}" alt="" srcset="" width="100"> &nbsp;
-                    <a href="#" class="btn btn-primary">BAI DIRECTO</a>
-                </div>
-
-                <div class="d-flex mb-3">
-                    <img src="{{asset('/img/express.jpeg')}}" alt="" srcset="" width="100" height="40"> &nbsp;
-                    <a href="#" class="btn btn-danger">EXPRESS</a>
-                </div>
-
-                <p>CONTA (BAI):</p>
-                <a >Nº DA CONTA: <span id="numeroConta">12345678902</span></a>
-                <a>IBAN: <span id="iban">0040 0000 2345 5432 3456 2</span></a>
-
-            </div>
-            <div class="condo-font card card-body shadow-card mt-3"
-            style="
-            background-color: rgb(255, 245, 225);
-            max-width: 800px;
-            margin: auto;">
-                <h5 class=" mb-3"><strong>Comprovativos</strong></h5>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th style="background-color: goldenrod; color:white;">Mês</th>
-                                <th style="background-color: goldenrod; color:white;">Comprovativo</th>
-                                <th style="background-color: goldenrod; color:white;">Validado</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="correspondenceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content" style="background-color: #24293E;">
-            <div class="modal-body">
-              <ul class="navbar-nav">
-                <li class="nav-link">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
-                        </button>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
-                        <div class="zoom-effect">
-                            <img src="{{ asset('/icon/logo2.svg') }}" width="35">
-                            <span>ConGest</span>
-                        </div>
-                    </a>
-                </li>
-                <div class="condo-separator rounded-pill mt-3"></div>
-                <div class="condo-font card card-body shadow-card mt-3" style="
-                background-color: rgb(255, 245, 225);">
-                    <h5 class="d-flex justify-content-center mb-3"><strong>Minhas Mensagens</strong></h5>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th style="background-color: goldenrod; color:white;">Assunto</th>
-                                    <th style="background-color: goldenrod; color:white;">Destinatário</th>
-                                    <th style="background-color: goldenrod; color:white;">Data de Envio</th>
-                                    <th style="background-color: goldenrod; color:white;">Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if ($messages->isNotEmpty())
-                                    @foreach ($messages as $message)
-                                        <tr>
-                                            <td style="background-color: rgb(255, 245, 225);">
-                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyMessage{{$message->id}}">
-                                                    {{$message->subject}}
-                                                </a>
-                                            </td>
-                                            <td style="background-color: rgb(255, 245, 225);">
-                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyMessage{{$message->id}}">
-                                                    {{$message->receiver}}
-                                                </a>
-                                            </td>
-                                            <td style="background-color: rgb(255, 245, 225);">
-                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyMessage{{$message->id}}">
-                                                    {{$message->date}}
-                                                </a>
-                                            </td>
-                                            <td style="background-color: rgb(255, 245, 225);">
-                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyMessage{{$message->id}}">
-                                                    {{$message->status}}
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="showBookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content" style="background-color: #24293E;">
-            <div class="modal-body">
-              <ul class="navbar-nav">
-                <li class="nav-link">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
-                        </button>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
-                        <div class="zoom-effect">
-                            <img src="{{ asset('/icon/logo2.svg') }}" width="35">
-                            <span>ConGest</span>
-                        </div>
-                    </a>
-                </li>
-                <div class="condo-separator rounded-pill mt-3"></div>
-                <div class="condo-font card card-body shadow-card mt-3" style="
-                background-color: rgb(255, 245, 225);">
-                    <h5 class="d-flex justify-content-center mb-3"><strong>Minhas Reservas</strong></h5>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th style="background-color: goldenrod; color:white;">Assunto</th>
-                                    <th style="background-color: goldenrod; color:white;">Data De Reserva</th>
-                                    <th style="background-color: goldenrod; color:white;">Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if ($bookings->isNotEmpty())
-                                    @foreach ($bookings as $booking)
-                                        <tr>
-                                            <td style="background-color: rgb(255, 245, 225);">
-                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyBooking{{$booking->id}}">
-                                                    {{$booking->subject}}
-                                                </a>
-                                            </td>
-                                            <td style="background-color: rgb(255, 245, 225);">
-                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyBooking{{$booking->id}}">
-                                                    {{$booking->booking_date}}
-                                                </a>
-                                            </td>
-                                            <td style="background-color: rgb(255, 245, 225);">
-                                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#showMyBooking{{$booking->id}}">
-                                                    {{$booking->status}}
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="emergencyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content" style="background-color: #24293E;">
-            <div class="modal-body">
-              <ul class="navbar-nav">
-                <li class="nav-link">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
-                        </button>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
-                        <div class="zoom-effect">
-                            <img src="{{ asset('/icon/logo.svg') }}" width="35">
-                            <span>ConGest</span>
-                        </div>
-                    </a>
-                </li>
-                <div class="condo-separator rounded-pill mt-3"></div>
-              </ul>
-              <div class="condo-font card card-body shadow-card mt-3" style="
-              background-color: rgb(255, 245, 225);">
-                <h5 class="d-flex justify-content-center mb-3"><strong>Contatos de Emergência</strong></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      @if ($messages->isNotEmpty())
-          @foreach ($messages as $message)
-          <div class="modal fade" id="showMyMessage{{$message->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen-xxl-down">
-              <div class="modal-content" style="background-color: #2F3651; color:white;">
-                <div class="modal-body">
-                  <ul class="navbar-nav">
-                    <li class="nav-link">
-                        <div class="d-flex justify-content-end">
-                            <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                                <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
-                            </button>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
-                            <div class="zoom-effect">
-                                <img src="{{ asset('/icon/logo2.svg') }}" width="35">
-                                <span>ConGest</span>
-                            </div>
-                        </a>
-                    </li>
-                    <div class="condo-separator rounded-pill mt-3"></div>
-                    <h5 class="mt-3">Destinatário: <strong>{{$message->receiver}}</strong></h5>
-                    <h5>Assunto: <strong>{{$message->subject}}</strong></h5>
-                    <p>{{$message->message}}</p>
-                    <p>Data De Envio: {{$message->date}}</p>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          @endforeach
-      @endif
-
-      @if ($bookings->isNotEmpty())
-          @foreach ($bookings as $booking)
-          <div class="modal fade" id="showMyBooking{{$booking->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen-xxl-down">
-              <div class="modal-content" style="background-color: #2F3651; color:white;">
-                <div class="modal-body">
-                  <ul class="navbar-nav">
-                    <li class="nav-link">
-                        <div class="d-flex justify-content-end">
-                            <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                                <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
-                            </button>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="logo-text-white d-flex justify-content-center" style="margin-left: 20px;">
-                            <div class="zoom-effect">
-                                <img src="{{ asset('/icon/logo2.svg') }}" width="35">
-                                <span>ConGest</span>
-                            </div>
-                        </a>
-                    </li>
-                    <div class="condo-separator rounded-pill mt-3"></div>
-                  </ul>
-                  <h5 class="mt-3">Assunto: {{$booking->subject}}</h5>
-                  <h5>Data De Reserva: {{$booking->booking_date}}</h5>
-                  <p>{{$booking->booking}}</p>
-                  <p>Data De Envio: {{$booking->date}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          @endforeach
-      @endif
 
     <script src="/bootstrap/script/popper.js"></script>
     <script src="/bootstrap/script/bootstrap.min.js"></script>

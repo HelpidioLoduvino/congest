@@ -12,16 +12,17 @@
 }
 
 .condo-navbar{
-    background-color: #2F3651;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
+    background: linear-gradient(to bottom, #3498db, #4098db);
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
     height: 80px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .logotipo {
     color: white;
     font-size: 1rem;
     font-weight: bolder;
-    font-family:monospace;
+    font-family: 'Poppins', sans-serif;
 }
 
 .barra{
@@ -34,10 +35,11 @@
 }
 
 footer{
-    background-color: #2F3651;
+    background: linear-gradient(to bottom, #3498db, #4098db);
     width: 100%;
     text-align: center;
-    box-shadow: 0 -3px 6px rgba(0, 0, 0, 1);
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.2);
 }
 
 footer th{
@@ -102,12 +104,12 @@ table {
 }
 
 .condo-font {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Poppins', sans-serif;
     font-size: larger;
 }
 
 .condo-title{
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Poppins', sans-serif;
     font-size: xx-large;
     font-weight: 900;
 }

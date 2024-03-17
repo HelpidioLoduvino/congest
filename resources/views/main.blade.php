@@ -8,16 +8,17 @@
     <title>CONGEST</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
 
 </head>
 
-<body class="condo-background">
+<body>
 
     <nav class="condo-navbar navbar navbar-expand-md">
 
         <a class="navbar-link" href="#" style="margin-left: 20px; margin-right:20px;">
-            <img src="{{ asset('/icon/logo2.svg') }}" width="35">
-            <span>ConGest</span>
+            <img src="{{ asset('/icon/home2.svg') }}" width="35">
+            <span style="color: white">ConGest</span>
         </a>
 
         <div class="d-none collapse navbar-collapse">
@@ -26,20 +27,20 @@
                     <div class="dropdown">
                         <a class="navbar-link" href="#">
                             <div class="zoom-effect">
-                                <img class="hover-image" src="{{ asset('/icon/idea-bulb-solution.svg') }}"
-                                    width="30">
-                                <span>Soluções</span>
+                                <img class="hover-image" src="{{ asset('/icon/solution.svg') }}"
+                                    width="25">
+                                <span style="color: white">Soluções</span>
                             </div>
                         </a>
-                        <div class="dropdown-content" style="background-color:#2F3651">
-                            <div class="card" style="background-color:goldenrod;">
+                        <div class="dropdown-content">
+                            <div class="card">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
                                             <a class="nav-link">
-                                                <div class="card card-body shadow-card" style="background-color:  goldenrod">
-                                                    <h5 class="white-text">Avisos</h5>
-                                                    <p class="white-text">Os administradores do condomínio podem enviar
+                                                <div class="card card-body">
+                                                    <h5>Avisos</h5>
+                                                    <p>Os administradores do condomínio podem enviar
                                                         avisos e comunicados para todos os moradores de forma simples.</p>
                                                 </div>
                                             </a>
@@ -47,9 +48,9 @@
 
                                         <div class="col-md-4">
                                             <a class="nav-link">
-                                                <div class="card card-body shadow-card" style="background-color: goldenrod">
-                                                    <h5 class="white-text">Reuniões</h5>
-                                                    <p class="white-text">Os administradores do condomínio podem marcar
+                                                <div class="card card-body">
+                                                    <h5>Reuniões</h5>
+                                                    <p>Os administradores do condomínio podem marcar
                                                         reuniões presenciais ou digitais fazendo com que o morador não tenha
                                                         que sair de casa.</p>
                                                 </div>
@@ -58,9 +59,9 @@
 
                                         <div class="col-md-4">
                                             <a class="nav-link">
-                                                <div class="card card-body shadow-card" style="background-color: goldenrod">
-                                                    <h5 class="white-text">Taxa dos Moradores</h5>
-                                                    <p class="white-text">Os administradores do condomínio podem ver uma
+                                                <div class="card card-body">
+                                                    <h5>Taxa dos Moradores</h5>
+                                                    <p>Os administradores do condomínio podem ver uma
                                                         lista de todos os moradores, podendo controlar de forma prática e
                                                         eficiente o estado de cada morador.</p>
                                                 </div>
@@ -69,9 +70,9 @@
 
                                         <div class="col-md-4">
                                             <a class="nav-link">
-                                                <div class="card card-body shadow-card" style="background-color: goldenrod">
-                                                    <h5 class="white-text">Sugestões e Reclamações</h5>
-                                                    <p class="white-text">Os moradores podem fazer reclamação de forma
+                                                <div class="card card-body">
+                                                    <h5>Sugestões e Reclamações</h5>
+                                                    <p>Os moradores podem fazer reclamação de forma
                                                         simples e apresenta sugestões à administração do condomínio.</p>
                                                 </div>
                                             </a>
@@ -79,9 +80,9 @@
 
                                         <div class="col-md-4">
                                             <a class="nav-link">
-                                                <div class="card card-body shadow-card" style="background-color: goldenrod">
-                                                    <h5 class="white-text">Informações sobre gestão</h5>
-                                                    <p class="white-text">Os moradores serão informados sobre a gestão
+                                                <div class="card card-body">
+                                                    <h5>Informações sobre gestão</h5>
+                                                    <p>Os moradores serão informados sobre a gestão
                                                         financeira e administrativa do condomínio, incluindo despesas,
                                                         receitas e outras informações relevantes.</p>
                                                 </div>
@@ -90,9 +91,9 @@
 
                                         <div class="col-md-4">
                                             <a class="nav-link">
-                                                <div class="card card-body shadow-card" style="background-color: goldenrod">
-                                                    <h5 class="white-text">Portaria</h5>
-                                                    <p class="white-text">Os porteiros terão maior controlo de quem entra e
+                                                <div class="card card-body">
+                                                    <h5>Portaria</h5>
+                                                    <p>Os porteiros terão maior controlo de quem entra e
                                                         sai do condomínio, e registrar de forma simples e eficiente os dados
                                                         de todos os visitantes.</p>
                                                 </div>
@@ -113,17 +114,17 @@
                         <div class="dropdown">
                             <a class="navbar-link" href="#">
                                 <div class="zoom-effect">
-                                    <img class="hover-image" src="{{ asset('/icon/notice.svg') }}" width="30">
-                                    <span>Sobre Nós</span>
+                                    <img class="hover-image" src="{{ asset('/icon/about.svg') }}" width="25">
+                                    <span style="color: white">Sobre Nós</span>
                                 </div>
                             </a>
-                            <div class="dropdown-content" style="background-color:#2F3651">
-                                <div class="card card-body" style="background-color: goldenrod">
+                            <div class="dropdown-content">
+                                <div class="card card-body">
                                     <div class="row">
                                         <div class="col">
                                             <a class="nav-link">
-                                                <div class="card card-body shadow-card" style="background-color:goldenrod">
-                                                    <p class="white-text">A <strong>ConGest</strong> é uma empresa
+                                                <div class="card card-body shadow-card">
+                                                    <p>A <strong>ConGest</strong> é uma empresa
                                                         de gestão de condomínios cujo objetivo é facilitar e
                                                         otimizar a administração, organização e controle de um
                                                         condomínio, seja ele residencial, comercial ou misto.</p>
@@ -143,7 +144,7 @@
                     <a class="navbar-link" href="#">
                         <div class="zoom-effect">
                             <img class="hover-image" src="{{ asset('/icon/whatsapp.svg') }}" width="30">
-                            <span>Entre Em Contacto</span>
+                            <span style="color: white">Entre Em Contacto</span>
                         </div>
                     </a>
                 </li>
@@ -152,7 +153,7 @@
 
         <div class="d-md-none" style="margin-left: 100px;">
             <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#solutionModal">
-                <img class="hover-image" src="{{ asset('/icon/idea-bulb-solution.svg') }}" width="35">
+                <img class="hover-image" src="{{ asset('icon/solution.svg') }}" width="35">
             </a>
 
             <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#aboutModal">
@@ -227,15 +228,17 @@
         <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content" style="background-color:#24293E">
-                    <div class="modal-body">
-
+                <div class="modal-content" style="
+                    background-image: url('{{ asset('img/img4.jpg') }}');
+                    background-size: cover;
+                    ">
+                    <div class="modal-body" style="background-color:rgba(0, 0, 0, 0.7)">
                         <div class="close-btn mb-5 d-flex justify-content-end">
-                            <input type="image" src="{{asset('/icon/close-circle.svg') }}" data-bs-dismiss="modal" aria-label="Close" width="35">
+                            <input type="image" src="{{asset('/icon/close.svg') }}" data-bs-dismiss="modal" aria-label="Close" width="35">
                         </div>
-                        <div class="card card-body shadow-card" style="background-color:#2F3651; max-width: 400px; margin: auto;">
+                        <div class="card card-body shadow-card" style="background-color:#4098db; max-width: 400px; margin: auto;">
                             <div class="user-circle mb-3 d-flex justify-content-center">
-                                <img src="{{ asset('/icon/logo2.svg') }}">
+                                <img src="{{ asset('/icon/home2.svg') }}">
                             </div>
                             <form action="/login" method="post">
                                 @csrf

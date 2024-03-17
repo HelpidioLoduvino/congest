@@ -9,131 +9,69 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/style2.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
 </head>
 
-<body class="antialiased" style="background-color: #24293E;">
+<body class="condo-background">
 
-    <nav class="condo-navbar navbar navbar-expand-md">
-
-        <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarNav"
-            aria-controls="sidebarNav" aria-expanded="false" aria-label="Toggle navigation" style="margin-left: 20px;">
-            <img class="hover-image" src="{{asset('/icon/menu.svg')}}" width="35">
-        </button>
-
-        <div class="collapse navbar-collapse" id="sidebarNav">
-            <div class="sidebar d-md-none">
-                <div class="close-btn mb-3 d-flex justify-content-end">
-                    <a href="#" class="d-md-none" data-bs-toggle="collapse"
-                        data-bs-target="#sidebarNav" aria-controls="sidebarNav" aria-expanded="false"
-                        aria-label="Close sidebar">
-                        <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="40">
-                    </a>
-                </div>
-                <ul>
-                    <li>
-                        <span class="logotipo">
-                            <img src="{{ asset('/icon/logo2.svg') }}" width="40">
-                            ConGest
-                        </span>
-                    </li>
-                    <div class="sidebar-separator container"></div>
-                    <br>
-                    <li>
-                        <a href="/admin">
-                            <img class="hover-image" src="{{ asset('/icon/home.svg') }}" width="25">
-                            Home
-                        </a>
-                    </li>
-                    <div class="container">
-                        <hr>
-                    </div>
-                    <li>
-                        <a href="/condomínios">
-                            <img class="hover-image" src="{{ asset('/icon/apartment.svg') }}" width="25">
-                            Condomínios
-                        </a>
-                    </li>
-                    <div class="container">
-                        <hr>
-                    </div>
-                    <li>
-                        <a href="/perfil-admin/{{session('id')}}">
-                            <img class="hover-image" src="{{ asset('/icon/profile.svg') }}" width="25">
-                            Perfil
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-    </nav>
-
-    <div class="row">
+    <div class="row g-0">
         <div class="col-md-3">
-            <div class="sidebar d-none d-md-block">
-                <ul>
-                    <li>
-                        <span class="logotipo">
-                            <img src="{{ asset('/icon/logo2.svg') }}" width="40">
-                            ConGest
-                        </span>
-                    </li>
-                    <div class="sidebar-separator container"></div>
-                    <br>
-                    <li>
-                        <a href="/admin">
-                            <img class="hover-image" src="{{ asset('/icon/home.svg') }}" width="25">
-                            Home
-                        </a>
-                    </li>
-                    <div class="container">
-                        <hr>
+            <div class="container mt-3">
+                <div class="my-card">
+                    <div class="d-flex justify-content-center">
+                        <img class="mt-5" src="{{asset('icon/user.svg')}}" alt="" width="100">
                     </div>
-                    <li>
-                        <a href="/condomínios">
-                            <img class="hover-image" src="{{ asset('/icon/apartment.svg') }}" width="25">
-                            Condomínios
-                        </a>
-                    </li>
-                    <div class="container">
-                        <hr>
+                    <div class="d-flex justify-content-center mt-3">
+                        <div class="dropdown">
+                            <button href="#" class="bg-transparent no-border-on-click border-0 d-flex justify-content-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Helpidio Mateus
+                                <img src="{{asset('icon/dropdown-arrow.svg')}}" alt="" width="25">
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/perfil-admin/{{session('id')}}" class="dropdowm-item">Perfil</a>
+                                </li>
+                                <li class="list-style" style="margin: 0; padding: 0;">
+                                    <form action="/logout" method="post">
+                                        @csrf
+                                        <span class="d-flex justify-content-center">
+                                            <input type="submit" class="bg-transparent border-0" value="Sair">
+                                        </span>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <li>
-                        <a href="/perfil-admin/{{session('id')}}">
-                            <img class="hover-image" src="{{ asset('/icon/profile.svg') }}" width="25">
-                            Perfil
-                        </a>
-                    </li>
-                </ul>
+
+                    <div class="mt-3">
+                        <ul class="text-style">
+                            <li class="list-style">
+                                <a class="navbar-link" href="/admin">
+                                    <div class="zoom-effect">
+                                        <img class="hover-image" src="{{ asset('/icon/house.svg') }}" width="25">
+                                        Home
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="list-style">
+                                <a class="navbar-link" href="/condomínios">
+                                    <div class="zoom-effect">
+                                        <img class="hover-image" src="{{ asset('/icon/houses.svg') }}" width="25">
+                                        Condomínios
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="col-md-8">
-            <div class="content mb-5">
-                <div class="container">
-                    @if($errors->any())
-                        <div class="alert mt-3 alert-danger alert-dismissible d-flex justify-content-center">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-                    @if(session('msg'))
-                        <div class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
-                            <p class="msg d-flex justify-content-center">{{session('msg')}}</p>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-                    @yield('content')
-                </div>
+        <div class="col">
+            <div class="container mt-3">
+                @yield('content')
             </div>
         </div>
     </div>
-
 
     <script src="/bootstrap/script/popper.js"></script>
     <script src="/bootstrap/script/bootstrap.min.js"></script>

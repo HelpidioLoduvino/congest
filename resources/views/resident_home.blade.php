@@ -3,99 +3,111 @@
 @section('content')
 
 @if (!empty($resident))
-<div class="card card-body shadow-card mt-3" style="background-color: rgb(93, 0, 0);">
-    <h6 class="d-flex justify-content-center condo-title" style="color: white">Condomínio {{$resident->condo_name}}</h6>
-</div>
-@endif
-<h4 class="title-font mt-3 white-text">Avisos</h4>
-<div class="condo-separator"></div>
-<div class="condo-font card card-body shadow-card mt-3" style="background-color:rgb(255, 245, 225);">
-    @if($notices->isNotEmpty())
-        <div>
-            <ul>
-                @foreach($notices as $notice)
-                    <li>{{ $notice->notice }}</li>
-                @endforeach
-            </ul>
+
+<div class="my-card d-md-block d-none mt-3" style="position: relative; overflow:hidden;">
+    <nav class="navbar navbar-expand-lg">
+        <h4 class="condo-title mt-5" style="margin-left: 50px;">Home</h4>
+        <div class="vertical-separator mt-5"></div>
+        <div class="d-flex calendar-background mt-5">
+            <span>
+
+                <span style="color: goldenrod; margin-left: 10px;">
+                    @php
+                    setlocale(LC_TIME, 'pt_BR');
+                    echo strftime('%A');
+                @endphp,
+                </span>
+
+                @php
+                    echo date('d')
+                @endphp,
+
+                @php
+                setlocale(LC_TIME, 'pt_BR');
+                echo strftime('%B');
+                @endphp,
+
+                <span style="margin-right: 10px;">
+                    @php
+                    echo date('Y')
+                 @endphp
+
+                </span>
+            </span>
         </div>
-    @endif
-</div>
+    </nav>
+    <div style="overflow: auto; overflow-x:hidden; max-height: 500px; margin-right:50px;">
+        <div class="condo-banner mt-5">
+            <div class="banner-margin">
+                <br>
+                <h6 class="">Condomínio</h6>
+                <h2 class="condo-name uppercase-text">{{$resident->condo_name}}</h2>
+                <h6> <small>Seja bem-vindo a ConGest: Plataforma Profissional para Gestão Condominial. Simplificando a admistração do seu condomínio com eficiência e segurança.</small></h6>
+            </div>
+            <br>
+        </div>
+        @endif
+        <div class="mt-3">
+            <div class="d-flex">
+                <div class="esphere-green"></div>
+                <h4 class="title">Avisos</h4>
+            </div>
+        </div>
+        <div class="condo-font card card-body border-0 mt-3" style="
+        margin-left: 50px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);">
+            @if($notices->isNotEmpty())
+                <div>
+                    <ul style="list-style:circle;">
+                        @foreach($notices as $notice)
+                            <li style="margin: 10px;">{{ $notice->notice }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @else
+            <div class="container">
+                <small class="text-muted">Não tem nenhum aviso.</small>
+            </div>
+            @endif
+        </div>
 
-<h4 class="title-font mt-3 white-text">Reuniões</h4>
-<div class="condo-separator"></div>
-<div class="condo-font card card-body shadow-card mt-3" style="background-color:rgb(255, 245, 225);">
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th style="background-color: goldenrod; color:white;">Assunto</th>
-                    <th style="background-color: goldenrod; color:white;">Local</th>
-                    <th style="background-color: goldenrod; color:white;">Data</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if ($meetings->isNotEmpty())
-                    @foreach ($meetings as $meeting)
+        <div class="mt-3">
+            <div class="d-flex">
+                <div class="esphere-green"></div>
+                <h4 class="title">Reuniões</h4>
+            </div>
+        </div>
+        <div class="condo-font card card-body border-0 mt-3" style="
+        margin-left:50px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);">
+            @if ($meetings->isNotEmpty())
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
                         <tr>
-                            <td style="background-color:rgb(255, 245, 225);">{{$meeting->subject}}</td>
-                            <td style="background-color:rgb(255, 245, 225);">{{$meeting->place}}</td>
-                            <td style="background-color:rgb(255, 245, 225);">{{$meeting->meeting_date}}</td>
+                            <th class="text-center">Assunto</th>
+                            <th class="text-center">Local</th>
+                            <th class="text-center">Data</th>
                         </tr>
-                    @endforeach
-                @endif
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<h4 class="title-font mt-3 white-text">Correspondências</h4>
-<div class="condo-separator"></div>
-
-<div class="condo-font card card-body shadow-card mt-3" style="background-color:rgb(255, 245, 225);">
-
-    <h5 class="title-font">Reservas</h5>
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <th style="background-color: goldenrod; color:white;">Assunto</th>
-                <th style="background-color: goldenrod; color:white;">Estado</th>
-            </thead>
-            <tbody>
-                @if (!empty($bookings))
-                    @foreach ($bookings as $booking)
-                        @if (trim($booking->status) !== trim("Aguardando"))
+                    </thead>
+                    <tbody>
+                        @foreach ($meetings as $meeting)
                             <tr>
-                                <td style="background-color:rgb(255, 245, 225);">{{$booking->subject}}</td>
-                                <td style="background-color:rgb(255, 245, 225);">{{$booking->status}}</td>
+                                <td>{{$meeting->subject}}</td>
+                                <td>{{$meeting->place}}</td>
+                                <td>{{$meeting->meeting_date}}</td>
                             </tr>
-                        @endif
-                    @endforeach
-                @endif
-            </tbody>
-        </table>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @else
+            <div class="container">
+                <small class="text-muted">Não tem nenhuma reunião marcada.</small>
+            </div>
+            @endif
+        </div>
     </div>
 </div>
 
-<div class="condo-font card card-body shadow-card mt-3" style="background-color:rgb(255, 245, 225);">
-    <h5 class="title-font">Mensagens</h5>
-
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <th style="background-color: goldenrod; color:white;">Assunto</th>
-                <th style="background-color: goldenrod; color:white;">Resposta</th>
-            </thead>
-            <tbody>
-                @if (!empty($message_feedback))
-                    @foreach ($message_feedback as $feedback)
-                        <tr>
-                            <td style="background-color:rgb(255, 245, 225);">{{$feedback->subject}}</td>
-                            <td style="background-color:rgb(255, 245, 225);">{{$feedback->feedback}}</td>
-                        </tr>
-                    @endforeach
-                @endif
-            </tbody>
-        </table>
-    </div>
-</div>
 @endsection

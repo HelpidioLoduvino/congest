@@ -4,7 +4,6 @@
 
 <div class="my-card d-md-block d-none mt-3" style="position: relative; overflow:hidden;">
     <div class="row">
-
         <div class="col-md-8">
             <nav class="navbar navbar-expand-lg">
                 <h4 class="condo-title mt-5" style="margin-left: 50px;">Reservas</h4>
@@ -166,8 +165,6 @@
                     </div>
                 </small>
             </div>
-
-
         </div>
     </div>
 </div>

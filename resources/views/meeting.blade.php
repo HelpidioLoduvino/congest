@@ -96,7 +96,7 @@
                 </div>
             </div>
             <div class="table-responsive" style="margin-left: 50px; margin-right: 50px;">
-                <table class="table" style="box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);">
+                <table class="table table-hover" style="box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);">
                     <thead class="table-active">
                         <tr>
                             <th class="text-center">Assunto</th>
