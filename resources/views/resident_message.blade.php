@@ -43,46 +43,81 @@
                             <h4 class="title" style="color: #0042aa; ">Chat</h4>
                         </div>
                     </li>
-                    <li style="margin-right: 2px;">
-                        <div class="dropdown">
-                            <a href="#" class="no-border-on-click" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{asset('icon/more-circle-horizontal.svg')}}" alt="" width="30">
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li style="margin: 0; padding:0;"><a class="dropdown-item" href="#">Apagar mensagens</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="no-border-on-click" href="#" role="button" data-bs-toggle="modal" data-bs-target="#showResident">
-                            <img src="{{asset('icon/plus-circle-fill.svg')}}" width="26">
-                        </a>
-                    </li>
                 </ul>
-                <div class="container">
-                    <div class="chat mt-4">
-                        <div class="col">
-                            <div class="row">
-                                <a class="card-link" href="#">
-                                    <ul class="chat-message">
-                                        <li style="margin-right:10px;">
-                                            <img src="{{asset('icon/user.svg')}}" width="45">
-                                        </li>
-                                        <li> <strong>Congest</strong> <br> <small class="text-muted">{{ implode(' ', array_slice(str_word_count("Hello World", 1, 'àáãâéêíóôõúüç,'), 0, 5)) }}...</small></li>
-                                    </ul>
-                                </a>
-                                <hr class="mt-2">
-                            </div>
-                        </div>
-                    </div>
+                <div class="container mt-4">
+                    <ul style="list-style: none; display:flex;">
+                        <li>
+                            <img src="{{asset('icon/user.svg')}}" width="40">
+                        </li>
+                        @if ($condo_name)
+                            <li style="margin-top:10px; margin-left:10px;">
+                                <strong>{{$condo_name->condo_name}}</strong>
+                            </li>
+                        @endif
+                    </ul>
+                    <hr class="mt-2">
                 </div>
             </div>
         </div>
         <div class="col-md-7">
             <div class="message-chat-box mt-3">
-                <h2 class="d-flex justify-content-center mt-5">Clique Para Ver Mensagem</h2>
+                <ul class="user-chat">
+                    <li>
+                        <img src="{{asset('icon/user.svg')}}" width="40">
+                    </li>
+                    @if ($condo_name)
+                    <li style="margin-left: 10px; margin-top:10px;"><strong>{{$condo_name->condo_name}}</> </strong></li>
+                    <li style="margin-left: 50vh;">
+                        <div class="dropdown">
+                            <a href="#" class="no-border-on-click" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{asset('icon/more-circle-horizontal.svg')}}" alt="" width="30">
+                            </a>
+                            <ul class="dropdown-menu mt-1">
+                                <li><a class="dropdown-item" href="#">Apagar Chat</a></li>
+                                <li><a class="dropdown-item" href="#">Ficheiros</a></li>
+                              </ul>
+                        </div>
+                    </li>
+                </ul>
+                <div class="container mt-4">
+                    <div class="message-sepatator mb-3"></div>
+                    <div class="message-scrollview mb-3" style="overflow: auto; max-height: 300px;">
+                        <ul class="received-message">
+                        @if ($messages->isNotEmpty())
+                            @foreach ($messages as $message)
+                            <li>
+                                <div class="card card-body mb-3" style="
+                                    max-width: 50vh;
+                                    background-color:rgba(220, 220, 220, 0.455);
+                                    border-bottom-left-radius: 50px;
+                                    border-top-right-radius: 50px;">
+                                    <p>{{$message->message}}</p>
+                                    <small class="text-muted d-flex justify-content-end">{{$message->time}}</small>
+                                </div>
+                            </li>
+                            @endforeach
+                        @else
+                            <h5 class="d-flex justify-content-center">Iniciar chat</h5>
+                            <br><br><br><br><br><br><br><br><br>
+                        @endif
+                        </ul>
+                    </div>
+                </div>
+                <div class="container">
+                    <form action="/enviar-mensagem" method="post">
+                        @csrf
+                        <input type="hidden" name="condo_id" value="{{$condo_name->id}}">
+                        <input type="hidden" name="user_id" value="{{$condo_name->resident_id}}">
+                        <ul style="list-style: none; display:flex;">
+                            <textarea class="form-control me-2" name="message" cols="40" rows="2" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);"></textarea>
+                            <input type="image" src="{{asset('icon/send.svg')}}" width="30">
+                        </ul>
+                    </form>
+                </div>
+                @endif
             </div>
         </div>
     </div>
 </div>
+
 @endsection

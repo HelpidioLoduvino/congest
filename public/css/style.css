@@ -154,9 +154,9 @@ table {
 }
 
 .navbar-link .zoom-effect:hover {
-    transform: scale(1.1);
-    transition: transform 0.3s ease-in-out;
-    color: wheat;
+    /* transform: scale(1.1); */
+    /* transition: transform 0.3s ease-in-out; */
+    color: #0080ff;
 }
 
 
@@ -243,18 +243,18 @@ table {
 }
 
 .calendar-background{
-    background-color: #0042aa;
+    background-color: #F1DAC4;
     border-radius: 10px;
     margin-left: 10px;
-    color: white;
+    color: black;
     font-family: 'Poppins', sans-serif;
 }
 
 .condo-banner{
-    background: linear-gradient(to right, #98fde7, #8be7d3);
     border-radius: 10px;
     margin-left: 50px;
     font-family: 'Poppins', sans-serif;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .banner-margin{
@@ -291,31 +291,9 @@ table {
     font-weight:500;
 }
 
-.paragraph {
-    font-family: 'Poppins', sans-serif;
-}
-
-.highlight-card{
-    border-radius: 10px;
-    background-color: #f7f7f7;
-    margin-left: 50px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.highlight-card::-webkit-scrollbar{
-    width: 0;
-    height: 0;
-}
-
-.highlight-card::-webkit-scrollbar-thumb{
-    background-color: transparent;
-}
-
 .my-div-card{
-    background-color: #fffefa;
-    border-radius: 10px;
     height: 60px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-bottom: 0.1px solid #ddd;
 }
 
 .current-month{
@@ -338,23 +316,9 @@ table {
 }
 
 .calendar-table th {
-    background-color: #3498db;
-    color: #fff;
+    border: 0;
+    font-weight: 600;
 }
-
-.highlight-table{
-    border-collapse: collapse;
-    padding-top: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.highlight-table th, td{
-    padding: 0;
-    margin: 0;
-    text-align: center;
-}
-
 
 .current-day {
     background-color: #3498db;
@@ -484,6 +448,11 @@ table {
     box-shadow: none;
     border: none;
 }
+
+.text-change{
+    color: #0042aa;
+}
+
 
 /*----------------------------------------- */
 /* CSS PARA TELA MOBILE */

@@ -6,10 +6,10 @@
     <nav class="navbar navbar-expand-lg">
         <h4 class="condo-title mt-5" style="margin-left: 50px;">Mensagens</h4>
         <div class="vertical-separator mt-5"></div>
-        <div class="d-flex calendar-background mt-5">
+        <div class="d-flex mt-5">
             <span>
 
-                <span style="color: goldenrod; margin-left: 10px;">
+                <span style="color: #0042aa; margin-left: 10px;">
                     @php
                     setlocale(LC_TIME, 'pt_BR');
                     echo strftime('%A');
@@ -132,20 +132,22 @@
 
                     <div class="col mt-5">
                         <div style="overflow: auto; max-height: 400px; overflow-x: hidden;">
-                            @if (!empty($messages))
-                                @foreach ($messages as $message)
+                            @if ($residents->isNotEmpty())
+                                @foreach ($residents as $resident)
                                 <div class="row">
-                                    <a class="card-link" href="#" onclick="redirectToChat('{{$message->resident_id}}', '{{$message->owner_id}}')">
+                                    <a class="card-link" href="#" onclick="redirectToChat('{{$resident->resident_id}}', '{{$resident->owner_id}}')">
                                         <ol class="chat-message">
                                             <li style="margin-right:10px;">
                                                 <img src="{{asset('icon/user.svg')}}" width="40">
                                             </li>
-                                            <li> <strong><p style="margin-top:5px;">{{$message->name}}</p></strong></li>
+                                            <li> <strong><p style="margin-top:5px;">{{$resident->name}}</p></strong></li>
                                         </ol>
                                     </a>
                                     <hr class="mt-2">
                                 </div>
                                 @endforeach
+                            @else
+                            <h5>Nao Tem Users</h5>
                             @endif
                         </div>
                     </div>

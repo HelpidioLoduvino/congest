@@ -39,8 +39,8 @@
                     </div>
 
                     <div class="mt-3">
-                        <ul class="text-style">
-                            <li class="list-style ">
+                        <ul class="text-style" id="focus">
+                            <li class="list-style">
                                 <a class="navbar-link" href="/condominio/{{session('id')}}">
                                     <div class="zoom-effect">
                                         <img class="hover-image" src="{{ asset('/icon/house.svg') }}" width="25">
@@ -49,10 +49,10 @@
                                 </a>
                             </li>
                             <li class="list-style">
-                                <a class="navbar-link" href="/condominio/{{session('id')}}">
+                                <a class="navbar-link" href="/comprovativos">
                                     <div class="zoom-effect">
                                         <img class="hover-image" src="{{ asset('/icon/houses.svg') }}" width="25">
-                                        Condomínio
+                                        Financeiro
                                     </div>
                                 </a>
                             </li>
@@ -139,6 +139,27 @@
                 $("#contractResidentModal").modal('show');
             });
         });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var destaque = document.querySelectorAll('#focus li .zoom-effect');
+            console.log(destaque)
+            destaque.forEach(function(item) {
+                item.addEventListener("click", function() {
+                    // Define a cor de fundo para o item clicado
+                    this.classList.add("text-change");
+
+                    // Armazena o índice do item clicado no armazenamento local do navegador
+                    localStorage.setItem("selectedItemIndex", Array.from(destaque).indexOf(item));
+                });
+                // Verifica se há um item previamente selecionado e destaca-o
+                var selectedItemIndex = localStorage.getItem("selectedItemIndex");
+                if (selectedItemIndex !== null) {
+                    destaque[selectedItemIndex].classList.add("text-change");
+                }
+            })
+        })
     </script>
 </body>
 </html>

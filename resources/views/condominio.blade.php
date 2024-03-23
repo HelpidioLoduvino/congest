@@ -6,10 +6,10 @@
     <nav class="navbar navbar-expand-lg">
         <h4 class="condo-title mt-5" style="margin-left: 50px;">Home</h4>
         <div class="vertical-separator mt-5"></div>
-        <div class="d-flex calendar-background mt-5">
+        <div class="d-flex mt-5">
             <span>
 
-                <span style="color: goldenrod; margin-left: 10px;">
+                <span style="color: #0042aa; margin-left: 10px;">
                     @php
                     setlocale(LC_TIME, 'pt_BR');
                     echo strftime('%A');
@@ -33,22 +33,6 @@
                 </span>
             </span>
         </div>
-        <div class="collapse navbar-collapse d-md-flex justify-content-end mt-5">
-            <ul class="navbar-nav">
-                <li class="nav-item" style="margin-right:50px;">
-                    <div>
-                        <form class="d-flex" role="search">
-                            <div class="input-group">
-                                <input class="form-control" type="search" placeholder="Pesquisar" aria-label="Search" style="background-color: #ebebeb; height:30px; width:26vh;">
-                                <button class="btn btn-primary" type="submit" style="height: 30px;">
-                                    <img src="{{asset('icon/search.svg')}}" width="20" style="margin-bottom: 20px;">
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
     </nav>
 
     <div class="row mt-5">
@@ -59,88 +43,14 @@
                     <h6 class="">Condomínio</h6>
                     <h2 class="condo-name uppercase-text">{{$owner->condo_name}}</h2>
                     <h6> <small>Seja bem-vindo a ConGest: Plataforma Profissional para Gestão Condominial. Simplificando a admistração do seu condomínio com eficiência e segurança.</small></h6>
-                    <a href="#" class="btn btn-warning" style="color: white;">Ver mais...</a>
                 </div>
                 <br>
             </div>
-            <div class="mt-3">
-                <div class="d-flex">
-                    <div class="esphere-green"></div>
-                    <h4 class="title">Destaques</h4>
-                </div>
-            </div>
-            <div class="highlight-card" style="overflow: auto; max-height: 200px;">
-                <div class="container mt-2">
-                    <div class="my-div-card mb-2">
-                        <div class="d-flex" style="margin-left: 20px;">
-                            <img src="{{asset('icon/user.svg')}}" alt="" width="30">
-                            <table class="highlight-table paragraph">
-                                <thead>
-                                    <tr>
-                                        <th>Nome</th>
-                                        <th>Espaço</th>
-                                        <th>Quando</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Helpidio Mateus</td>
-                                        <td>Piscina</td>
-                                        <td>10/02/2024</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="my-div-card mb-2">
-                        <div class="d-flex" style="margin-left: 20px;">
-                            <img src="{{asset('icon/user.svg')}}" alt="" width="30">
-                            <table class="highlight-table paragraph">
-                                <thead>
-                                    <tr>
-                                        <th>Nome</th>
-                                        <th>Espaço</th>
-                                        <th>Quando</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Helpidio Mateus</td>
-                                        <td>Piscina</td>
-                                        <td>10/02/2024</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="my-div-card mb-2">
-                        <div class="d-flex" style="margin-left: 20px;">
-                            <img src="{{asset('icon/user.svg')}}" alt="" width="30">
-                            <table class="highlight-table paragraph">
-                                <thead>
-                                    <tr>
-                                        <th>Nome</th>
-                                        <th>Espaço</th>
-                                        <th>Quando</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Helpidio Mateus</td>
-                                        <td>Piscina</td>
-                                        <td>10/02/2024</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <div class="col-md-3">
-            <h5 class="title" style="color: orange;">Calendário</h5>
-            <span id="currentMonth" class="d-flex justify-content-center"></span>
+            <h5 class="title" style="color: #0042aa;">Calendário</h5>
+            <span id="currentMonth"></span>
             <table class="calendar-table mt-3">
                 <thead>
                     <tr>
@@ -292,9 +202,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
 
 @endif

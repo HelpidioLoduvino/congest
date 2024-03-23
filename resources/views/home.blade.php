@@ -14,9 +14,6 @@
 
 <div class="card mt-5" style ="background-color: #3498db">
     <div class="card-body" style="box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);">
-        <div class="d-flex d-md-block d-md-flex justify-content-center mb-3">
-            <img src="{{ asset('/icon/home2.svg') }}" width="50">
-        </div>
         <h6 class="text-banner title-banner white-text">Sistema Completo <br> para Adminstração de condomínios</h6>
         <p class=" text-banner white-text ">Automatizamos a gerencia do seu condomínio por meio de uma plataforma simples e fácil de manusear</p>
     </div>

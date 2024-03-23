@@ -104,7 +104,7 @@
                     <li>
                         <img src="{{asset('icon/user.svg')}}" width="45">
                     </li>
-                    @if (!empty($userInfo))
+                    @if ($userInfo)
                         <li style="margin-left: 10px;"><strong> <small>{{$userInfo->name}}</small> </strong></li>
                     @endif
                     <li style="margin-left: 50vh;">
@@ -123,15 +123,23 @@
                     <div class="message-sepatator mb-3"></div>
                     <div class="message-scrollview mb-3" style="overflow: auto; max-height: 300px;">
                         <ul class="received-message">
-                            @if (!empty($messages))
-                                @foreach ($messages as $message)
+                            @if ($resident_chat->isNotEmpty())
+                                @foreach ($resident_chat as $chat)
                                 <li>
-                                    <div class="card card-body mb-3" style="max-width: 100vh; background-color:gainsboro;">
-                                        <p>{{$message->message}}</p>
-                                        <small class="text-muted d-flex justify-content-end">{{$message->time}}</small>
+                                    <div class="card card-body mb-3" style="
+                                        max-width: 100vh;
+                                        background-color:rgba(220, 220, 220, 0.455);
+                                        border-bottom-left-radius: 50px;
+                                        border-top-right-radius: 50px;">
+                                        <p>{{$chat->message}}</p>
+                                        <small class="text-muted d-flex justify-content-end">{{$chat->time}}</small>
                                     </div>
                                 </li>
                                 @endforeach
+                            @else
+                            <div class="container">
+                                <h5>Hello World</h5>
+                            </div>
                             @endif
                         </ul>
 
@@ -139,7 +147,11 @@
                             @if (!empty($feedbacks))
                                 @foreach ($feedbacks as $feedback)
                                 <li>
-                                    <div class="card card-body mb-3" style="max-width: 100vh; background-color: #73e600;">
+                                    <div class="card card-body   mb-3" style="
+                                        max-width: 100vh;
+                                        background-color: #80ff0091;
+                                        border-top-left-radius: 50px;
+                                        border-bottom-right-radius: 50px;">
                                         <p>{{$feedback->feedback}}</p>
                                         <small class="text-muted d-flex justify-content-end">{{$feedback->time}}</small>
                                     </div>
@@ -151,7 +163,7 @@
                 </div>
 
                 <div class="container">
-                    @if (!empty($userInfo))
+                    @if ($userInfo)
                         <form action="/responder-mensagem" method="post">
                             @csrf
                             <ul style="list-style: none; display:flex;">

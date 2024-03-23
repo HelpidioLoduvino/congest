@@ -113,13 +113,15 @@ class CondominioController extends Controller
                             ->get();
 
 
-        if($messages->isNotEmpty()){
-            return view('message', compact('messages'));
-        }else {
-            $messages = [];
-            return view('message', compact('messages'));
-        }
+        $residents = Resident::select('users.name', 'residents.resident_id', 'residents.owner_id')
+                            ->join('users', 'residents.resident_id', '=', 'users.id')
+                            ->join('condominios', 'condominios.id', 'residents.condo_id')
+                            ->where('condominios.user_id', $id)->get();
 
+
+        if($messages->isNotEmpty()){
+            return view('message', compact('messages', 'residents'));
+        }
     }
 
     public function showBooking($id){
@@ -153,10 +155,7 @@ class CondominioController extends Controller
                             ->groupBy('users.name', 'condominios.user_id')
                             ->get();
 
-        $userInfo = Message::select('users.name', 'residents.plot_resident',
-                                    'residents.resident_id as resident_id',
-                                    'residents.residency_number',
-                                    'condominios.id as condo_id')
+        $userInfo = Message::select('users.name', 'condominios.id as condo_id')
                             ->join('residents', 'residents.resident_id', '=', 'messages.user_id')
                             ->join('condominios', 'condominios.id', '=', 'messages.condo_id')
                             ->join('users', 'messages.user_id', '=', 'users.id')
@@ -172,8 +171,21 @@ class CondominioController extends Controller
 
         $feedbacks = MessageFeedback::where('resident_id', $residentId)->get();
 
-        if($messages->isNotEmpty()){
-            return view('view_resident_message', compact('messages', 'userInfo', 'chats', 'feedbacks'));
+        $residents = Resident::select('users.name', 'residents.resident_id', 'residents.owner_id')
+                            ->join('users', 'residents.resident_id', '=', 'users.id')
+                            ->join('condominios', 'condominios.id', 'residents.condo_id')
+                            ->where('condominios.user_id', $ownerId)->get();
+
+        $resident_chat = Message::where('user_id', $residentId)->get();
+
+        if($userInfo){
+            return view('view_resident_message', compact(
+                'messages',
+                'userInfo',
+                'chats',
+                'feedbacks',
+                'residents',
+                'resident_chat'));
         }
     }
 
@@ -195,7 +207,15 @@ class CondominioController extends Controller
 
     public function showMessageResident($residentId){
 
-        return view('resident_message');
+        $condo_name = Resident::select('condominios.condo_name', 'condominios.id', 'residents.resident_id')
+                                ->join('condominios', 'condominios.id', '=', 'residents.condo_id')
+                                ->where('residents.resident_id', $residentId)->first();
+
+        $messages = Message::where('user_id', $residentId)->get();
+
+        if($condo_name){
+            return view('resident_message', compact('condo_name', 'messages'));
+        }
     }
 
     public function showBookingResident($id){
@@ -745,7 +765,7 @@ class CondominioController extends Controller
                 'message' => $request->input('message')
             ]);
 
-            return redirect('/morador/'. $userId);
+            return redirect()->back();
 
         } catch (Exception $e){
             return redirect()->back()->withErrors($validator)->withInput();
