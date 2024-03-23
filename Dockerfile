@@ -1,4 +1,4 @@
-FROM php:8.3-fpm
+FROM php:latest
 
 
 WORKDIR /var/www/html
@@ -19,5 +19,5 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN composer install
 
-
 CMD php artisan serve --host=0.0.0.0 --port=8000
+
