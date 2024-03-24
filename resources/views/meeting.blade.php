@@ -93,17 +93,17 @@
                         @foreach ($meetings as $meeting)
                             <tr>
                                 <td>
-                                    <a class="nav-link" href="#" onclick="redirectToViewMeeting('{{$meeting->id}}')">
+                                    <a class="nav-link" href="#" onclick="redirectToViewMeeting('{{$meeting->id}}', '{{session('id')}}')">
                                         {{$meeting->subject}}
                                     </a>
                                 </td>
                                 <td>
-                                    <a class="nav-link" href="#" onclick="redirectToViewMeeting('{{$meeting->id}}')">
+                                    <a class="nav-link" href="#" onclick="redirectToViewMeeting('{{$meeting->id}}', '{{session('id')}}')">
                                         {{$meeting->place}}
                                     </a>
                                 </td>
                                 <td>
-                                    <a class="nav-link" href="#" onclick="redirectToViewMeeting('{{$meeting->id}}')">
+                                    <a class="nav-link" href="#" onclick="redirectToViewMeeting('{{$meeting->id}}', '{{session('id')}}')">
                                         {{$meeting->meeting_date}}
                                     </a>
                                 </td>
@@ -121,8 +121,8 @@
 </div>
 
 <script>
-    function redirectToViewMeeting(id) {
-        var url = '/reunião/' + id;
+    function redirectToViewMeeting(id, ownerId) {
+        var url = '/reunião/' + id + '/' + ownerId;
         window.location.href = url;
     }
 </script>

@@ -2,21 +2,38 @@
 
 @section('content')
 
-<div class="banner card card-body condo-font shadow-card mt-3" style="background-color: goldenrod;">
-    <div class="d-none d-md-block d-md-flex justify-content-center">
-        <img src="{{ asset('/icon/profile-black.svg') }}" width="100">
-    </div>
-    <h6 class="text-banner title-banner white-text">Nome: {{$user->name}}</h6>
-    <h6 class="text-banner title-banner white-text">Email: {{$user->email}}</h6>
-    <p class="text-banner white-text">Tipo de Utilizador: {{$user->type}}</p>
+<div class="my-card d-md-block d-none mt-3" style="position: relative; overflow:hidden;">
+    <nav class="navbar navbar-expand-lg">
+        <h4 class="condo-title mt-5" style="margin-left: 50px;">Perfil</h4>
+        <div class="vertical-separator mt-5"></div>
+        <div class="d-flex mt-5">
+            <span>
+
+                <span style="color: #0042aa; margin-left: 10px;">
+                    @php
+                    setlocale(LC_TIME, 'pt_BR');
+                    echo strftime('%A');
+                @endphp,
+                </span>
+
+                @php
+                    echo date('d')
+                @endphp,
+
+                @php
+                setlocale(LC_TIME, 'pt_BR');
+                echo strftime('%B');
+                @endphp,
+
+                <span style="margin-right: 10px;">
+                    @php
+                    echo date('Y')
+                 @endphp
+
+                </span>
+            </span>
+        </div>
+    </nav>
 </div>
-
-
-<form action="/logout" method="post">
-    @csrf
-    <span class="d-flex justify-content-center">
-        <input type="submit" class="btn btn-danger mt-3" value="Sair">
-    </span>
-</form>
 
 @endsection

@@ -105,17 +105,17 @@
                         @foreach ($residents as $resident)
                         <tr>
                             <td class="uppercase-text">
-                                <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
+                                <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}', '{{session('id')}}')">
                                     {{$resident->name}}
                                 </a>
                             </td>
                             <td class="uppercase-text">
-                                <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
+                                <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}', '{{session('id')}}')">
                                     {{$resident->plot_resident}}
                                 </a>
                             </td>
                             <td>
-                                <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}')">
+                                <a class="nav-link" href="#" onclick="redirectToResidentForm('{{$resident->resident_id}}', '{{session('id')}}')">
                                     {{$resident->residency_number}}
                                 </a>
                             </td>
@@ -138,8 +138,8 @@
 </div>
 
     <script>
-        function redirectToResidentForm(residentId) {
-            var url = '/contracto-morador/' + residentId;
+        function redirectToResidentForm(residentId, ownerId) {
+            var url = '/contracto-morador/' + residentId + '/' + ownerId;
             window.location.href = url;
         }
     </script>

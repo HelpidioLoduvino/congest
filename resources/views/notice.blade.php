@@ -82,12 +82,12 @@
                             @foreach ($notices as $notice)
                                 <tr>
                                     <td>
-                                        <a class="nav-link" href="#" onclick="redirectToViewNotice('{{$notice->id}}')">
+                                        <a class="nav-link" href="#" onclick="redirectToViewNotice('{{$notice->id}}', '{{session('id')}}')">
                                             {{$notice->subject}}
                                         </a>
                                     </td>
                                     <td>
-                                        <a class="nav-link" href="#" onclick="redirectToViewNotice('{{$notice->id}}')">
+                                        <a class="nav-link" href="#" onclick="redirectToViewNotice('{{$notice->id}}', '{{session('id')}}')">
                                             {{$notice->date}}
                                         </a>
                                     </td>
@@ -105,8 +105,8 @@
 </div>
 
 <script>
-    function redirectToViewNotice(id) {
-        var url = '/aviso/' + id;
+    function redirectToViewNotice(id, ownerId) {
+        var url = '/aviso/' + id + '/' + ownerId;
         window.location.href = url;
     }
 </script>

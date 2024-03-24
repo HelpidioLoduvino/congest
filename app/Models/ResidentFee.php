@@ -5,17 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Message extends Model
+class ResidentFee extends Model
 {
     use HasFactory;
-    public $table = 'messages';
+
+    public $table = 'resident_fees';
+
     public $timestamps = false;
+
     protected $fillable = [
-        'user_id',
         'condo_id',
-        'message',
-        'time',
+        'resident_id',
+        'bank_receipt',
+        'month',
         'date',
-        'type'
     ];
 }

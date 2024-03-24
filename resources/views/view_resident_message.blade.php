@@ -5,10 +5,10 @@
     <nav class="navbar navbar-expand-lg">
         <h4 class="condo-title mt-5" style="margin-left: 50px;">Mensagens</h4>
         <div class="vertical-separator mt-5"></div>
-        <div class="d-flex calendar-background mt-5">
+        <div class="d-flex mt-5">
             <span>
 
-                <span style="color: goldenrod; margin-left: 10px;">
+                <span style="color: #0042aa; margin-left: 10px;">
                     @php
                     setlocale(LC_TIME, 'pt_BR');
                     echo strftime('%A');
@@ -83,9 +83,9 @@
                                     <a class="card-link" href="#" onclick="redirectToChat('{{$chat->resident_id}}', '{{$chat->owner_id}}')">
                                         <ul class="chat-message">
                                             <li style="margin-right:10px;">
-                                                <img src="{{asset('icon/user.svg')}}" width="45">
+                                                <img src="{{asset('icon/user.svg')}}" width="40">
                                             </li>
-                                            <li> <strong><small></small> {{$chat->name}}</strong> <br> <small class="text-muted">{{ implode(' ', array_slice(str_word_count($chat->message, 1, 'àáãâéêíóôõúüç,'), 0, 5)) }}...</small></li>
+                                            <li style="margin-top: 5px;"> <strong><small></small> {{$chat->name}}</strong></li>
                                         </ul>
                                     </a>
                                     <hr class="mt-2">
@@ -122,41 +122,38 @@
                 <div class="container mt-4">
                     <div class="message-sepatator mb-3"></div>
                     <div class="message-scrollview mb-3" style="overflow: auto; max-height: 300px;">
-                        <ul class="received-message">
+                        <ul style="list-style: none;">
                             @if ($resident_chat->isNotEmpty())
                                 @foreach ($resident_chat as $chat)
-                                <li>
-                                    <div class="card card-body mb-3" style="
-                                        max-width: 100vh;
-                                        background-color:rgba(220, 220, 220, 0.455);
-                                        border-bottom-left-radius: 50px;
-                                        border-top-right-radius: 50px;">
-                                        <p>{{$chat->message}}</p>
-                                        <small class="text-muted d-flex justify-content-end">{{$chat->time}}</small>
-                                    </div>
-                                </li>
+                                    @if (trim($chat->type) === trim("condominio"))
+                                        <li>
+                                            <div class="card card-body mb-3" style="
+                                                max-width: 100vh;
+                                                background-color: #276F7A;
+                                                color:white;
+                                                border-top-left-radius: 50px;
+                                                border-bottom-right-radius: 50px;">
+                                                <p>{{$chat->message}}</p>
+                                                <small class="d-flex justify-content-end">{{$chat->time}}</small>
+                                            </div>
+                                        </li>
+                                    @else
+                                        <li>
+                                            <div class="card card-body mb-3" style="
+                                                max-width: 100vh;
+                                                background-color: #f5f5f5;
+                                                border-bottom-left-radius: 50px;
+                                                border-top-right-radius: 50px;">
+                                                <p>{{$chat->message}}</p>
+                                                <small class="text-muted d-flex justify-content-end">{{$chat->time}} - {{$chat->date}}</small>
+                                            </div>
+                                        </li>
+                                    @endif
                                 @endforeach
                             @else
                             <div class="container">
-                                <h5>Hello World</h5>
+                                <h5>Iniciar chat</h5>
                             </div>
-                            @endif
-                        </ul>
-
-                        <ul class="sent-message" style="list-style: none;">
-                            @if (!empty($feedbacks))
-                                @foreach ($feedbacks as $feedback)
-                                <li>
-                                    <div class="card card-body   mb-3" style="
-                                        max-width: 100vh;
-                                        background-color: #80ff0091;
-                                        border-top-left-radius: 50px;
-                                        border-bottom-right-radius: 50px;">
-                                        <p>{{$feedback->feedback}}</p>
-                                        <small class="text-muted d-flex justify-content-end">{{$feedback->time}}</small>
-                                    </div>
-                                </li>
-                                @endforeach
                             @endif
                         </ul>
                     </div>
@@ -164,14 +161,15 @@
 
                 <div class="container">
                     @if ($userInfo)
-                        <form action="/responder-mensagem" method="post">
+                        <form action="/enviar-mensagem" method="post">
                             @csrf
                             <ul style="list-style: none; display:flex;">
                                 <input type="hidden" name="condo_id" value="{{$userInfo->condo_id}}">
-                                <input type="hidden" name="resident_id" value="{{$userInfo->resident_id}}">
+                                <input type="hidden" name="user_id" value="{{$userInfo->resident_id}}">
                                 <input type="hidden" name="time" value="<?php echo date('H:i:s', strtotime('now +1 hour')); ?>">
                                 <input type="hidden" name="date" value="<?php echo date('Y-m-d') ?>">
-                                <textarea class="form-control me-2" name="feedback" cols="40" rows="2" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);"></textarea>
+                                <input type="hidden" name="type" value="condominio">
+                                <textarea class="form-control me-2" name="message" cols="40" rows="2" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);"></textarea>
                                 <input type="image" src="{{asset('icon/send.svg')}}" width="30">
                             </ul>
                         </form>

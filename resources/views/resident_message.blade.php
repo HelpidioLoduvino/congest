@@ -82,19 +82,33 @@
                 <div class="container mt-4">
                     <div class="message-sepatator mb-3"></div>
                     <div class="message-scrollview mb-3" style="overflow: auto; max-height: 300px;">
-                        <ul class="received-message">
+                        <ul class="sent-message" style="list-style: none;">
                         @if ($messages->isNotEmpty())
                             @foreach ($messages as $message)
-                            <li>
-                                <div class="card card-body mb-3" style="
-                                    max-width: 50vh;
-                                    background-color:rgba(220, 220, 220, 0.455);
-                                    border-bottom-left-radius: 50px;
-                                    border-top-right-radius: 50px;">
-                                    <p>{{$message->message}}</p>
-                                    <small class="text-muted d-flex justify-content-end">{{$message->time}}</small>
-                                </div>
-                            </li>
+                                @if (trim($message->type) === trim("morador"))
+                                    <li>
+                                        <div class="card card-body mb-3" style="
+                                            max-width: 100vh;
+                                            background-color: #276F7A;
+                                            color:white;
+                                            border-bottom-left-radius: 50px;
+                                            border-top-right-radius: 50px;">
+                                            <p>{{$message->message}}</p>
+                                            <small class="d-flex justify-content-end">{{$message->time}} - {{$message->date}}</small>
+                                        </div>
+                                    </li>
+                                @else
+                                    <li>
+                                        <div class="card card-body mb-3" style="
+                                            max-width: 100vh;
+                                            background-color: #f5f5f5;
+                                            border-top-left-radius: 50px;
+                                            border-bottom-right-radius: 50px;">
+                                            <p>{{$message->message}}</p>
+                                            <small class="text-muted d-flex justify-content-end">{{$message->time}} - {{$message->date}}</small>
+                                        </div>
+                                    </li>
+                                @endif
                             @endforeach
                         @else
                             <h5 class="d-flex justify-content-center">Iniciar chat</h5>
@@ -110,6 +124,7 @@
                         <input type="hidden" name="user_id" value="{{$condo_name->resident_id}}">
                         <input type="hidden" name="time" value="<?php echo date('H:i:s', strtotime('now +1 hour')); ?>">
                         <input type="hidden" name="date" value="<?php echo date('Y-m-d') ?>">
+                        <input type="hidden" name="type" value="morador">
                         <ul style="list-style: none; display:flex;">
                             <textarea class="form-control me-2" name="message" cols="40" rows="2" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);"></textarea>
                             <input type="image" src="{{asset('icon/send.svg')}}" width="30">

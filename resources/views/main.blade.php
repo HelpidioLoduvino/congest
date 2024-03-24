@@ -16,7 +16,7 @@
 
     <nav class="condo-navbar navbar navbar-expand-md">
 
-        <a class="navbar-link" href="#" style="margin-left: 20px; margin-right:20px;">
+        <a class="navbar-link" style="margin-left: 20px; margin-right:20px;">
             <img src="{{ asset('/icon/home2.svg') }}" width="35">
             <span style="color: white">ConGest</span>
         </a>
@@ -162,32 +162,6 @@
         <div class="ml-auto">
             <ul class="navbar-nav">
                 <div class="d-none d-md-flex">
-                    <li>
-                        <dropdown class="dropdown">
-                            <button class="btn bg-transparent border-0 " style="color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Soluções
-                              </button>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                              </ul>
-                        </dropdown>
-                    </li>
-                    <li>
-
-                        <dropdown class="dropdown">
-                            <button class="btn bg-transparent border-0 me-2" style="color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Sobre Nós
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" style="width: 100vh;">
-                            <p>A <strong>ConGest</strong> é uma empresa
-                                de gestão de condomínios cujo objetivo é facilitar e
-                                otimizar a administração, organização e controle de um
-                                condomínio, seja ele residencial, comercial ou misto.</p>
-                            </ul>
-                        </dropdown>
-                    </li>
                     <li class="nav-item">
                         <button class="btn btn-warning round-5" type="button" data-bs-toggle="modal"
                             data-bs-target="#loginModal" style="margin-right: 20px; color: white;">

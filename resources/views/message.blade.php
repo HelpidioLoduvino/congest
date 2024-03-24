@@ -64,7 +64,7 @@
                 <div class="container">
                     <form class="d-flex" role="search">
                         <div class="input-group mt-3">
-                            <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search" style="background-color: #ebebeb; height:30px; width:20px;">
+                            <input class="form-control " type="search" placeholder="Pesquisar" aria-label="Search" style="background-color: #f5f5f5; height:30px; width:20px;">
                             <button class="btn btn-primary" type="submit" style="height: 30px;">
                                 <img src="{{asset('icon/search.svg')}}" width="20" style="margin-bottom: 20px;">
                             </button>
@@ -79,9 +79,9 @@
                                     <a class="card-link" href="#" onclick="redirectToChat('{{$message->resident_id}}', '{{$message->owner_id}}')">
                                         <ul class="chat-message">
                                             <li style="margin-right:10px;">
-                                                <img src="{{asset('icon/user.svg')}}" width="45">
+                                                <img src="{{asset('icon/user.svg')}}" width="40">
                                             </li>
-                                            <li> <strong>{{$message->name}}</strong> <br> <small class="text-muted">{{ implode(' ', array_slice(str_word_count($message->message, 1, 'àáãâéêíóôõúüç,'), 0, 5)) }}...</small></li>
+                                            <li style="margin-top: 5px;"> <strong>{{$message->name}}</strong></li>
                                         </ul>
                                     </a>
                                     <hr class="mt-2">
@@ -123,7 +123,7 @@
                 <div class="container">
                     <form class="d-flex" role="search">
                         <div class="input-group mt-3">
-                            <input class="form-control " type="search" placeholder="Pesquisar morador" aria-label="Search" style="background-color: #ebebeb; height:30px; width:20px;">
+                            <input class="form-control " type="search" placeholder="Pesquisar morador" aria-label="Search" style="background-color: #f5f5f5; height:30px; width:20px;">
                             <button class="btn btn-primary" type="submit" style="height: 30px;">
                                 <img src="{{asset('icon/search.svg')}}" width="20" style="margin-bottom: 20px;">
                             </button>

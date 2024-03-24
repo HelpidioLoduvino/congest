@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="/fontawesome/css/brands.css">
+    <link rel="stylesheet" href="/fontawesome/css/solid.css">
+    <link rel="stylesheet" href="/fontawesome/css/regular.css">
 </head>
 
 <body class="condo-background">
@@ -22,15 +26,24 @@
                     <div class="d-flex justify-content-center mt-3">
                         <div class="dropdown">
                             <button href="#" class="bg-transparent no-border-on-click border-0 d-flex justify-content-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Helpidio Mateus
+                                @if($owner)
+                                    {{$owner->condo_name}}
+                                @endif
                                 <img src="{{asset('icon/dropdown-arrow.svg')}}" alt="" width="25">
                             </button>
                             <ul class="dropdown-menu">
+                                <li>
+                                    <span class="d-flex">
+                                        <i class="fa-regular fa-user mt-2" style="margin-left: 20px;"></i>
+                                        <a href="/perfil-condominio/{{session('id')}}" class="dropdown-item">Perfil</a>
+                                    </span>
+                                </li>
                                 <li class="list-style" style="margin: 0; padding: 0;">
                                     <form action="/logout" method="post">
                                         @csrf
-                                        <span class="d-flex justify-content-center">
-                                            <input type="submit" class="bg-transparent border-0" value="Sair">
+                                        <span class="d-flex">
+                                            <i class="fa-solid fa-arrow-right-from-bracket mt-2" style="margin-left: 20px;"></i>
+                                            <input type="submit" class="dropdown-item" value="Sair">
                                         </span>
                                     </form>
                                 </li>
@@ -49,7 +62,7 @@
                                 </a>
                             </li>
                             <li class="list-style">
-                                <a class="navbar-link" href="/comprovativos">
+                                <a class="navbar-link" href="/comprovativos/{{session('id')}}">
                                     <div class="zoom-effect">
                                         <img class="hover-image" src="{{ asset('/icon/houses.svg') }}" width="25">
                                         Financeiro

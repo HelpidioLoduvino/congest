@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 use App\Models\User;
 use App\Models\Condominio;
 use App\Models\Contract;
@@ -17,8 +18,7 @@ use App\Models\Information;
 use App\Models\Meeting;
 use App\Models\Booking;
 use App\Models\Message;
-use App\Models\MessageFeedback;
-
+use App\Models\ResidentFee;
 
 
 class CondominioController extends Controller
@@ -42,7 +42,27 @@ class CondominioController extends Controller
         }
     }
 
+    public function showProfileCondominio($id){
+
+        $owner = User::select('condominios.condo_name')
+                    ->join('condominios', 'condominios.user_id', '=', 'users.id')
+                    ->join('available_condos', 'available_condos.condoId', '=',
+                    'condominios.id')
+                    ->where('users.id', '=', $id)
+                    ->first();
+
+        return view('condominio_profile', compact('owner'));
+    }
+
     public function showNotice($id){
+
+        $owner = User::select('condominios.condo_name')
+                    ->join('condominios', 'condominios.user_id', '=', 'users.id')
+                    ->join('available_condos', 'available_condos.condoId', '=',
+                    'condominios.id')
+                    ->where('users.id', '=', $id)
+                    ->first();
+
         $condoId = Condominio::select('condominios.id')
                                     ->join('users', 'users.id', '=',
                                     'condominios.user_id')
@@ -52,15 +72,18 @@ class CondominioController extends Controller
         $notices = Information::where('user_id', $id)->get();
 
         if($condoId){
-            if($notices->isNotEmpty()){
-                return view('notice', compact('condoId', 'notices'));
-            }else {
-                return view('notice', compact('condoId'));
-            }
+            return view('notice', compact('condoId', 'notices', 'owner'));
         }
     }
 
     public function showMeeting($id){
+
+        $owner = User::select('condominios.condo_name')
+                    ->join('condominios', 'condominios.user_id', '=', 'users.id')
+                    ->join('available_condos', 'available_condos.condoId', '=',
+                    'condominios.id')
+                    ->where('users.id', '=', $id)
+                    ->first();
 
         $condoId = Condominio::select('condominios.id')
                                     ->join('users', 'users.id', '=',
@@ -71,16 +94,18 @@ class CondominioController extends Controller
         $meetings = Meeting::where('user_id', $id)->get();
 
         if($condoId){
-
-            if($meetings->isNotEmpty()){
-                return view('meeting', compact('condoId', 'meetings'));
-            } else {
-                return view('meeting', compact('condoId'));
-            }
+            return view('meeting', compact('condoId', 'meetings', 'owner'));
         }
     }
 
     public function showResident($id){
+
+        $owner = User::select('condominios.condo_name')
+                    ->join('condominios', 'condominios.user_id', '=', 'users.id')
+                    ->join('available_condos', 'available_condos.condoId', '=',
+                    'condominios.id')
+                    ->where('users.id', '=', $id)
+                    ->first();
 
         $residents = Resident::select(
                                     'residents.*', 'users.name', 'users.email')
@@ -88,19 +113,22 @@ class CondominioController extends Controller
                                     ->where('residents.owner_id', $id)
                                     ->get();
         if($residents->isNotEmpty()){
-            return view('resident', compact('residents'));
+            return view('resident', compact('residents', 'owner'));
         }else {
             $residents = [];
-            return view('resident', compact('residents'));
+            return view('resident', compact('residents', 'owner'));
         }
 
     }
 
-    public function showBlock(){
-        return view('block');
-    }
-
     public function showMessage($id){
+
+        $owner = User::select('condominios.condo_name')
+                    ->join('condominios', 'condominios.user_id', '=', 'users.id')
+                    ->join('available_condos', 'available_condos.condoId', '=',
+                    'condominios.id')
+                    ->where('users.id', '=', $id)
+                    ->first();
 
         $messages = Message::select('users.name', 'condominios.user_id as owner_id',
                                     DB::raw('MAX(messages.user_id) as resident_id'),
@@ -119,11 +147,18 @@ class CondominioController extends Controller
 
 
         if($messages->isNotEmpty()){
-            return view('message', compact('messages', 'residents'));
+            return view('message', compact('messages', 'residents', 'owner'));
         }
     }
 
     public function showBooking($id){
+
+        $owner = User::select('condominios.condo_name')
+                    ->join('condominios', 'condominios.user_id', '=', 'users.id')
+                    ->join('available_condos', 'available_condos.condoId', '=',
+                    'condominios.id')
+                    ->where('users.id', '=', $id)
+                    ->first();
 
         $bookings = Booking::select('bookings.*', 'users.name',
                             'residents.plot_resident', 'residents.residency_number')
@@ -134,15 +169,22 @@ class CondominioController extends Controller
                            ->get();
 
         if($bookings->isNotEmpty()){
-            return view('booking', compact('bookings'));
+            return view('booking', compact('bookings', 'owner'));
         }else {
             $bookings = [];
-            return view('booking', compact('bookings'));
+            return view('booking', compact('bookings', 'owner'));
         }
 
     }
 
     public function showResidentMessage($residentId, $ownerId){
+
+        $owner = User::select('condominios.condo_name')
+                    ->join('condominios', 'condominios.user_id', '=', 'users.id')
+                    ->join('available_condos', 'available_condos.condoId', '=',
+                    'condominios.id')
+                    ->where('users.id', '=', $ownerId)
+                    ->first();
 
         $chats = Message::select('users.name', 'condominios.user_id as owner_id',
                                     DB::raw('MAX(messages.user_id) as resident_id'),
@@ -160,15 +202,6 @@ class CondominioController extends Controller
                             ->where('messages.user_id', $residentId)
                             ->first();
 
-        $messages = Message::select('messages.*')
-                           ->join('residents', 'residents.resident_id', '=', 'messages.user_id')
-                           ->join('condominios', 'condominios.id', '=', 'messages.condo_id')
-                           ->join('users', 'messages.user_id', '=', 'users.id')
-                           ->where('messages.user_id', $residentId)
-                           ->get();
-
-        $feedbacks = MessageFeedback::where('resident_id', $residentId)->get();
-
         $residents = Resident::select('users.name', 'residents.resident_id', 'residents.owner_id')
                             ->join('users', 'residents.resident_id', '=', 'users.id')
                             ->join('condominios', 'condominios.id', 'residents.condo_id')
@@ -178,16 +211,23 @@ class CondominioController extends Controller
 
         if($userInfo){
             return view('view_resident_message', compact(
-                'messages',
                 'userInfo',
                 'chats',
-                'feedbacks',
                 'residents',
-                'resident_chat'));
+                'resident_chat',
+                'owner'
+            ));
         }
     }
 
     public function showResidentBooking($id){
+
+        $owner = User::select('condominios.condo_name')
+                    ->join('condominios', 'condominios.user_id', '=', 'users.id')
+                    ->join('available_condos', 'available_condos.condoId', '=',
+                    'condominios.id')
+                    ->where('users.id', '=', $id)
+                    ->first();
 
         $booking = Booking::select('bookings.*', 'users.name',
                                 'residents.plot_resident', 'residents.residency_number')
@@ -198,12 +238,18 @@ class CondominioController extends Controller
                             ->first();
 
         if($booking){
-            return view('view_resident_booking', compact('booking'));
+            return view('view_resident_booking', compact('booking', 'owner'));
         }
 
     }
 
     public function showMessageResident($residentId){
+
+        $resident = Resident::select('users.name')
+                            ->join('condominios', 'condominios.id', '=', 'residents.condo_id')
+                            ->join('users', 'users.id', '=', 'residents.resident_id')
+                            ->where('residents.resident_id', $residentId)
+                            ->first();
 
         $condo_name = Resident::select('condominios.condo_name', 'condominios.id', 'residents.resident_id')
                                 ->join('condominios', 'condominios.id', '=', 'residents.condo_id')
@@ -212,7 +258,7 @@ class CondominioController extends Controller
         $messages = Message::where('user_id', $residentId)->get();
 
         if($condo_name){
-            return view('resident_message', compact('condo_name', 'messages'));
+            return view('resident_message', compact('condo_name', 'messages', 'resident'));
         }
     }
 
@@ -232,8 +278,13 @@ class CondominioController extends Controller
 
     }
 
-    public function showAdmin(){
-        return view('admin');
+    public function showAdmin($id){
+
+        $admin = User::find($id);
+
+        if($admin){
+            return view('admin', compact('admin'));
+        }
     }
 
     public function showHomeResident($id){
@@ -269,12 +320,62 @@ class CondominioController extends Controller
         }
     }
 
-    public function showResidentFee(){
-        return view('resident_fee');
+    public function showResidentProfile($id){
+        $resident = Resident::select('condominios.*', 'residents.*', 'users.name', 'users.email')
+                            ->join('condominios', 'condominios.id', '=', 'residents.condo_id')
+                            ->join('users', 'users.id', '=', 'residents.resident_id')
+                            ->where('residents.resident_id', $id)
+                            ->first();
+
+        if($resident){
+            return view('resident_profile', compact('resident'));
+        }
     }
 
-    public function showValidResidentFee(){
-        return view('resident_fee_list');
+    public function showResidentFee($id){
+
+        $owner = User::select('condominios.condo_name')
+                    ->join('condominios', 'condominios.user_id', '=', 'users.id')
+                    ->join('available_condos', 'available_condos.condoId', '=',
+                    'condominios.id')
+                    ->where('users.id', '=', $id)
+                    ->first();
+
+        $bank_receipts = ResidentFee::select('resident_fees.*', 'users.name')
+                                    ->join('users', 'users.id', '=', 'resident_fees.resident_id')
+                                    ->join('condominios', 'condominios.id', '=', 'resident_fees.condo_id')
+                                    ->where('condominios.user_id', $id)
+                                    ->get();
+
+        if($owner){
+            return view('resident_fee', compact('owner', 'bank_receipts'));
+        }
+    }
+
+    public function showPayResidentFee($id){
+        $resident = Resident::select('users.name', 'residents.condo_id')
+                            ->join('condominios', 'condominios.id', '=', 'residents.condo_id')
+                            ->join('users', 'users.id', '=', 'residents.resident_id')
+                            ->where('residents.resident_id', $id)
+                            ->first();
+
+        $bank_receipts = ResidentFee::where('resident_id', $id)->get();
+
+        if($resident){
+            return view('pay_resident_fee', compact('resident', 'bank_receipts'));
+        }
+    }
+
+    public function showPdf($id){
+
+        $pdf = ResidentFee::findOrFail($id);
+
+        $pdfPath = storage_path('app/' . $pdf->bank_receipt);
+        if (!file_exists($pdfPath)) {
+            abort(404);
+        }
+
+        return Response::file($pdfPath);
     }
 
     public function showPersonForm(){
@@ -285,7 +386,9 @@ class CondominioController extends Controller
         return view('company_form');
     }
 
-    public function showAdminCondominio(){
+    public function showAdminCondominio($id){
+
+        $admin = User::find($id);
 
         $condo_personal_contracts = Condominio::select(
                                                     'condominios.user_id', 'condominios.condo_name',
@@ -308,25 +411,23 @@ class CondominioController extends Controller
                                                     '=', 'business_contracts.userId')
                                                     ->get();
 
-        if($condo_personal_contracts->isNotEmpty() || $condo_business_contracts->isNotEmpty()){
-            return view('admin_condominio', compact('condo_personal_contracts', 'condo_business_contracts'));
-        } else {
-            $condo_personal_contracts = [];
-            $condo_business_contracts = [];
-            return view('admin_condominio', compact('condo_personal_contracts', 'condo_business_contracts'));
+        if($admin){
+            return view('admin_condominio', compact('condo_personal_contracts', 'condo_business_contracts', 'admin'));
         }
-
-
     }
 
     public function showAdminProfile($id){
 
-        $user = User::find($id);
+        $admin = User::find($id);
 
-        return view('admin_profile', compact('user'));
+        if($admin){
+            return view('admin_profile', compact('admin'));
+        }
     }
 
-    public function showPersonalContract($id){
+    public function showPersonalContract($id, $adminId){
+
+        $admin = User::find($adminId);
 
         $contract = User::select(
                                 'users.name', 'users.email', 'condominios.condo_name',
@@ -342,12 +443,14 @@ class CondominioController extends Controller
                                 ->first();
 
         if($contract){
-            return view('view_personal_contract', compact('contract'));
+            return view('view_personal_contract', compact('contract', 'admin'));
         }
 
     }
 
-    public function showBusinessContract($id){
+    public function showBusinessContract($id, $adminId){
+
+        $admin = User::find($adminId);
 
         $contract = User::select(
                                 'users.name', 'users.email', 'condominios.condo_name',
@@ -362,7 +465,7 @@ class CondominioController extends Controller
                                 ->first();
 
         if($contract){
-            return view('view_business_contract', compact('contract'));
+            return view('view_business_contract', compact('contract', 'admin'));
         }
 
     }
@@ -380,7 +483,14 @@ class CondominioController extends Controller
         }
     }
 
-    public function showResidentForm($id){
+    public function showResidentForm($id, $ownerId){
+
+        $owner = User::select('condominios.condo_name')
+                    ->join('condominios', 'condominios.user_id', '=', 'users.id')
+                    ->join('available_condos', 'available_condos.condoId', '=',
+                    'condominios.id')
+                    ->where('users.id', '=', $ownerId)
+                    ->first();
 
         $resident = Resident::select('residents.*', 'users.name', 'users.email')
                             ->join('users', 'users.id', '=', 'residents.resident_id')
@@ -388,22 +498,39 @@ class CondominioController extends Controller
                             ->first();
 
         if($resident){
-            return view('view_resident_form', compact('resident'));
+            return view('view_resident_form', compact('resident', 'owner'));
         }
 
     }
 
-    public function showCondominioNotice($id){
+    public function showCondominioNotice($id, $ownerId){
+
+        $owner = User::select('condominios.condo_name')
+                    ->join('condominios', 'condominios.user_id', '=', 'users.id')
+                    ->join('available_condos', 'available_condos.condoId', '=',
+                    'condominios.id')
+                    ->where('users.id', '=', $ownerId)
+                    ->first();
+
         $notice = Information::find($id);
         if($notice){
-            return view('view_notice', compact('notice'));
+            return view('view_notice', compact('notice', 'owner'));
         }
     }
 
-    public function showCondominioMeeting($id){
+    public function showCondominioMeeting($id, $ownerId){
+
+        $owner = User::select('condominios.condo_name')
+                    ->join('condominios', 'condominios.user_id', '=', 'users.id')
+                    ->join('available_condos', 'available_condos.condoId', '=',
+                    'condominios.id')
+                    ->where('users.id', '=', $ownerId)
+                    ->first();
+
         $meeting = Meeting::find($id);
+
         if($meeting){
-            return view('view_meeting', compact('meeting'));
+            return view('view_meeting', compact('meeting', 'owner'));
         }
     }
 
@@ -423,13 +550,13 @@ class CondominioController extends Controller
                 $sessionType = session('type');
                 switch($sessionType){
                     case 'condominio':
-                        return redirect('/condominio/' . session('id'))->with('msg', 'Condominio Logado Com Sucesso');
+                        return redirect('/condominio/' . session('id'));
                         break;
                     case 'admin':
-                        return redirect('/admin')->with('msg','Admin Logado Com Sucesso');
+                        return redirect('/admin/' . session('id'));
                         break;
                     case 'morador':
-                        return redirect('/morador/'. session('id'))->with('msg', 'Morador Logado Com Sucesso');
+                        return redirect('/morador/'. session('id'));
                         break;
                     default:
                         return view('/login')->with('error', 'Erro ao Fazer Login');
@@ -766,29 +893,8 @@ class CondominioController extends Controller
                 'user_id' => $userId,
                 'message' => $request->input('message'),
                 'time' => $request->input('time'),
-                'date' => $request->input('date')
-            ]);
-
-            return redirect()->back();
-
-        } catch (Exception $e){
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-    }
-
-    public function messageFeedback(Request $request){
-        $validator = $request->validate([
-            'feedback' => 'required|string'
-        ]);
-
-        try {
-
-            MessageFeedback::create([
-                'resident_id' => $request->input('resident_id'),
-                'condo_id' => $request->input('condo_id'),
-                'feedback' => $request->input('feedback'),
-                'time' => $request->input('time'),
-                'date' => $request->input('date')
+                'date' => $request->input('date'),
+                'type' => $request->input('type')
             ]);
 
             return redirect()->back();
@@ -826,6 +932,43 @@ class CondominioController extends Controller
             return redirect('/reservas/' . $userId)->with('msg', 'Reserva Negada');
         }
 
+    }
+
+    public function sendBankReceipt(Request $request){
+        $validator = $request->validate([
+            'bank_receipt' => 'required|mimes:pdf'
+        ]);
+
+        if($request->file('bank_receipt')->isValid()){
+            $pdf = $request->file('bank_receipt')->store('pdfs');
+            ResidentFee::create([
+                'condo_id' => $request->input('condo_id'),
+                'resident_id' => $request->input('resident_id'),
+                'bank_receipt' => $pdf,
+                'month' => $request->input('month'),
+                'date' => $request->input('date'),
+                'status' => $request->input('status'),
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
+    public function approveBankReceipt(Request $request){
+
+        ResidentFee::where('id', $request->input('receipt_id'))
+                                ->update(['status' => 'Aprovado']);
+
+        return redirect()->back();
+
+    }
+
+    public function disapproveBankReceipt(Request $request){
+
+        ResidentFee::where('id', $request->input('receipt_id'))
+                                ->update(['status' => 'Negado']);
+
+        return redirect()->back();
     }
 
     public function searchResident($resident_name){

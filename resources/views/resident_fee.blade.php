@@ -56,34 +56,66 @@
         </div>
     </div>
     <div class="table-responsive" style="margin-left: 50px; margin-right: 50px;">
-        <table class="table table-striped" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-            <thead>
+        <table class="table table-hover" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+            <thead class="table-active">
                 <tr>
                     <th class="text-center">Morador</th>
                     <th class="text-center">Mês</th>
                     <th class="text-center">Comprovativo</th>
                     <th class="text-center">Estado</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Johelsa Mateus</td>
-                    <td>Novembro</td>
-                    <td>bai.pdf</td>
-                    <td>Valido</td>
-                </tr>
-                <tr>
-                    <td>Johelsa Mateus</td>
-                    <td>Novembro</td>
-                    <td>bai.pdf</td>
-                    <td>Valido</td>
-                </tr>
-                <tr>
-                    <td>Johelsa Mateus</td>
-                    <td>Novembro</td>
-                    <td>bai.pdf</td>
-                    <td>Valido</td>
-                </tr>
+                @if ($bank_receipts->isNotEmpty())
+                    @foreach ($bank_receipts as $receipt)
+                        <tr>
+                            <td>
+                                <a class="nav-link" href="{{route('visualizar_pdf', ['id' => $receipt->id] )}}">
+                                    {{$receipt->name}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="{{route('visualizar_pdf', ['id' => $receipt->id] )}}">
+                                    {{$receipt->month}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="{{route('visualizar_pdf', ['id' => $receipt->id] )}}">
+                                    {{$receipt->bank_receipt}}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="nav-link" href="{{route('visualizar_pdf', ['id' => $receipt->id] )}}">
+                                    {{$receipt->status}}
+                                </a>
+                            </td>
+                            <td>
+                                <ul style="display:flex; list-style:none;">
+                                    <li>
+                                        <form action="/validar-comprovativo" method="post">
+                                            @csrf
+                                            <input type="hidden" name="receipt_id" value="{{$receipt->id}}">
+                                            <button class="btn btn-success" type="submit">
+                                                <i class="fa-solid fa-check"></i>
+                                            </button>
+                                        </form>
+                                    </li>
+                                    &nbsp;&nbsp;
+                                    <li>
+                                        <form action="/invalidar-comprovativo" method="post">
+                                            @csrf
+                                            <input type="hidden" name="receipt_id" value="{{$receipt->id}}">
+                                            <button class="btn btn-danger" type="submit">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
     </div>

@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="/fontawesome/css/brands.css">
+    <link rel="stylesheet" href="/fontawesome/css/solid.css">
+    <link rel="stylesheet" href="/fontawesome/css/regular.css">
 
 </head>
 
@@ -24,15 +28,24 @@
                     <div class="d-flex justify-content-center mt-3">
                         <div class="dropdown">
                             <button href="#" class="bg-transparent no-border-on-click border-0 d-flex justify-content-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Helpidio Mateus
+                                @if ($resident)
+                                    {{$resident->name}}
+                                @endif
                                 <img src="{{asset('icon/dropdown-arrow.svg')}}" alt="" width="25">
                             </button>
                             <ul class="dropdown-menu">
+                                <li>
+                                    <span class="d-flex">
+                                        <i class="fa-regular fa-user mt-2" style="margin-left: 20px;"></i>
+                                        <a href="/perfil-morador/{{session('id')}}" class="dropdown-item">Perfil</a>
+                                    </span>
+                                </li>
                                 <li class="list-style" style="margin: 0; padding: 0;">
                                     <form action="/logout" method="post">
                                         @csrf
-                                        <span class="d-flex justify-content-center">
-                                            <input type="submit" class="bg-transparent border-0" value="Sair">
+                                        <span class="d-flex">
+                                            <i class="fa-solid fa-arrow-right-from-bracket mt-2" style="margin-left: 20px;"></i>
+                                            <input type="submit" class="dropdown-item" value="Sair">
                                         </span>
                                     </form>
                                 </li>
@@ -44,23 +57,23 @@
                             <li class="list-style">
                                 <a class="navbar-link" href="/morador/{{session('id')}}">
                                     <div class="zoom-effect">
-                                        <img class="hover-image" src="{{ asset('/icon/house.svg') }}" width="25">
+                                        <img class="hover-image" src="{{ asset('/icon/house.svg') }}" width="20" style="margin-left: 3px;">
                                         Home
                                     </div>
                                 </a>
                             </li>
                             <li class="list-style">
-                                <a class="navbar-link" href="/condominio/{{session('id')}}">
+                                <a class="navbar-link" href="/taxa-condominio/{{session('id')}}">
                                     <div class="zoom-effect">
-                                        <img class="hover-image" src="{{ asset('/icon/house.svg') }}" width="25">
-                                        Taxa do Condomínio
+                                        <img class="hover-image" src="{{ asset('/icon/dollar.svg') }}" width="25">
+                                        Financeiro
                                     </div>
                                 </a>
                             </li>
                             <li class="list-style">
                                 <a class="navbar-link" href="/morador-mensagem/{{session('id')}}">
                                     <div class="zoom-effect">
-                                        <img class="hover-image" src="{{ asset('/icon/email.svg') }}" width="25">
+                                        <img class="hover-image" src="{{ asset('/icon/email.svg') }}" width="20" style="margin-left: 3px;">
                                         Mensagens
                                     </div>
                                 </a>
@@ -68,7 +81,7 @@
                             <li class="list-style">
                                 <a class="navbar-link" href="/morador-reserva/{{session('id')}}">
                                     <div class="zoom-effect">
-                                        <img class="hover-image" src="{{ asset('/icon/calendar.svg') }}" width="25">
+                                        <img class="hover-image" src="{{ asset('/icon/calendar.svg') }}" width="25" style="margin-left: 3px;">
                                         Reservas
                                     </div>
                                 </a>
@@ -84,93 +97,6 @@
             </div>
         </div>
     </div>
-
-
-      <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-xxl-down">
-          <div class="modal-content" style="background-color: #2F3651; color:white;">
-            <div class="modal-body">
-              <ul class="navbar-nav">
-                <li class="nav-link">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn" data-bs-dismiss="modal" aria-label="Close">
-                            <img class="hover-image" src="{{asset('/icon/close-circle.svg')}}" width="35">
-                        </button>
-                    </div>
-                </li>
-                </ul>
-                <div class="d-none d-md-block d-md-flex justify-content-center mt-3">
-                    <img src="{{ asset('/icon/profile.svg') }}" width="100">
-                </div>
-                @if (!empty($resident))
-                <div class="container">
-                    <div class="row">
-                        <h6><strong>DADOS PESSOAIS</strong></h6>
-                        <div class="form-separator mb-3"></div>
-
-                        <div class="col-md-6 mb-3 uppercase-text">
-                            <h6>NOME COMPLETO</h6>
-                            <h5><strong>{{$resident->name}}</strong></h5>
-                        </div>
-
-                        <div class="col-md-6 mb-3 uppercase-text">
-                            <h6>BILHETE DE IDENTIDADE</h6>
-                            <h5><strong>{{$resident->bi}}</strong></h5>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <h6>DATA DE NASCIMENTO</h6>
-                            <h5><strong>{{$resident->birthday}}</strong></h5>
-                        </div>
-
-                        <div class="col-md-6 mb-3 uppercase-text">
-                            <h6>GÉNERO</h6>
-                            <h5><strong>{{$resident->gender}}</strong></h5>
-                        </div>
-
-                        <div class="col-md-6 mb-3 uppercase-text">
-                            <h6>NACIONALIDADE</h6>
-                            <h5><strong>{{$resident->nationality}}</strong></h5>
-                        </div>
-
-                        <h6><strong>CONTATOS</strong></h6>
-                        <div class="form-separator mb-3"></div>
-
-                        <div class="col-md-6 mb-3">
-                            <h6>TELEFONE</h6>
-                            <h5><strong>{{$resident->contact}}</strong></h5>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <h6>EMAIL</h6>
-                            <h5><strong>{{$resident->email}}</strong></h5>
-                        </div>
-
-                        <h6><strong>DADOS DO CONDOMÍNIO</strong></h6>
-                        <div class="form-separator mb-3"></div>
-
-
-                        <div class="col-md-6 mb-3 uppercase-text">
-                            <h6>LOTE</h6>
-                            <h5><strong>{{$resident->plot_resident}}</strong></h5>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <h6>RESIDÊNCIA</h6>
-                            <h5><strong>{{$resident->residency_number}}</strong></h5>
-                        </div>
-                    </div>
-
-                    <span class="d-flex justify-content-center">
-                        <a href="" class="btn btn-warning">EDITAR</a>
-                    </span>
-                </div>
-
-                @endif
-            </div>
-          </div>
-        </div>
-      </div>
 
     <script src="/bootstrap/script/popper.js"></script>
     <script src="/bootstrap/script/bootstrap.min.js"></script>
