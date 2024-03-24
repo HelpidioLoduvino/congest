@@ -10,5 +10,5 @@ class Contract extends Model
     use HasFactory;
     public $table = 'contracts';
     public $timestamps = false;
-    protected $fillable = ['condo_id', 'user_id', 'contract_type', 'plan'];
+    protected $fillable = ['condo_id', 'user_id', 'contract_type', 'plan', 'date'];
 }

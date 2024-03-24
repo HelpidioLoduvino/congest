@@ -49,7 +49,7 @@
                     @csrf
                     <input type="hidden" name="condo_id" value="{{$condoId->id}}">
                     <input type="hidden" name="user_id" value="{{session('id')}}">
-
+                    <input type="hidden" name="date" value="<?php echo date('Y-m-d') ?>">
                     <div class="form-group mb-3">
                         <input type="text" name="subject" placeholder="Assunto" class="form-control">
                     </div>

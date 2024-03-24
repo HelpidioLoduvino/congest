@@ -5,6 +5,7 @@
     <div style = "overflow:auto; overflow-x:hidden; max-height: 600px; margin-left: 50px; margin-right: 50px;">
         <form action="/cadastrar-condominio-contracto-empresarial" method="post">
             @csrf
+            <input type="hidden" name="date" value="<?php echo date('Y-m-d') ?>">
             <div class="condo-font card card-body border-0 mt-3">
                 <div class="d-flex justify-content-center">
                     <span class="logotipo">
@@ -81,7 +82,6 @@
                             <option value="Anual">Anual</option>
                         </select>
                     </div>
-
                 </div>
             </div>
             <span class="d-flex mt-3 justify-content-center">

@@ -15,14 +15,12 @@ services:
 
   db:
     image: mysql:latest
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: josefa
       MYSQL_DATABASE: congest
 
   adminer:
     image: adminer
-    restart: always
     ports:
       - 8080:8080
 

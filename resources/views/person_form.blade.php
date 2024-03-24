@@ -5,6 +5,7 @@
     <div style = "overflow:auto; overflow-x:hidden; max-height: 600px; margin-left: 50px; margin-right: 50px;">
         <form action="/cadastrar-condominio-contracto-pessoal" method="post">
             @csrf
+            <input type="hidden" name="date" value="<?php echo date('Y-m-d') ?>">
             <div class="condo-font card card-body border-0 mt-3">
                 <div class="d-flex justify-content-center">
                     <span class="logotipo">

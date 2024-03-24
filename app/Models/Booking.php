@@ -15,6 +15,7 @@ class Booking extends Model
         'user_id',
         'place',
         'purpose',
-        'booking_date'
+        'booking_date',
+        'date'
     ];
 }

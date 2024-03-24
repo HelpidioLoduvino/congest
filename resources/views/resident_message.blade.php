@@ -5,10 +5,10 @@
     <nav class="navbar navbar-expand-lg">
         <h4 class="condo-title mt-5" style="margin-left: 50px;">Mensagens</h4>
         <div class="vertical-separator mt-5"></div>
-        <div class="d-flex calendar-background mt-5">
+        <div class="d-flex mt-5">
             <span>
 
-                <span style="color: goldenrod; margin-left: 10px;">
+                <span style="color: #0042aa; margin-left: 10px;">
                     @php
                     setlocale(LC_TIME, 'pt_BR');
                     echo strftime('%A');
@@ -108,6 +108,8 @@
                         @csrf
                         <input type="hidden" name="condo_id" value="{{$condo_name->id}}">
                         <input type="hidden" name="user_id" value="{{$condo_name->resident_id}}">
+                        <input type="hidden" name="time" value="<?php echo date('H:i:s', strtotime('now +1 hour')); ?>">
+                        <input type="hidden" name="date" value="<?php echo date('Y-m-d') ?>">
                         <ul style="list-style: none; display:flex;">
                             <textarea class="form-control me-2" name="message" cols="40" rows="2" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);"></textarea>
                             <input type="image" src="{{asset('icon/send.svg')}}" width="30">

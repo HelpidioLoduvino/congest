@@ -169,6 +169,8 @@
                             <ul style="list-style: none; display:flex;">
                                 <input type="hidden" name="condo_id" value="{{$userInfo->condo_id}}">
                                 <input type="hidden" name="resident_id" value="{{$userInfo->resident_id}}">
+                                <input type="hidden" name="time" value="<?php echo date('H:i:s', strtotime('now +1 hour')); ?>">
+                                <input type="hidden" name="date" value="<?php echo date('Y-m-d') ?>">
                                 <textarea class="form-control me-2" name="feedback" cols="40" rows="2" style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);"></textarea>
                                 <input type="image" src="{{asset('icon/send.svg')}}" width="30">
                             </ul>

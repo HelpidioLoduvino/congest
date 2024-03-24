@@ -10,5 +10,5 @@ class MessageFeedback extends Model
     use HasFactory;
     public $table = 'message_feedback';
     public $timestamps = false;
-    protected $fillable = ['resident_id', 'condo_id', 'feedback'];
+    protected $fillable = ['resident_id', 'condo_id', 'feedback', 'time', 'date'];
 }

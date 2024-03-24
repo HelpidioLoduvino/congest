@@ -14,5 +14,7 @@ class Message extends Model
         'user_id',
         'condo_id',
         'message',
+        'time',
+        'date'
     ];
 }

@@ -108,7 +108,6 @@ class CondominioController extends Controller
                             ->join('condominios', 'condominios.id', '=', 'messages.condo_id')
                             ->join('users', 'messages.user_id', '=', 'users.id')
                             ->where('condominios.user_id', $id)
-                            ->latest('messages.time')
                             ->groupBy('users.name', 'condominios.user_id')
                             ->get();
 
@@ -151,11 +150,10 @@ class CondominioController extends Controller
                             ->join('condominios', 'condominios.id', '=', 'messages.condo_id')
                             ->join('users', 'messages.user_id', '=', 'users.id')
                             ->where('condominios.user_id', $ownerId)
-                            ->latest('messages.time')
                             ->groupBy('users.name', 'condominios.user_id')
                             ->get();
 
-        $userInfo = Message::select('users.name', 'condominios.id as condo_id')
+        $userInfo = Message::select('users.name', 'condominios.id as condo_id', 'residents.resident_id as resident_id')
                             ->join('residents', 'residents.resident_id', '=', 'messages.user_id')
                             ->join('condominios', 'condominios.id', '=', 'messages.condo_id')
                             ->join('users', 'messages.user_id', '=', 'users.id')
@@ -507,7 +505,8 @@ class CondominioController extends Controller
                     'condo_id' => $condoId,
                     'user_id' => $userId,
                     'contract_type' => $request->input('contract_type'),
-                    'plan' => $request->input('plan')
+                    'plan' => $request->input('plan'),
+                    'date' => $request->input('date')
                 ]);
 
                 AvailableCondo::create([
@@ -572,7 +571,8 @@ class CondominioController extends Controller
                     'condo_id' => $condoId,
                     'user_id' => $userId,
                     'contract_type' => $request->input('contract_type'),
-                    'plan' => $request->input('plan')
+                    'plan' => $request->input('plan'),
+                    'date' => $request->input('date')
                 ]);
 
                 AvailableCondo::create([
@@ -653,7 +653,6 @@ class CondominioController extends Controller
         $validator = $request->validate([
             'subject' => 'required|string',
             'notice' => 'required|string',
-            'receiver' => 'required|string'
         ]);
 
         $userId = $request->input('user_id');
@@ -663,10 +662,10 @@ class CondominioController extends Controller
                 'user_id' => $userId,
                 'notice' => $request->input('notice'),
                 'subject' => $request->input('subject'),
-                'receiver' => $request->input('receiver')
+                'date' => $request->input('date')
             ]);
 
-            return redirect('/avisos/'. $userId)->with('msg', 'Aviso Enviado Com Sucesso');
+            return redirect()->back();
         } catch (Exception $e){
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -690,10 +689,11 @@ class CondominioController extends Controller
                 'user_id' => $userId,
                 'subject' => $request->input('subject'),
                 'place' => $request->input('place'),
-                'meeting_date' => $request->input('meeting_date')
+                'meeting_date' => $request->input('meeting_date'),
+                'date' => $request->input('date')
             ]);
 
-            return redirect('/reuniões/' . $userId)->with('msg', 'Reunião Agendada Com Sucesso');
+            return redirect()->back();
 
         } catch (Exception $e){
             return redirect()->back()->withErrors($validator)->withInput();
@@ -716,10 +716,11 @@ class CondominioController extends Controller
                 'user_id' => $userId,
                 'place' => $request->input('place'),
                 'purpose' => $request->input('purpose'),
-                'booking_date' => $request->input('booking_date')
+                'booking_date' => $request->input('booking_date'),
+                'date' => $request->input('date')
             ]);
 
-            return redirect('/morador/'. $userId)->with('msg', 'Reserva Feita Com Sucesso');
+            return redirect()->back();
 
         } catch (Exception $e){
             return redirect()->back()->withErrors($validator)->withInput();
@@ -741,6 +742,7 @@ class CondominioController extends Controller
                 'user_id' => $userId,
                 'subject' => $request->input('subject'),
                 'complaint' => $request->input('complaint'),
+                'date' => $request->input('date')
             ]);
 
             return redirect('/morador/'. $userId)->with('msg', 'Reclamação Feita Com Sucesso');
@@ -762,7 +764,9 @@ class CondominioController extends Controller
             Message::create([
                 'condo_id' => $request->input('condo_id'),
                 'user_id' => $userId,
-                'message' => $request->input('message')
+                'message' => $request->input('message'),
+                'time' => $request->input('time'),
+                'date' => $request->input('date')
             ]);
 
             return redirect()->back();
@@ -782,7 +786,9 @@ class CondominioController extends Controller
             MessageFeedback::create([
                 'resident_id' => $request->input('resident_id'),
                 'condo_id' => $request->input('condo_id'),
-                'feedback' => $request->input('feedback')
+                'feedback' => $request->input('feedback'),
+                'time' => $request->input('time'),
+                'date' => $request->input('date')
             ]);
 
             return redirect()->back();
